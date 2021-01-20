@@ -9,7 +9,7 @@ target 'TravelLog' do
 
   
   pod 'Firebase/Firestore'
-
+  pod 'Firebase/Auth'
 
   target 'TravelLogTests' do
     inherit! :search_paths

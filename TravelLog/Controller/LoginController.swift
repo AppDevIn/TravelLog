@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+import FirebaseAuth
 
 class LoginController : UIViewController {
     
@@ -25,6 +25,14 @@ class LoginController : UIViewController {
         
         print("Email " + email)
         print("Password " + password)
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+            guard let user = authResult?.user, error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            print("\(user.email!) created")
+        }
     }
     
     @IBAction func signUpClicked(_ sender: Any) {
