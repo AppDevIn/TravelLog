@@ -46,7 +46,7 @@
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R9G-ZI-AWm">
                                                         <rect key="frame" x="0.0" y="58" width="358" height="50"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" smartDashesType="yes" textContentType="password"/>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -63,6 +63,9 @@
                                                         <state key="normal" title="Login">
                                                             <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="loginClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Agh-5f-Z3N"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t6p-iI-AQN">
                                                         <rect key="frame" x="0.0" y="58" width="358" height="50"/>
@@ -71,6 +74,9 @@
                                                         <state key="normal" title="Sign Up">
                                                             <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="signUpClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zds-fB-kju"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -103,6 +109,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EJg-kk-Yxf"/>
+                    <connections>
+                        <outlet property="txt_email" destination="F4m-1b-byQ" id="yiE-y2-KWW"/>
+                        <outlet property="txt_password" destination="R9G-ZI-AWm" id="aVh-K5-jdl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
