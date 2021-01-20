@@ -23,8 +23,6 @@ class LoginController : UIViewController {
         guard let email:String =  txt_email.text else { return }
         guard let password:String = txt_password.text else { return }
         
-        print("Email " + email)
-        print("Password " + password)
         
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             guard let user = authResult?.user, error == nil else {
@@ -36,6 +34,10 @@ class LoginController : UIViewController {
     }
     
     @IBAction func signUpClicked(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil) // File name of the story board
+        let vc = storyboard.instantiateViewController(identifier: "register") as UIViewController // name must set as the identifer in stroyboard
+        vc.modalPresentationStyle = .fullScreen //
+        present(vc, animated: true, completion: nil)
     }
     
 }
