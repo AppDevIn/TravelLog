@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		9B7DC98625B336E5009E97D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B7DC98425B336E5009E97D3 /* LaunchScreen.storyboard */; };
 		9B7DC99125B336E6009E97D3 /* TravelLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DC99025B336E6009E97D3 /* TravelLogTests.swift */; };
 		9B7DC99C25B336E6009E97D3 /* TravelLogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DC99B25B336E6009E97D3 /* TravelLogUITests.swift */; };
+		9BA55E4025B809950044B69B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA55E3F25B809950044B69B /* LoginController.swift */; };
+		9BA55E4525B80C940044B69B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BA55E4425B80C940044B69B /* GoogleService-Info.plist */; };
 		DD6E668BE3ED2BD3FC382CB4 /* Pods_TravelLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 694934EEA5C78AD427F65815 /* Pods_TravelLog.framework */; };
 		DFB47515FA29559658EFF3D7 /* Pods_TravelLogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD73D9326B00EE5E8BCC444 /* Pods_TravelLogTests.framework */; };
 /* End PBXBuildFile section */
@@ -60,6 +62,8 @@
 		9B7DC99725B336E6009E97D3 /* TravelLogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TravelLogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7DC99B25B336E6009E97D3 /* TravelLogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelLogUITests.swift; sourceTree = "<group>"; };
 		9B7DC99D25B336E6009E97D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BA55E3F25B809950044B69B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		9BA55E4425B80C940044B69B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A1211861ACC43AB780960673 /* Pods-TravelLog-TravelLogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelLog-TravelLogUITests.debug.xcconfig"; path = "Target Support Files/Pods-TravelLog-TravelLogUITests/Pods-TravelLog-TravelLogUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		DCD73D9326B00EE5E8BCC444 /* Pods_TravelLogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelLogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E45FDE8685703F0692CABED2 /* Pods_TravelLog_TravelLogUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelLog_TravelLogUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,7 +107,6 @@
 				231AD8F3A465AE75535BB009 /* Pods-TravelLogTests.debug.xcconfig */,
 				973E913224385A4354A2D243 /* Pods-TravelLogTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -132,13 +135,16 @@
 		9B7DC97525B336E4009E97D3 /* TravelLog */ = {
 			isa = PBXGroup;
 			children = (
+				9BA55E3B25B808860044B69B /* Views */,
+				9BA55E3A25B8087E0044B69B /* Model */,
+				9BA55E3825B8085C0044B69B /* Controller */,
 				9B7DC97625B336E4009E97D3 /* AppDelegate.swift */,
 				9B7DC97825B336E4009E97D3 /* SceneDelegate.swift */,
 				9B7DC97A25B336E4009E97D3 /* ViewController.swift */,
-				9B7DC97C25B336E4009E97D3 /* Main.storyboard */,
 				9B7DC98225B336E5009E97D3 /* Assets.xcassets */,
 				9B7DC98425B336E5009E97D3 /* LaunchScreen.storyboard */,
 				9B7DC98725B336E5009E97D3 /* Info.plist */,
+				9BA55E4425B80C940044B69B /* GoogleService-Info.plist */,
 				9B7DC97F25B336E4009E97D3 /* TravelLog.xcdatamodeld */,
 			);
 			path = TravelLog;
@@ -160,6 +166,29 @@
 				9B7DC99D25B336E6009E97D3 /* Info.plist */,
 			);
 			path = TravelLogUITests;
+			sourceTree = "<group>";
+		};
+		9BA55E3825B8085C0044B69B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9BA55E3F25B809950044B69B /* LoginController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		9BA55E3A25B8087E0044B69B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9BA55E3B25B808860044B69B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9B7DC97C25B336E4009E97D3 /* Main.storyboard */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		B31F7B3A62BC94FA8BBAD7F2 /* Frameworks */ = {
@@ -281,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B7DC98625B336E5009E97D3 /* LaunchScreen.storyboard in Resources */,
+				9BA55E4525B80C940044B69B /* GoogleService-Info.plist in Resources */,
 				9B7DC98325B336E5009E97D3 /* Assets.xcassets in Resources */,
 				9B7DC97E25B336E4009E97D3 /* Main.storyboard in Resources */,
 			);
@@ -414,6 +444,7 @@
 				9B7DC97725B336E4009E97D3 /* AppDelegate.swift in Sources */,
 				9B7DC98125B336E4009E97D3 /* TravelLog.xcdatamodeld in Sources */,
 				9B7DC97925B336E4009E97D3 /* SceneDelegate.swift in Sources */,
+				9BA55E4025B809950044B69B /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
