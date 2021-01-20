@@ -19,6 +19,7 @@
 		9B7DC99C25B336E6009E97D3 /* TravelLogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DC99B25B336E6009E97D3 /* TravelLogUITests.swift */; };
 		9BA55E4025B809950044B69B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA55E3F25B809950044B69B /* LoginController.swift */; };
 		9BA55E4525B80C940044B69B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BA55E4425B80C940044B69B /* GoogleService-Info.plist */; };
+		9BA55E6925B81FB40044B69B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA55E6825B81FB40044B69B /* RegisterController.swift */; };
 		DD6E668BE3ED2BD3FC382CB4 /* Pods_TravelLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 694934EEA5C78AD427F65815 /* Pods_TravelLog.framework */; };
 		DFB47515FA29559658EFF3D7 /* Pods_TravelLogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD73D9326B00EE5E8BCC444 /* Pods_TravelLogTests.framework */; };
 /* End PBXBuildFile section */
@@ -64,6 +65,7 @@
 		9B7DC99D25B336E6009E97D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BA55E3F25B809950044B69B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		9BA55E4425B80C940044B69B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9BA55E6825B81FB40044B69B /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		A1211861ACC43AB780960673 /* Pods-TravelLog-TravelLogUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelLog-TravelLogUITests.debug.xcconfig"; path = "Target Support Files/Pods-TravelLog-TravelLogUITests/Pods-TravelLog-TravelLogUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		DCD73D9326B00EE5E8BCC444 /* Pods_TravelLogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelLogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E45FDE8685703F0692CABED2 /* Pods_TravelLog_TravelLogUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelLog_TravelLogUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				9BA55E3F25B809950044B69B /* LoginController.swift */,
+				9BA55E6825B81FB40044B69B /* RegisterController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 			files = (
 				9B7DC97B25B336E4009E97D3 /* ViewController.swift in Sources */,
 				9B7DC97725B336E4009E97D3 /* AppDelegate.swift in Sources */,
+				9BA55E6925B81FB40044B69B /* RegisterController.swift in Sources */,
 				9B7DC98125B336E4009E97D3 /* TravelLog.xcdatamodeld in Sources */,
 				9B7DC97925B336E4009E97D3 /* SceneDelegate.swift in Sources */,
 				9BA55E4025B809950044B69B /* LoginController.swift in Sources */,
