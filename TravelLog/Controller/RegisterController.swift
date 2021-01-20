@@ -23,22 +23,31 @@ class RegisterController : UIViewController {
     }
 
     @IBAction func signUpClicked(_ sender: Any) {
+        
+        //Get the text values
         guard let email:String =  txt_email.text else { return }
         guard let password:String = txt_password.text else { return }
         guard let Cpassword:String = txt_cPassword.text else { return }
         
-        print("Email " + email)
-        print("Password " + password)
-        print("Password " + Cpassword)
-        
-        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
-            guard let user = authResult?.user, error == nil else {
-                print(error!.localizedDescription)
-                return
-            }
+        //Check if the password the same
+        if password == Cpassword {
             
-            print("\(user.email!) login")
+            //Create a new user
+            Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+                //Check if there is error
+                guard let user = authResult?.user, error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+                print("\(user.email!) created")
+            }
+        } else {
+            print("Is not the same password")
         }
+        
+        
+      
+
     }
     
     @IBAction func loginClicked(_ sender: Any) {
