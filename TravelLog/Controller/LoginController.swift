@@ -20,22 +20,30 @@ class LoginController : UIViewController {
     }
     
     @IBAction func loginClicked(_ sender: Any) {
+        
+        //Get the text values
         guard let email:String =  txt_email.text else { return }
         guard let password:String = txt_password.text else { return }
         
-        print("Email " + email)
-        print("Password " + password)
         
-        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+        //Sign in into the user
+        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
+            
+            //Check if there is error
             guard let user = authResult?.user, error == nil else {
                 print(error!.localizedDescription)
                 return
             }
-            print("\(user.email!) created")
+            
+            print("\(user.email!) login")
         }
     }
     
     @IBAction func signUpClicked(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil) // File name of the story board
+        let vc = storyboard.instantiateViewController(identifier: "register") as UIViewController // name must set as the identifer in stroyboard
+        vc.modalPresentationStyle = .fullScreen //
+        present(vc, animated: true, completion: nil)
     }
     
 }
