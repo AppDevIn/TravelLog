@@ -39,7 +39,12 @@ class RegisterController : UIViewController {
                     print(error!.localizedDescription)
                     return
                 }
+                
                 print("\(user.email!) created")
+                
+                //Move to the next storyboard
+                
+                
             }
         } else {
             print("Is not the same password")

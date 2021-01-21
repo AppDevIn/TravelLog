@@ -35,7 +35,9 @@ class LoginController : UIViewController {
                 return
             }
             
-            print("\(user.email!) login")
+            print("\(user.email!) loginned")
+            
+            //Move to the next storyboard
         }
     }
     

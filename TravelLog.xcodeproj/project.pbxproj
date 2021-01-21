@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6BDBB446FF1E53B6CFDE2931 /* Pods_TravelLog_TravelLogUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45FDE8685703F0692CABED2 /* Pods_TravelLog_TravelLogUITests.framework */; };
+		9B2F8DC425BA00870009D9A1 /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2F8DC325BA00870009D9A1 /* Content.storyboard */; };
 		9B7DC97725B336E4009E97D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DC97625B336E4009E97D3 /* AppDelegate.swift */; };
 		9B7DC97925B336E4009E97D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DC97825B336E4009E97D3 /* SceneDelegate.swift */; };
 		9B7DC97B25B336E4009E97D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DC97A25B336E4009E97D3 /* ViewController.swift */; };
@@ -48,6 +49,7 @@
 		4E52BBF775D0C603377C5864 /* Pods-TravelLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelLog.debug.xcconfig"; path = "Target Support Files/Pods-TravelLog/Pods-TravelLog.debug.xcconfig"; sourceTree = "<group>"; };
 		694934EEA5C78AD427F65815 /* Pods_TravelLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		973E913224385A4354A2D243 /* Pods-TravelLogTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelLogTests.release.xcconfig"; path = "Target Support Files/Pods-TravelLogTests/Pods-TravelLogTests.release.xcconfig"; sourceTree = "<group>"; };
+		9B2F8DC325BA00870009D9A1 /* Content.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Content.storyboard; sourceTree = "<group>"; };
 		9B7DC97325B336E4009E97D3 /* TravelLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7DC97625B336E4009E97D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B7DC97825B336E4009E97D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				9B7DC97C25B336E4009E97D3 /* Main.storyboard */,
+				9B2F8DC325BA00870009D9A1 /* Content.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				9BA55E4525B80C940044B69B /* GoogleService-Info.plist in Resources */,
 				9B7DC98325B336E5009E97D3 /* Assets.xcassets in Resources */,
 				9B7DC97E25B336E4009E97D3 /* Main.storyboard in Resources */,
+				9B2F8DC425BA00870009D9A1 /* Content.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
