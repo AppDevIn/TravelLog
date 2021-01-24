@@ -96,10 +96,10 @@
             </objects>
             <point key="canvasLocation" x="-744.92753623188412" y="1067.4107142857142"/>
         </scene>
-        <!--View Controller-->
+        <!--Edit Controller-->
         <scene sceneID="Txv-N9-9en">
             <objects>
-                <viewController id="9pK-H8-GVc" sceneMemberID="viewController">
+                <viewController id="9pK-H8-GVc" customClass="EditController" customModule="TravelLog" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EzP-Mz-Vsc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
