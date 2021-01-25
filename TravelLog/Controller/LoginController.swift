@@ -17,6 +17,9 @@ class LoginController : UIViewController {
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
         txt_password.isSecureTextEntry = true
+        
+        txt_email.text = "jeyavishnu@gmail.com"
+        txt_password.text = "Test123"
     }
     
     @IBAction func loginClicked(_ sender: Any) {

@@ -11,10 +11,12 @@ import PhotosUI
 
 class EditController : UIViewController {
     
-    @IBOutlet weak var imageview: UIImageView!
+
     
     var ItemProviders: [NSItemProvider] = []
     var iterator: IndexingIterator<[NSItemProvider]>?
+    
+    @IBOutlet weak var imageview: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +38,18 @@ class EditController : UIViewController {
             let previousImage = imageview.image
             
             itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
-                guard let image = image as? UIImage, self.imageview.image == previousImage else {return}
-                self.imageview.image = image
+                
+                DispatchQueue.main.async {
+                    guard let image = image as? UIImage, self.imageview.image == previousImage else {return}
+                    self.imageview.image = image
+                }
+
             }
         }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        displayNextImage()
     }
     
     
