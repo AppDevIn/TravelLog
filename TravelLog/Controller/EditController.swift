@@ -8,14 +8,20 @@
 import Foundation
 import UIKit
 import PhotosUI
+import FirebaseFirestore
+import FirebaseAuth
 
 class EditController : UIViewController {
+    
     
     
     
     var ItemProviders: [NSItemProvider] = []
     var iterator: IndexingIterator<[NSItemProvider]>?
     
+    var db: Firestore!
+    
+    let user = Auth.auth().currentUser
     
     @IBOutlet weak var imageview: UIImageView!
     
@@ -31,6 +37,16 @@ class EditController : UIViewController {
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeLeft.direction = .left
         self.imageview.addGestureRecognizer(swipeLeft)
+        
+        
+        let settings = FirestoreSettings()
+
+        Firestore.firestore().settings = settings
+        
+        db = Firestore.firestore()
+        
+        
+        addInfo()
         
         
     }
@@ -85,6 +101,26 @@ class EditController : UIViewController {
                 
             default:
                 break
+            }
+        }
+    }
+    
+    func addInfo(){
+        var ref: DocumentReference? = nil
+        
+        guard let id = user?.uid else {return}
+        
+        
+        
+        db.collection("users").document(id).setData([
+            "title": "God Jorney",
+            "locations": "Heavean",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu ac tortor dignissim convallis aenean et tortor at risus. At lectus urna duis convallis. Nulla aliquet porttitor lacus luctus accumsan tortor posuere ac. Adipiscing enim eu turpis egestas pretium aenean pharetra magna."
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(id)")
             }
         }
     }
