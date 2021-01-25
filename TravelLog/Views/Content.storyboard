@@ -8,21 +8,43 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Edit Controller-->
         <scene sceneID="F2G-ft-Umf">
             <objects>
-                <viewController id="15K-v6-bjF" sceneMemberID="viewController">
+                <viewController id="15K-v6-bjF" customClass="EditController" customModule="TravelLog" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="v2N-oa-7kA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WR4-ln-ViP">
+                                <rect key="frame" x="0.0" y="88" width="414" height="270"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUJ-Lz-gZS">
+                                <rect key="frame" x="184" y="397" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="presentPicker:" destination="15K-v6-bjF" eventType="touchUpInside" id="HLU-EE-gXh"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Dqp-UR-1EU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="WR4-ln-ViP" firstAttribute="trailing" secondItem="Dqp-UR-1EU" secondAttribute="trailing" id="4IL-n3-JZL"/>
+                            <constraint firstItem="WR4-ln-ViP" firstAttribute="top" secondItem="Dqp-UR-1EU" secondAttribute="top" id="CVL-4t-Brq"/>
+                            <constraint firstItem="WR4-ln-ViP" firstAttribute="centerX" secondItem="v2N-oa-7kA" secondAttribute="centerX" id="XUs-ZJ-tlx"/>
+                            <constraint firstItem="WR4-ln-ViP" firstAttribute="leading" secondItem="Dqp-UR-1EU" secondAttribute="leading" id="bqi-eS-I2R"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2x7-tD-PXR"/>
+                    <connections>
+                        <outlet property="imageview" destination="WR4-ln-ViP" id="U9t-Tp-qud"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cmu-Dq-LfV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1574" y="131"/>
+            <point key="canvasLocation" x="1573.913043478261" y="130.58035714285714"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="OjF-tH-F7f">

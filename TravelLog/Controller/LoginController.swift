@@ -46,6 +46,7 @@ class LoginController : UIViewController {
     }
     
     @IBAction func signUpClicked(_ sender: Any) {
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil) // File name of the story board
         let vc = storyboard.instantiateViewController(identifier: "register") as UIViewController // name must set as the identifer in stroyboard
         vc.modalPresentationStyle = .fullScreen //
