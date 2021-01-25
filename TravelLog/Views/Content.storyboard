@@ -15,32 +15,10 @@
                     <view key="view" contentMode="scaleToFill" id="v2N-oa-7kA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WR4-ln-ViP">
-                                <rect key="frame" x="0.0" y="88" width="414" height="270"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUJ-Lz-gZS">
-                                <rect key="frame" x="184" y="397" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="presentPicker:" destination="15K-v6-bjF" eventType="touchUpInside" id="HLU-EE-gXh"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Dqp-UR-1EU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="WR4-ln-ViP" firstAttribute="trailing" secondItem="Dqp-UR-1EU" secondAttribute="trailing" id="4IL-n3-JZL"/>
-                            <constraint firstItem="WR4-ln-ViP" firstAttribute="top" secondItem="Dqp-UR-1EU" secondAttribute="top" id="CVL-4t-Brq"/>
-                            <constraint firstItem="WR4-ln-ViP" firstAttribute="centerX" secondItem="v2N-oa-7kA" secondAttribute="centerX" id="XUs-ZJ-tlx"/>
-                            <constraint firstItem="WR4-ln-ViP" firstAttribute="leading" secondItem="Dqp-UR-1EU" secondAttribute="leading" id="bqi-eS-I2R"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2x7-tD-PXR"/>
-                    <connections>
-                        <outlet property="imageview" destination="WR4-ln-ViP" id="U9t-Tp-qud"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cmu-Dq-LfV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -125,6 +103,36 @@
                     <view key="view" contentMode="scaleToFill" id="EzP-Mz-Vsc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="SuG-l3-SHm">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XkJ-cV-hYa">
+                                        <rect key="frame" x="0.0" y="88" width="414" height="270"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNo-J5-fpA">
+                                        <rect key="frame" x="0.0" y="397" width="414" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="presentPicker:" destination="15K-v6-bjF" eventType="touchUpInside" id="smD-KT-pXy"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <viewLayoutGuide key="safeArea" id="CTc-Xg-Jza"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="XkJ-cV-hYa" firstAttribute="leading" secondItem="CTc-Xg-Jza" secondAttribute="leading" id="20d-j2-ygO"/>
+                                    <constraint firstItem="CTc-Xg-Jza" firstAttribute="trailing" secondItem="qNo-J5-fpA" secondAttribute="trailing" id="NBQ-dL-KCe"/>
+                                    <constraint firstItem="XkJ-cV-hYa" firstAttribute="centerX" secondItem="SuG-l3-SHm" secondAttribute="centerX" id="Ul0-N4-5H0"/>
+                                    <constraint firstItem="XkJ-cV-hYa" firstAttribute="top" secondItem="CTc-Xg-Jza" secondAttribute="top" id="VKd-ue-LuO"/>
+                                    <constraint firstItem="qNo-J5-fpA" firstAttribute="leading" secondItem="CTc-Xg-Jza" secondAttribute="leading" id="Xdl-9k-iAn"/>
+                                    <constraint firstItem="qNo-J5-fpA" firstAttribute="top" secondItem="XkJ-cV-hYa" secondAttribute="bottom" constant="39" id="fcX-bO-ZuK"/>
+                                    <constraint firstItem="CTc-Xg-Jza" firstAttribute="bottom" secondItem="qNo-J5-fpA" secondAttribute="bottom" constant="386" id="gFy-kz-LdU"/>
+                                    <constraint firstItem="XkJ-cV-hYa" firstAttribute="trailing" secondItem="CTc-Xg-Jza" secondAttribute="trailing" id="tpu-Eo-QmX"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="kq8-ST-Tkc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
