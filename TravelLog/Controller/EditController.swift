@@ -28,6 +28,9 @@ class EditController : UIViewController {
     let postId = UUID().uuidString
     
     @IBOutlet weak var imageview: UIImageView!
+    @IBOutlet weak var txt_title: UITextField!
+    @IBOutlet weak var txt_locations: UITextField!
+    @IBOutlet weak var txt_description: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,10 +53,41 @@ class EditController : UIViewController {
         db = Firestore.firestore()
         
         
-        addInfo()
+        
+    }
+    
+    @IBAction func uploadData(_ sender: Any) {
+        
+        guard let title = txt_title.text else {
+            print("Empty title")
+            return
+        }
+        
+        guard let location = txt_locations.text else {
+            print("Empty location")
+            return
+        }
+        
+        
+        guard let description = txt_description.text else {
+            print("Empty description")
+            return
+        }
+        
+        if ItemProviders.count <= 0 {
+            print("No images")
+            return
+        }
+        
+        
+        uploadPostInfo(titleOfPost: title, location: location, decriptionOfPost: description)
+        
+        uploadPostImages(images: ItemProviders)
         
         
     }
+    
+    
     
     var currentImage:Int = 0
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer?) -> Void {
@@ -112,16 +146,14 @@ class EditController : UIViewController {
         }
     }
     
-    func addInfo(){
+    func uploadPostInfo(titleOfPost title:String, location loc:String, decriptionOfPost decription:String){
     
         guard let id = user?.uid else {return}
         
-        
-        
         self.db.collection("users").document(id).collection("posts").document(postId).setData([
-            "title": "God Jorney",
-            "locations": "Heavean",
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu ac tortor dignissim convallis aenean et tortor at risus. At lectus urna duis convallis. Nulla aliquet porttitor lacus luctus accumsan tortor posuere ac. Adipiscing enim eu turpis egestas pretium aenean pharetra magna."
+            "title": title,
+            "locations": loc,
+            "description": decription
             
         ]) { err in
             if let err = err {
@@ -132,7 +164,23 @@ class EditController : UIViewController {
         }
     }
     
-    func addImages(_ image:UIImage, _ postid:String){
+    func uploadPostImages(images img:[NSItemProvider]){
+        
+        for i in 0..<img.count {
+            if ItemProviders[i].canLoadObject(ofClass: UIImage.self){
+                ItemProviders[i].loadObject(ofClass: UIImage.self) { (image, error) in
+                    
+                    guard let image = image as? UIImage else {return}
+                    self.addImages(image,self.postId)
+                    
+                }
+                
+            }
+        }
+    }
+    
+    
+    func addImages(_ image:UIImage, _ postid:String) {
         
         // Get a reference to the storage service using the default Firebase App
         let storage = Storage.storage()
@@ -154,6 +202,8 @@ class EditController : UIViewController {
         guard let uploadData = image.pngData() else {return}
         
         
+        
+        
         // Upload the file to the path "images/rivers.jpg"
         imageRef.putData(uploadData, metadata: nil) { (metadata, error) in
           
@@ -164,8 +214,9 @@ class EditController : UIViewController {
               return
             }
             
+            
             self.db.collection("users").document(id).collection("posts").document(self.postId).setData([
-                "images":[downloadURL.absoluteString]
+                "images":FieldValue.arrayUnion([downloadURL.absoluteString])
                 
             ], merge: true) { err in
                 if let err = err {
@@ -177,6 +228,8 @@ class EditController : UIViewController {
             
             print("Uploaded image: \(downloadURL)")
           }
+            
+            
         }
         
             
@@ -190,6 +243,8 @@ class EditController : UIViewController {
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
         present(picker, animated: true)
+        
+        self.view.endEditing(true)
         
     }
     

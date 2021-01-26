@@ -202,6 +202,9 @@
                                                 <state key="normal" title="Post">
                                                     <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="uploadData:" destination="Qf5-1X-vKy" eventType="touchUpInside" id="up2-Jv-rEc"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -227,6 +230,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="imageview" destination="lTh-AE-mTB" id="cJf-GU-6Pr"/>
+                        <outlet property="txt_description" destination="kDi-d7-d7M" id="EBl-Fh-rb1"/>
+                        <outlet property="txt_locations" destination="SU0-GH-apO" id="mbm-LQ-LoK"/>
+                        <outlet property="txt_title" destination="6aW-6S-ohy" id="7t1-KV-qLn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3PP-Tl-9EC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
