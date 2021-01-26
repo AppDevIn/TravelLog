@@ -10,6 +10,7 @@ import UIKit
 import PhotosUI
 import FirebaseFirestore
 import FirebaseAuth
+import FirebaseStorage
 
 class EditController : UIViewController {
     
@@ -54,6 +55,7 @@ class EditController : UIViewController {
     var currentImage:Int = 0
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer?) -> Void {
         
+        
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             
             
@@ -70,8 +72,10 @@ class EditController : UIViewController {
                 if ItemProviders[self.currentImage].canLoadObject(ofClass: UIImage.self){
                     ItemProviders[currentImage].loadObject(ofClass: UIImage.self) { (image, error) in
                         
+                        
                         DispatchQueue.main.async {
                             guard let image = image as? UIImage else {return}
+                            self.addImages(image)
                             self.imageview.image = image
                         }
                         
@@ -106,8 +110,7 @@ class EditController : UIViewController {
     }
     
     func addInfo(){
-        var ref: DocumentReference? = nil
-        
+    
         guard let id = user?.uid else {return}
         
         
@@ -116,6 +119,7 @@ class EditController : UIViewController {
             "title": "God Jorney",
             "locations": "Heavean",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu ac tortor dignissim convallis aenean et tortor at risus. At lectus urna duis convallis. Nulla aliquet porttitor lacus luctus accumsan tortor posuere ac. Adipiscing enim eu turpis egestas pretium aenean pharetra magna."
+            
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -123,6 +127,40 @@ class EditController : UIViewController {
                 print("Document added with ID: \(id)")
             }
         }
+    }
+    
+    func addImages(_ image:UIImage){
+        
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference()
+    
+        // Create a reference to the file you want to upload
+        let riversRef = storageRef.child("images/rivers.jpg")
+
+        //Get the data
+        guard let uploadData = image.pngData() else {return}
+        
+        // Upload the file to the path "images/rivers.jpg"
+        let uploadTask = riversRef.putData(uploadData, metadata: nil) { (metadata, error) in
+          guard let metadata = metadata else {
+            // Uh-oh, an error occurred!
+            return
+          }
+          // Metadata contains file metadata such as size, content-type.
+          let size = metadata.size
+          // You can also access to download URL after upload.
+          riversRef.downloadURL { (url, error) in
+            guard let downloadURL = url else {
+              // Uh-oh, an error occurred!
+              return
+            }
+          }
+        }
+            
+            
     }
     
     @IBAction func presentPicker(_ sender: Any) {
