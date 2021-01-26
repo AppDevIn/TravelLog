@@ -24,6 +24,9 @@ class EditController : UIViewController {
     
     let user = Auth.auth().currentUser
     
+    //Get a UUID for the image
+    let postId = UUID().uuidString
+    
     @IBOutlet weak var imageview: UIImageView!
     
     override func viewDidLoad() {
@@ -75,7 +78,7 @@ class EditController : UIViewController {
                         
                         DispatchQueue.main.async {
                             guard let image = image as? UIImage else {return}
-                            self.addImages(image)
+                            self.addImages(image,self.postId)
                             self.imageview.image = image
                         }
                         
@@ -115,7 +118,7 @@ class EditController : UIViewController {
         
         
         
-        db.collection("users").document(id).setData([
+        self.db.collection("users").document(id).collection("posts").document(postId).setData([
             "title": "God Jorney",
             "locations": "Heavean",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu ac tortor dignissim convallis aenean et tortor at risus. At lectus urna duis convallis. Nulla aliquet porttitor lacus luctus accumsan tortor posuere ac. Adipiscing enim eu turpis egestas pretium aenean pharetra magna."
@@ -129,37 +132,53 @@ class EditController : UIViewController {
         }
     }
     
-    func addImages(_ image:UIImage){
+    func addImages(_ image:UIImage, _ postid:String){
         
         // Get a reference to the storage service using the default Firebase App
         let storage = Storage.storage()
 
         // Create a storage reference from our storage service
         let storageRef = storage.reference()
-    
+        
+        
+        //Get a UUID for the image
+        let uuid = UUID().uuidString
+        
+        //Get the user id
+        guard let id = user?.uid else {return}
+
         // Create a reference to the file you want to upload
-        let riversRef = storageRef.child("images/rivers.jpg")
+        let imageRef = storageRef.child("users/\(id)/\(postId)/\(uuid).jpg")
 
         //Get the data
         guard let uploadData = image.pngData() else {return}
         
+        
         // Upload the file to the path "images/rivers.jpg"
-        let uploadTask = riversRef.putData(uploadData, metadata: nil) { (metadata, error) in
-          guard let metadata = metadata else {
-            // Uh-oh, an error occurred!
-            return
-          }
-          // Metadata contains file metadata such as size, content-type.
-          let size = metadata.size
+        imageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+          
           // You can also access to download URL after upload.
-          riversRef.downloadURL { (url, error) in
+          imageRef.downloadURL { (url, error) in
             guard let downloadURL = url else {
               // Uh-oh, an error occurred!
               return
             }
+            
+            self.db.collection("users").document(id).collection("posts").document(self.postId).setData([
+                "images":[downloadURL.absoluteString]
+                
+            ], merge: true) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("Document added with ID: \(id)")
+                }
+            }
+            
+            print("Uploaded image: \(downloadURL)")
           }
         }
-            
+        
             
     }
     
