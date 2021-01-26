@@ -168,7 +168,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="8zY-Mh-Mvg">
-                                        <rect key="frame" x="16" y="371.66666666666674" width="396" height="463.33333333333326"/>
+                                        <rect key="frame" x="16" y="370.33333333333326" width="396" height="464.66666666666674"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="LMV-yz-RMy">
                                                 <rect key="frame" x="0.0" y="0.0" width="396" height="119"/>
@@ -189,10 +189,20 @@
                                                 </subviews>
                                             </stackView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kDi-d7-d7M">
-                                                <rect key="frame" x="0.0" y="138.99999999999997" width="396" height="324.33333333333326"/>
+                                                <rect key="frame" x="0.0" y="139.00000000000003" width="396" height="265.66666666666674"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r2N-Go-fvE">
+                                                <rect key="frame" x="0.0" y="424.66666666666669" width="396" height="40"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="bgP-iJ-fHQ"/>
+                                                </constraints>
+                                                <state key="normal" title="Post">
+                                                    <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
