@@ -17,6 +17,9 @@ class LoginController : UIViewController {
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
         txt_password.isSecureTextEntry = true
+        
+        txt_email.text = "jeyavishnu@gmail.com"
+        txt_password.text = "Test123"
     }
     
     @IBAction func loginClicked(_ sender: Any) {
@@ -46,6 +49,7 @@ class LoginController : UIViewController {
     }
     
     @IBAction func signUpClicked(_ sender: Any) {
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil) // File name of the story board
         let vc = storyboard.instantiateViewController(identifier: "register") as UIViewController // name must set as the identifer in stroyboard
         vc.modalPresentationStyle = .fullScreen //

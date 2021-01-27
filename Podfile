@@ -3,13 +3,14 @@
 
 target 'TravelLog' do
   # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
+ use_frameworks!
 
   # Pods for TravelLog
 
-  
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
 
   target 'TravelLogTests' do
     inherit! :search_paths
