@@ -44,6 +44,10 @@ class EditController : UIViewController {
     var currentImage:Int = 0
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer?) -> Void {
         
+        if ItemProviders.count <= 0 {
+            print("No images")
+            return
+        }
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             

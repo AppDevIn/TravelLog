@@ -49,6 +49,8 @@ class EditDetailsController : UIViewController {
     
     @IBAction func uploadData(_ sender: Any) {
         
+        self.view.endEditing(true)
+        
         guard let title = txt_title.text else {
             print("Empty title")
             return
@@ -65,6 +67,11 @@ class EditDetailsController : UIViewController {
             return
         }
         
+        if (description == "" && title == "" && location == "") {
+            print("Empty text filed")
+            return
+        }
+        
         if ItemProviders.count <= 0 {
             print("No images")
             return
@@ -74,6 +81,8 @@ class EditDetailsController : UIViewController {
         uploadPostInfo(titleOfPost: title, location: location, decriptionOfPost: description)
         
         uploadPostImages(images: ItemProviders)
+        
+        clearTextField()
     }
     
     func uploadPostInfo(titleOfPost title:String, location loc:String, decriptionOfPost decription:String){
@@ -107,6 +116,17 @@ class EditDetailsController : UIViewController {
                 
             }
         }
+    }
+    
+    
+    func clearTextField()  {
+        //Empty the text fields
+        txt_title.text = ""
+        txt_locations.text = ""
+        txt_description.text = ""
+        
+        //Remove the array of images
+        ItemProviders = []
     }
     
     
@@ -171,6 +191,10 @@ class EditDetailsController : UIViewController {
 
 extension EditDetailsController:UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
     }
 }
