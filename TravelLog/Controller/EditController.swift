@@ -41,6 +41,12 @@ class EditController : UIViewController {
     }
     
     
+    
+    
+    
+    
+    
+    
     var currentImage:Int = 0
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer?) -> Void {
         

@@ -186,6 +186,13 @@ class EditDetailsController : UIViewController {
                 
                 if self.count >= self.lengthOfImage {
                     self.loading.stopAnimating()
+                    let editController = self.navigationController?.viewControllers.first as! EditController
+                    editController.ItemProviders = []
+                    editController.imageview.image = UIImage(named: "FooterLogin")
+                    
+                    self.navigationController?.popViewController(animated: true)
+                    
+                    
                 }
                 return
             }
@@ -203,6 +210,13 @@ class EditDetailsController : UIViewController {
                 
                 if self.count >= self.lengthOfImage {
                     self.loading.stopAnimating()
+                    let editController = self.navigationController?.viewControllers.first as! EditController
+                    editController.ItemProviders = []
+                    editController.imageview.image = UIImage(named: "FooterLogin")
+                    
+                    self.navigationController?.popViewController(animated: true)
+                    
+                    
                 }
                 
                 if let err = err {
