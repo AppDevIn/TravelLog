@@ -11,6 +11,7 @@
 		562C1BF13C27560F1C00A509 /* Pods_TravelLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 802FF8E9037EC6AFAED7DFC4 /* Pods_TravelLog.framework */; };
 		9B2F8DC425BA00870009D9A1 /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2F8DC325BA00870009D9A1 /* Content.storyboard */; };
 		9B71979325BFDA2B00F9B51C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B71979225BFDA2B00F9B51C /* Post.swift */; };
+		9B71979825C0F88200F9B51C /* EditDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B71979725C0F88200F9B51C /* EditDetailsController.swift */; };
 		9B7DC97725B336E4009E97D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DC97625B336E4009E97D3 /* AppDelegate.swift */; };
 		9B7DC97925B336E4009E97D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DC97825B336E4009E97D3 /* SceneDelegate.swift */; };
 		9B7DC97B25B336E4009E97D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DC97A25B336E4009E97D3 /* ViewController.swift */; };
@@ -55,6 +56,7 @@
 		9553392FFA87464992ADE143 /* Pods_TravelLogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelLogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B2F8DC325BA00870009D9A1 /* Content.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Content.storyboard; sourceTree = "<group>"; };
 		9B71979225BFDA2B00F9B51C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		9B71979725C0F88200F9B51C /* EditDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDetailsController.swift; sourceTree = "<group>"; };
 		9B7DC97325B336E4009E97D3 /* TravelLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7DC97625B336E4009E97D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B7DC97825B336E4009E97D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				9BA55E3F25B809950044B69B /* LoginController.swift */,
 				9BA55E6825B81FB40044B69B /* RegisterController.swift */,
 				9BC2BD9825BDF6270097B582 /* EditController.swift */,
+				9B71979725C0F88200F9B51C /* EditDetailsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				9BA55E6925B81FB40044B69B /* RegisterController.swift in Sources */,
 				9B7DC98125B336E4009E97D3 /* TravelLog.xcdatamodeld in Sources */,
 				9B7DC97925B336E4009E97D3 /* SceneDelegate.swift in Sources */,
+				9B71979825C0F88200F9B51C /* EditDetailsController.swift in Sources */,
 				9BA55E4025B809950044B69B /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
