@@ -10,16 +10,23 @@ import UIKit
 
 class Post{
     
-    var images:[UIImage]
+    var images:[String]
     var title:  String
     var decription: String
     var locations:String
     
-    init(_ title:String, _ decription:String, _ locations:String, _ images:[UIImage]) {
-        self.title = title
-        self.decription = decription
-        self.locations = locations
-        self.images = images
+    init() {
+        images = []
+        title = ""
+        decription = ""
+        locations = ""
+    }
+    
+    init(title t:String, decription des:String, locations loc:String, images imgs:[String]) {
+        self.title = t
+        self.decription = des
+        self.locations = loc
+        self.images = imgs
     }
     
     

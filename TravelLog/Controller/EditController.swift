@@ -54,7 +54,7 @@ class EditController : UIViewController {
             
             switch swipeGesture.direction {
             case UISwipeGestureRecognizer.Direction.left:
-                print("left")
+                
                 if currentImage == ItemProviders.count - 1 {
                     currentImage = 0
                     
@@ -77,7 +77,7 @@ class EditController : UIViewController {
                 
                 
             case UISwipeGestureRecognizer.Direction.right:
-                print("right")
+                
                 if currentImage == 0 {
                     currentImage = ItemProviders.count - 1
                 }else{

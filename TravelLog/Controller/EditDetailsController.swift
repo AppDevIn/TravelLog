@@ -27,9 +27,15 @@ class EditDetailsController : UIViewController {
     //Get a UUID for the image
     let postId = UUID().uuidString
     
+    var post:Post = Post()
+    
+    var count = 0
+    var lengthOfImage:Int = 0
+    
     @IBOutlet weak var txt_title: UITextField!
     @IBOutlet weak var txt_locations: UITextField!
     @IBOutlet weak var txt_description: UITextField!
+    @IBOutlet weak var loading: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,12 +50,20 @@ class EditDetailsController : UIViewController {
         txt_locations.delegate = self
         txt_description.delegate = self
         
+        loading.hidesWhenStopped = true
+        
+        
+        lengthOfImage = ItemProviders.count
+        
         
     }
     
     @IBAction func uploadData(_ sender: Any) {
         
         self.view.endEditing(true)
+        
+        loading.startAnimating()
+        
         
         guard let title = txt_title.text else {
             print("Empty title")
@@ -77,22 +91,25 @@ class EditDetailsController : UIViewController {
             return
         }
         
+        post = Post(title: title, decription: description, locations: location, images: [])
         
-        uploadPostInfo(titleOfPost: title, location: location, decriptionOfPost: description)
+        
+        uploadPostInfo(post: post)
         
         uploadPostImages(images: ItemProviders)
         
         clearTextField()
     }
     
-    func uploadPostInfo(titleOfPost title:String, location loc:String, decriptionOfPost decription:String){
+    func uploadPostInfo(post p:Post){
     
         guard let id = user?.uid else {return}
         
+        
         self.db.collection("users").document(id).collection("posts").document(postId).setData([
-            "title": title,
-            "locations": loc,
-            "description": decription
+            "title": p.title,
+            "locations": p.locations,
+            "description": p.decription
             
         ]) { err in
             if let err = err {
@@ -110,13 +127,16 @@ class EditDetailsController : UIViewController {
                 ItemProviders[i].loadObject(ofClass: UIImage.self) { (image, error) in
                     
                     guard let image = image as? UIImage else {return}
-                    self.addImages(image,self.postId)
+                    
+                    self.addImages(image, self.postId)
                     
                 }
                 
             }
         }
     }
+    
+
     
     
     func clearTextField()  {
@@ -159,17 +179,36 @@ class EditDetailsController : UIViewController {
           
           // You can also access to download URL after upload.
           imageRef.downloadURL { (url, error) in
+            
+            
             guard let downloadURL = url else {
-              return
+                self.count += 1
+                
+                if self.count >= self.lengthOfImage {
+                    self.loading.stopAnimating()
+                }
+                return
             }
+     
+            self.post.images.append(downloadURL.absoluteString)
+            
+            
             
             
             self.db.collection("users").document(id).collection("posts").document(self.postId).setData([
                 "images":FieldValue.arrayUnion([downloadURL.absoluteString])
                     
             ], merge: true) { err in
+                self.count += 1
+                
+                if self.count >= self.lengthOfImage {
+                    self.loading.stopAnimating()
+                }
+                
                 if let err = err {
+                    
                     print("Error adding document: \(err)")
+                    
                 } else {
                     print("Document added with ID: \(id)")
                 }

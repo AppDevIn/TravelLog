@@ -271,17 +271,26 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="wnb-bG-gjy">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" white="1" alpha="0.48899507838369205" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KRn-bs-cOG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="drj-G1-zAt" firstAttribute="leading" secondItem="KRn-bs-cOG" secondAttribute="leading" constant="5" id="Efo-5R-T3z"/>
                             <constraint firstItem="KRn-bs-cOG" firstAttribute="trailing" secondItem="drj-G1-zAt" secondAttribute="trailing" constant="5" id="LMy-rv-DGR"/>
+                            <constraint firstItem="wnb-bG-gjy" firstAttribute="top" secondItem="KRn-bs-cOG" secondAttribute="top" id="U1a-HB-Gqg"/>
+                            <constraint firstItem="wnb-bG-gjy" firstAttribute="leading" secondItem="KRn-bs-cOG" secondAttribute="leading" id="YcE-uK-Jgt"/>
+                            <constraint firstItem="KRn-bs-cOG" firstAttribute="bottom" secondItem="wnb-bG-gjy" secondAttribute="bottom" id="cIf-d0-WXb"/>
+                            <constraint firstItem="KRn-bs-cOG" firstAttribute="trailing" secondItem="wnb-bG-gjy" secondAttribute="trailing" id="qLA-B8-9Mm"/>
                             <constraint firstItem="drj-G1-zAt" firstAttribute="top" secondItem="KRn-bs-cOG" secondAttribute="top" constant="10" id="t77-Kf-wXY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Tds-cM-b87"/>
                     <connections>
+                        <outlet property="loading" destination="wnb-bG-gjy" id="VYP-Aa-TWb"/>
                         <outlet property="txt_description" destination="wL5-8s-UYJ" id="mcd-jh-hCZ"/>
                         <outlet property="txt_locations" destination="nh0-xZ-Nc6" id="hYD-r8-hVq"/>
                         <outlet property="txt_title" destination="xOd-5u-aR8" id="fts-Fi-ELh"/>
