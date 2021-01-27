@@ -18,7 +18,7 @@ class EditDetailsController : UIViewController {
     
     
     var ItemProviders: [NSItemProvider] = []
-    var iterator: IndexingIterator<[NSItemProvider]>?
+
     
     var db: Firestore!
     
@@ -29,8 +29,9 @@ class EditDetailsController : UIViewController {
     
     var post:Post = Post()
     
+    // How many image added in the database
     var count = 0
-    var lengthOfImage:Int = 0
+    var lengthOfImage:Int = 0 //The number of images in the array
     
     @IBOutlet weak var txt_title: UITextField!
     @IBOutlet weak var txt_locations: UITextField!
@@ -39,20 +40,21 @@ class EditDetailsController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
         
-        
+        //Set up text field delgate
         txt_title.delegate = self
         txt_locations.delegate = self
         txt_description.delegate = self
         
+        //Hide the loading bar when stopped
         loading.hidesWhenStopped = true
         
-        
+        //Init the length of image
         lengthOfImage = ItemProviders.count
         
         
@@ -64,7 +66,7 @@ class EditDetailsController : UIViewController {
         
         loading.startAnimating()
         
-        
+        //Change the text from String? to String
         guard let title = txt_title.text else {
             print("Empty title")
             return
@@ -81,28 +83,37 @@ class EditDetailsController : UIViewController {
             return
         }
         
+        //Check if the text is empty
         if (description == "" && title == "" && location == "") {
             print("Empty text filed")
             return
         }
         
+        //Check if the images is empty
         if ItemProviders.count <= 0 {
             print("No images")
             return
         }
         
+        //Create the post object
         post = Post(title: title, decription: description, locations: location, images: [])
         
-        
+        //Upload the the info but not the imzage
         uploadPostInfo(post: post)
         
+        //Upload the images
         uploadPostImages(images: ItemProviders)
         
+        //Clearfiled upon uploading
         clearTextField()
     }
     
+    /**
+     Use firestore to upload the information into
+     users/{id}/posts/{postID}
+     */
     func uploadPostInfo(post p:Post){
-    
+        
         guard let id = user?.uid else {return}
         
         
@@ -120,14 +131,17 @@ class EditDetailsController : UIViewController {
         }
     }
     
+    //To upload the images with the addImage helper
     func uploadPostImages(images img:[NSItemProvider]){
         
         for i in 0..<img.count {
             if ItemProviders[i].canLoadObject(ofClass: UIImage.self){
                 ItemProviders[i].loadObject(ofClass: UIImage.self) { (image, error) in
                     
+                    //Convert to UIImage
                     guard let image = image as? UIImage else {return}
                     
+                    //Add the image to firestoage
                     self.addImages(image, self.postId)
                     
                 }
@@ -136,7 +150,7 @@ class EditDetailsController : UIViewController {
         }
     }
     
-
+    
     
     
     func clearTextField()  {
@@ -149,12 +163,34 @@ class EditDetailsController : UIViewController {
         ItemProviders = []
     }
     
+    /**
+     When all the images is upload
+     this function will be called
+     */
+    func completed() -> Void {
+        self.count += 1
+        
+        if self.count >= self.lengthOfImage {
+            self.loading.stopAnimating()
+            let editController = self.navigationController?.viewControllers.first as! EditController
+            editController.ItemProviders = []
+            editController.imageview.image = UIImage(named: "FooterLogin")
+            
+            self.navigationController?.popViewController(animated: true)
+            
+            
+        }
+    }
     
+    /**
+     Add the images to firebase stoage
+     into path users/{uid}/{postid}
+     */
     func addImages(_ image:UIImage, _ postid:String) {
         
         // Get a reference to the storage service using the default Firebase App
         let storage = Storage.storage()
-
+        
         // Create a storage reference from our storage service
         let storageRef = storage.reference()
         
@@ -164,10 +200,10 @@ class EditDetailsController : UIViewController {
         
         //Get the user id
         guard let id = user?.uid else {return}
-
+        
         // Create a reference to the file you want to upload
         let imageRef = storageRef.child("users/\(id)/\(postId)/\(uuid).jpg")
-
+        
         //Get the data
         guard let uploadData = image.pngData() else {return}
         
@@ -176,65 +212,43 @@ class EditDetailsController : UIViewController {
         
         // Upload the file to the path "images/rivers.jpg"
         imageRef.putData(uploadData, metadata: nil) { (metadata, error) in
-          
-          // You can also access to download URL after upload.
-          imageRef.downloadURL { (url, error) in
             
-            
-            guard let downloadURL = url else {
-                self.count += 1
+            // You can also access to download URL after upload.
+            imageRef.downloadURL { (url, error) in
                 
-                if self.count >= self.lengthOfImage {
-                    self.loading.stopAnimating()
-                    let editController = self.navigationController?.viewControllers.first as! EditController
-                    editController.ItemProviders = []
-                    editController.imageview.image = UIImage(named: "FooterLogin")
-                    
-                    self.navigationController?.popViewController(animated: true)
-                    
-                    
+                
+                guard let downloadURL = url else {
+                    self.completed()
+                    return
                 }
-                return
+                
+                self.post.images.append(downloadURL.absoluteString)
+                
+                
+                
+                
+                self.db.collection("users").document(id).collection("posts").document(self.postId).setData([
+                    "images":FieldValue.arrayUnion([downloadURL.absoluteString])
+                    
+                ], merge: true) { err in
+                    self.completed()
+                    
+                    if let err = err {
+                        
+                        print("Error adding document: \(err)")
+                        
+                    } else {
+                        print("Document added with ID: \(id)")
+                    }
+                }
+                
+                print("Uploaded image: \(downloadURL)")
             }
-     
-            self.post.images.append(downloadURL.absoluteString)
-            
-            
-            
-            
-            self.db.collection("users").document(id).collection("posts").document(self.postId).setData([
-                "images":FieldValue.arrayUnion([downloadURL.absoluteString])
-                    
-            ], merge: true) { err in
-                self.count += 1
-                
-                if self.count >= self.lengthOfImage {
-                    self.loading.stopAnimating()
-                    let editController = self.navigationController?.viewControllers.first as! EditController
-                    editController.ItemProviders = []
-                    editController.imageview.image = UIImage(named: "FooterLogin")
-                    
-                    self.navigationController?.popViewController(animated: true)
-                    
-                    
-                }
-                
-                if let err = err {
-                    
-                    print("Error adding document: \(err)")
-                    
-                } else {
-                    print("Document added with ID: \(id)")
-                }
-            }
-            
-            print("Uploaded image: \(downloadURL)")
-          }
             
             
         }
         
-            
+        
     }
     
     

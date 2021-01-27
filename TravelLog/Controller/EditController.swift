@@ -18,7 +18,7 @@ class EditController : UIViewController {
     
     
     var ItemProviders: [NSItemProvider] = []
-    var iterator: IndexingIterator<[NSItemProvider]>?
+    var currentImage:Int = 0
     
     @IBOutlet weak var imageview: UIImageView!
     
@@ -26,12 +26,15 @@ class EditController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Allow the user to interact the images for gestures
         self.imageview.isUserInteractionEnabled = true
         
+        //Setting up the gestue for right
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeRight.direction = .right
         self.imageview.addGestureRecognizer(swipeRight)
         
+        //Setting up the gestue for left
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeLeft.direction = .left
         self.imageview.addGestureRecognizer(swipeLeft)
@@ -40,14 +43,31 @@ class EditController : UIViewController {
         
     }
     
+    /**
+        This is to display the images based on the index to
+        i is the index
+     */
+    func displayImages(i index:Int){
+        
+        if ItemProviders[index].canLoadObject(ofClass: UIImage.self){
+            ItemProviders[index].loadObject(ofClass: UIImage.self) { (image, error) in
+                DispatchQueue.main.async {
+                    guard let image = image as? UIImage else {return}
+                    self.imageview.image = image
+                }
+                
+            }
+            
+        }
+        
+    }
     
-    
-    
-    
-    
-    
-    
-    var currentImage:Int = 0
+    /**
+     This function is to respond to getsure a
+     gesture is the to know which diretcion is being swipped
+     
+     Code for left and right only
+     */
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer?) -> Void {
         
         if ItemProviders.count <= 0 {
@@ -58,95 +78,56 @@ class EditController : UIViewController {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             
             
+            //Check which directiuon is being swipped
             switch swipeGesture.direction {
+            //Swipped Left
             case UISwipeGestureRecognizer.Direction.left:
                 
-                if currentImage == ItemProviders.count - 1 {
-                    currentImage = 0
-                    
-                }else{
-                    currentImage += 1
-                }
+                // Add the current Image interger to go front
+                if currentImage == ItemProviders.count - 1 { currentImage = 0 }
+                else { currentImage += 1 }
                 
-                if ItemProviders[self.currentImage].canLoadObject(ofClass: UIImage.self){
-                    ItemProviders[currentImage].loadObject(ofClass: UIImage.self) { (image, error) in
-                        
-                        
-                        DispatchQueue.main.async {
-                            guard let image = image as? UIImage else {return}
-                            self.imageview.image = image
-                        }
-                        
-                    }
-                    
-                }
-                
-                
+                displayImages(i: currentImage)
+            
+            //Swipped Right
             case UISwipeGestureRecognizer.Direction.right:
                 
-                if currentImage == 0 {
-                    currentImage = ItemProviders.count - 1
-                }else{
-                    currentImage -= 1
-                }
-                if ItemProviders[self.currentImage].canLoadObject(ofClass: UIImage.self){
-                    ItemProviders[currentImage].loadObject(ofClass: UIImage.self) { (image, error) in
-                        
-                        DispatchQueue.main.async {
-                            guard let image = image as? UIImage else {return}
-                            self.imageview.image = image
-                        }
-                        
-                    }
-                    
-                }
+                // Minus the current Image interger to go back
+                if currentImage == 0 { currentImage = ItemProviders.count - 1 }
+                else { currentImage -= 1 }
                 
+                displayImages(i: currentImage)
             default:
                 break
             }
         }
     }
     
+    //The is add the naviagtion button function
     @IBAction func presentPicker(_ sender: Any) {
+        
+        //Sett  up the PHPicker
         var configuration = PHPickerConfiguration()
         configuration.filter = .images
         configuration.selectionLimit = 0
         
+        //Open the PHPicker
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
         present(picker, animated: true)
         
         
     }
-    
-    func displayNextImage() {
-        
-        if let itemProvider = iterator?.next(), itemProvider.canLoadObject(ofClass: UIImage.self) {
-            let previousImage = imageview.image
-            
-            itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
-                
-                DispatchQueue.main.async {
-                    guard let image = image as? UIImage, self.imageview.image == previousImage else {return}
-                    self.imageview.image = image
-                }
-                
-            }
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //        displayNextImage()
-    }
-    
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //Check if that is the seque using an identifier
+        
+        //Move to EditDeatailController
         if segue.identifier == "addDeatils" {
             let destination = segue.destination as! EditDetailsController
             destination.ItemProviders = self.ItemProviders
-            destination.iterator = self.iterator
-            
+
         }
     }
     
@@ -158,7 +139,7 @@ extension EditController : PHPickerViewControllerDelegate {
         dismiss(animated: true)
         
         ItemProviders = results.map(\.itemProvider)
-        iterator = ItemProviders.makeIterator()
-        displayNextImage()
+        
+        displayImages(i: 0)
     }
 }
