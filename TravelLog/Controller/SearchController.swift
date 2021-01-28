@@ -18,6 +18,7 @@ class SearchController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tabelView.delegate = self
         tabelView.dataSource = self
     }
     @IBAction func searching(_ sender: Any) {
@@ -39,6 +40,8 @@ extension SearchController:UITableViewDataSource{
         return 1
     }
     
+    
+    
     //The length of each section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
@@ -58,5 +61,13 @@ extension SearchController:UITableViewDataSource{
     //Allow the given to e
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
+    }
+}
+
+extension SearchController:UITableViewDelegate{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        performSegue(withIdentifier: "userDatails", sender: self)
     }
 }

@@ -43,6 +43,9 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="380" height="43.666667938232422"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <segue destination="PJg-cf-sRj" kind="show" identifier="userDatails" id="VL1-VR-xzM"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
@@ -417,6 +420,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v1k-oU-4OH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="580" y="2578"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="rZS-N7-3lg">
+            <objects>
+                <viewController id="PJg-cf-sRj" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ysf-KF-RA2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="MhQ-av-9y4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="78W-Tl-hhE"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oG6-6L-teW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1609" y="2577"/>
         </scene>
         <!--Map-->
         <scene sceneID="SdG-Xa-TzY">
