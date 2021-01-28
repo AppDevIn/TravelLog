@@ -20,7 +20,34 @@ class DatabaseManager{
         db = Firestore.firestore()
     }
     
+    func setProfileImage(userID UID:String, profileLink link:String) {
+        let docRef = db.collection("users").document(UID)
+        
+        docRef.setData([
+            "profileLink": link
+        ])
+        
+    }
     
+    func getProfileImage(userID UID:String, completionBlock: @escaping (URL) -> Void) {
+        let docRef = db.collection("users").document(UID)
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                guard let data = document.data() else {return}
+                
+                //Cover string to URL
+                let url:URL = NSURL(string: data["profileLink"] as! String )! as URL
+                
+                completionBlock(url)
+                
+            } else {
+                print("Document does not exist")
+            }
+        }
+
+        
+    }
     
     func getPosts(postID id:String, userID UID:String, success: @escaping ([Post]) -> Void )  {
         var posts:[Post] = []

@@ -46,6 +46,7 @@ class StorageManager{
             imageRef.downloadURL { (url, error) in
                 guard let downloadURL = url else {return}
                 
+                DatabaseManager.shared.setProfileImage(userID: uid, profileLink: downloadURL.absoluteString)
             }
             
             
