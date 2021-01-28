@@ -36,7 +36,7 @@ class StorageManager{
         // Upload the file to the path "images/rivers.jpg"
         imageRef.putData(uploadData, metadata: nil) { (metadata, error) in
             
-            guard let metadata = metadata else {
+            guard let _ = metadata else {
               completionBlock(false)
               return
             }

@@ -19,8 +19,15 @@ class ProfileController:UIViewController {
     let UID = Auth.auth().currentUser?.uid;
     var posts:[Post] = []
     
+    var refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Set up the refresh for the collection view
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
         
         
         //Make a circular border the image view
@@ -90,6 +97,17 @@ class ProfileController:UIViewController {
                 imageView.image = image
             }
         }
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        
+        //Get the posts
+        DatabaseManager.shared.getPosts(userID: UID!) { (posts) in
+            self.posts = posts
+            self.collectionView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
+        
     }
     
     
