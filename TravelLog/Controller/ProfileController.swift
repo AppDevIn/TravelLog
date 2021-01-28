@@ -16,6 +16,7 @@ class ProfileController:UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     
     let UID = Auth.auth().currentUser?.uid;
+    var posts:[Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +40,17 @@ class ProfileController:UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        
+        //Get the posts
         DatabaseManager.shared.getPosts(postID: "2C110B33-A249-4FBE-A3F5-C38567B566A8", userID: UID!) { (posts) in
             for post in posts{
                 print(post.title)
+                
             }
+            
+            self.posts = posts
+            
+            self.collectionView.reloadData()
         }
         
         
@@ -68,13 +76,22 @@ extension ProfileController:UICollectionViewDelegate{
 
 extension ProfileController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return posts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.identifier, for: indexPath) as! MyCollectionViewCell
         
-        cell.configure(with: UIImage(named: "FooterLogin")!)
+        //Cover string to URL
+        let url:URL = NSURL(string: posts[indexPath.item].images[0])! as URL
+        
+        if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    cell.configure(with: image)
+                }
+            }
+        
+        
         
         return cell
     }
