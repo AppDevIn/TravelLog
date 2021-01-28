@@ -29,6 +29,27 @@ class DatabaseManager{
         
     }
     
+    func getUserName(userID UID:String, completionBlock: @escaping (String) -> Void) {
+        let docRef = db.collection("users").document(UID)
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                guard let data = document.data() else {return}
+                
+                guard let name = data["name"] else {
+                    return
+                }
+                
+                completionBlock(name as! String)
+                
+            } else {
+                print("Document does not exist")
+            }
+        }
+
+        
+    }
+    
     func setProfileImage(userID UID:String, profileLink link:String) {
         let docRef = db.collection("users").document(UID)
         

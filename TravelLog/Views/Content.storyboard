@@ -17,10 +17,49 @@
                     <view key="view" contentMode="scaleToFill" id="v2N-oa-7kA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="pDg-We-hbj">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x20-d0-wSV">
+                                        <rect key="frame" x="17" y="8" width="380" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="HSg-yf-egG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FVC-3D-KHr">
+                                        <rect key="frame" x="17" y="53" width="380" height="664"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" id="Kcv-7p-IF9">
+                                                <rect key="frame" x="0.0" y="28" width="380" height="43.666667938232422"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kcv-7p-IF9" id="eXq-i8-4BF">
+                                                    <rect key="frame" x="0.0" y="0.0" width="380" height="43.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                                <edgeInsets key="layoutMargins" top="8" left="17" bottom="8" right="17"/>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Dqp-UR-1EU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="pDg-We-hbj" secondAttribute="bottom" id="C0x-A1-RWw"/>
+                            <constraint firstItem="pDg-We-hbj" firstAttribute="top" secondItem="Dqp-UR-1EU" secondAttribute="top" id="EbP-7f-Pca"/>
+                            <constraint firstItem="Dqp-UR-1EU" firstAttribute="trailing" secondItem="pDg-We-hbj" secondAttribute="trailing" id="Ye3-c1-aAA"/>
+                            <constraint firstItem="pDg-We-hbj" firstAttribute="leading" secondItem="Dqp-UR-1EU" secondAttribute="leading" id="kDp-jj-ENo"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2x7-tD-PXR"/>
+                    <connections>
+                        <outlet property="tabelView" destination="FVC-3D-KHr" id="Qt8-2T-SJ3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cmu-Dq-LfV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -166,6 +205,7 @@
                     <connections>
                         <outlet property="collectionView" destination="NmY-bR-xcW" id="vDW-xx-xUs"/>
                         <outlet property="imageView" destination="kMA-zw-35Q" id="beP-dL-aUQ"/>
+                        <outlet property="txt_name" destination="7Bi-dm-I04" id="2wO-rz-qnc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WLM-NZ-qZ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

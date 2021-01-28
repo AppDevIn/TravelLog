@@ -15,6 +15,7 @@ class ProfileController:UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var txt_name: UILabel!
     
     let UID = Auth.auth().currentUser?.uid;
     var posts:[Post] = []
@@ -64,6 +65,10 @@ class ProfileController:UIViewController {
             self.setUrlToImage(url: url, imageView: self.imageView)
         }
         
+        //Get the name of the user
+        DatabaseManager.shared.getUserName(userID: UID!) { (username) in
+            self.txt_name.text = username
+        }
         
         //Add tab gesture into imageview
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
