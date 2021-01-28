@@ -54,6 +54,14 @@ class ProfileController:UIViewController {
             self.collectionView.reloadData()
         }
         
+        //Get the Profile picture
+        DatabaseManager.shared.getProfileImage(userID: UID!) { (url) in
+            if let data = try? Data(contentsOf: url) {
+                    if let image = UIImage(data: data) {
+                        self.imageView.image = image
+                    }
+                }
+        }
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         imageView.isUserInteractionEnabled = true
@@ -84,6 +92,9 @@ extension ProfileController : PHPickerViewControllerDelegate {
         dismiss(animated: true)
         
         let ItemProviders = results.map(\.itemProvider)
+        
+        //If Zero exit
+        guard ItemProviders.count > 0 else {return}
         
         if ItemProviders[0].canLoadObject(ofClass: UIImage.self){
             ItemProviders[0].loadObject(ofClass: UIImage.self) { (image, error) in
