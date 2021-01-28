@@ -7,12 +7,15 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 
 class ProfileController:UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imageView: UIImageView!
+    
+    let UID = Auth.auth().currentUser?.uid;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +38,12 @@ class ProfileController:UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        DatabaseManager.shared.getPosts(postID: "2C110B33-A249-4FBE-A3F5-C38567B566A8", userID: UID!) { (posts) in
+            for post in posts{
+                print(post.title)
+            }
+        }
         
         
     }
