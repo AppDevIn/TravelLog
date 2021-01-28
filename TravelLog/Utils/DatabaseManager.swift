@@ -20,6 +20,15 @@ class DatabaseManager{
         db = Firestore.firestore()
     }
     
+    func insertUser(userID UID:String, userName name:String) {
+        let docRef = db.collection("users").document(UID)
+        
+        docRef.setData([
+            "name": link
+        ])
+        
+    }
+    
     func setProfileImage(userID UID:String, profileLink link:String) {
         let docRef = db.collection("users").document(UID)
         
@@ -36,8 +45,12 @@ class DatabaseManager{
             if let document = document, document.exists {
                 guard let data = document.data() else {return}
                 
+                guard let profileLink = data["profileLink"] else {
+                    return
+                }
+                
                 //Cover string to URL
-                let url:URL = NSURL(string: data["profileLink"] as! String )! as URL
+                let url:URL = NSURL(string: profileLink as! String )! as URL
                 
                 completionBlock(url)
                 
