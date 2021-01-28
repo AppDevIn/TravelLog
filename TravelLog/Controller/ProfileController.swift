@@ -12,7 +12,7 @@ import PhotosUI
 
 
 class ProfileController:UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imageView: UIImageView!
     
@@ -22,6 +22,8 @@ class ProfileController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        //Make a circular border the image view
         imageView.layer.borderWidth = 1
         imageView.layer.masksToBounds = false
         imageView.layer.borderColor = UIColor.black.cgColor
@@ -30,7 +32,7 @@ class ProfileController:UIViewController {
         imageView.clipsToBounds = true
         
         
-        
+        //Register the custom cell
         collectionView.register(MyCollectionViewCell.nib(), forCellWithReuseIdentifier: MyCollectionViewCell.identifier)
         
         
@@ -38,31 +40,25 @@ class ProfileController:UIViewController {
         layout.itemSize = CGSize(width: 120, height: 120)
         collectionView.collectionViewLayout = layout
         
+        
+        //Set up the delgate for the collectio view
         collectionView.delegate = self
         collectionView.dataSource = self
         
         
         //Get the posts
-        DatabaseManager.shared.getPosts(postID: "2C110B33-A249-4FBE-A3F5-C38567B566A8", userID: UID!) { (posts) in
-            for post in posts{
-                print(post.title)
-                
-            }
-            
+        DatabaseManager.shared.getPosts(userID: UID!) { (posts) in
             self.posts = posts
-            
             self.collectionView.reloadData()
         }
         
         //Get the Profile picture
         DatabaseManager.shared.getProfileImage(userID: UID!) { (url) in
-            if let data = try? Data(contentsOf: url) {
-                    if let image = UIImage(data: data) {
-                        self.imageView.image = image
-                    }
-                }
+            self.setUrlToImage(url: url, imageView: self.imageView)
         }
         
+        
+        //Add tab gesture into imageview
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(tapGestureRecognizer)
@@ -70,9 +66,11 @@ class ProfileController:UIViewController {
         
     }
     
+    
+    //Action that will be taken when the image is tapped
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-
+        
         //Sett  up the PHPicker
         var configuration = PHPickerConfiguration()
         configuration.filter = .images
@@ -85,8 +83,20 @@ class ProfileController:UIViewController {
     }
     
     
+    //function to set the url into the image
+    func setUrlToImage(url:URL, imageView:UIImageView){
+        if let data = try? Data(contentsOf: url) {
+            if let image = UIImage(data: data) {
+                imageView.image = image
+            }
+        }
+    }
+    
+    
 }
 
+
+//The PHPicker delgate
 extension ProfileController : PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         dismiss(animated: true)
@@ -127,7 +137,7 @@ extension ProfileController:UICollectionViewDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-           return UIEdgeInsets(top: 10, left: 15, bottom: 0, right: 15)
+        return UIEdgeInsets(top: 10, left: 15, bottom: 0, right: 15)
     }
 }
 
@@ -141,12 +151,7 @@ extension ProfileController:UICollectionViewDataSource{
         
         //Cover string to URL
         let url:URL = NSURL(string: posts[indexPath.item].images[0])! as URL
-        
-        if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    cell.configure(with: image)
-                }
-            }
+        setUrlToImage(url: url, imageView: cell.imageView)
         
         
         

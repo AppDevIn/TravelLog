@@ -49,7 +49,7 @@ class DatabaseManager{
         
     }
     
-    func getPosts(postID id:String, userID UID:String, success: @escaping ([Post]) -> Void )  {
+    func getPosts(userID UID:String, success: @escaping ([Post]) -> Void )  {
         var posts:[Post] = []
         
         let docRef = db.collection("users").document(UID).collection("posts")
@@ -60,7 +60,6 @@ class DatabaseManager{
             } else {
                 for document in querySnapshot!.documents {
                     let data = document.data()
-                    print("\(document.documentID) => \(document.data())")
                     
                     let post = Post(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: data["images"]! as! [String])
                     posts.append(post)
