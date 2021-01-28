@@ -82,17 +82,16 @@
             </objects>
             <point key="canvasLocation" x="1610" y="1067"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile Controller-->
         <scene sceneID="DG4-TC-vgx">
             <objects>
-                <viewController id="uOx-Mj-DKm" sceneMemberID="viewController">
+                <viewController id="uOx-Mj-DKm" customClass="ProfileController" customModule="TravelLog" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GKB-K0-k6z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ovn-Ps-NfV">
-                                <rect key="frame" x="0.0" y="178" width="414" height="138"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ovn-Ps-NfV">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="28z-Tv-eEC">
                                     <size key="itemSize" width="128" height="128"/>
@@ -114,6 +113,12 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Eni-xg-E2P"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ovn-Ps-NfV" firstAttribute="trailing" secondItem="Eni-xg-E2P" secondAttribute="trailing" id="84J-ZI-80I"/>
+                            <constraint firstItem="ovn-Ps-NfV" firstAttribute="top" secondItem="Eni-xg-E2P" secondAttribute="top" id="BGt-us-zlF"/>
+                            <constraint firstItem="ovn-Ps-NfV" firstAttribute="leading" secondItem="Eni-xg-E2P" secondAttribute="leading" id="Ro1-51-afY"/>
+                            <constraint firstItem="Eni-xg-E2P" firstAttribute="bottom" secondItem="ovn-Ps-NfV" secondAttribute="bottom" id="pqV-DL-zpV"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ZTf-FM-Rel"/>
                 </viewController>
@@ -163,6 +168,7 @@
                     <tabBarItem key="tabBarItem" title="Add" image="plus" catalog="system" id="Pep-3W-2id"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Grx-JB-4Ts">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
