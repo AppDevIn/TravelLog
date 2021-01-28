@@ -21,9 +21,14 @@
 		9B7DC98625B336E5009E97D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B7DC98425B336E5009E97D3 /* LaunchScreen.storyboard */; };
 		9B7DC99125B336E6009E97D3 /* TravelLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DC99025B336E6009E97D3 /* TravelLogTests.swift */; };
 		9B7DC99C25B336E6009E97D3 /* TravelLogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DC99B25B336E6009E97D3 /* TravelLogUITests.swift */; };
+		9B80D1DC25C24CB40052570F /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B80D1DB25C24CB40052570F /* ProfileController.swift */; };
+		9B80D1F725C250C30052570F /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B80D1F525C250C30052570F /* MyCollectionViewCell.swift */; };
+		9B80D1F825C250C30052570F /* MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B80D1F625C250C30052570F /* MyCollectionViewCell.xib */; };
+		9B80D20B25C26FAA0052570F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B80D20A25C26FAA0052570F /* GoogleService-Info.plist */; };
 		9BA55E4025B809950044B69B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA55E3F25B809950044B69B /* LoginController.swift */; };
-		9BA55E4525B80C940044B69B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BA55E4425B80C940044B69B /* GoogleService-Info.plist */; };
 		9BA55E6925B81FB40044B69B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA55E6825B81FB40044B69B /* RegisterController.swift */; };
+		9BB8913325C2AE1300222158 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8913225C2AE1300222158 /* DatabaseManager.swift */; };
+		9BB8913B25C2BF2900222158 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8913A25C2BF2900222158 /* StorageManager.swift */; };
 		9BC2BD9925BDF6270097B582 /* EditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC2BD9825BDF6270097B582 /* EditController.swift */; };
 		DBD8F3E4F95671F504A7D211 /* Pods_TravelLog_TravelLogUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B509B6B9BF0125265519D3 /* Pods_TravelLog_TravelLogUITests.framework */; };
 /* End PBXBuildFile section */
@@ -72,9 +77,14 @@
 		9B7DC99725B336E6009E97D3 /* TravelLogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TravelLogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B7DC99B25B336E6009E97D3 /* TravelLogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelLogUITests.swift; sourceTree = "<group>"; };
 		9B7DC99D25B336E6009E97D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B80D1DB25C24CB40052570F /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		9B80D1F525C250C30052570F /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyCollectionViewCell.swift; path = ../MyCollectionViewCell.swift; sourceTree = "<group>"; };
+		9B80D1F625C250C30052570F /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MyCollectionViewCell.xib; path = ../MyCollectionViewCell.xib; sourceTree = "<group>"; };
+		9B80D20A25C26FAA0052570F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9BA55E3F25B809950044B69B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
-		9BA55E4425B80C940044B69B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9BA55E6825B81FB40044B69B /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
+		9BB8913225C2AE1300222158 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		9BB8913A25C2BF2900222158 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		9BC2BD9825BDF6270097B582 /* EditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditController.swift; sourceTree = "<group>"; };
 		E168E8993381FED63DB1F912 /* Pods-TravelLog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelLog.release.xcconfig"; path = "Target Support Files/Pods-TravelLog/Pods-TravelLog.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,6 +165,8 @@
 		9B7DC97525B336E4009E97D3 /* TravelLog */ = {
 			isa = PBXGroup;
 			children = (
+				9BB8913125C2977300222158 /* Utils */,
+				9B80D1E725C24F330052570F /* Cell */,
 				9BA55E3B25B808860044B69B /* Views */,
 				9BA55E3A25B8087E0044B69B /* Model */,
 				9BA55E3825B8085C0044B69B /* Controller */,
@@ -164,8 +176,8 @@
 				9B7DC98225B336E5009E97D3 /* Assets.xcassets */,
 				9B7DC98425B336E5009E97D3 /* LaunchScreen.storyboard */,
 				9B7DC98725B336E5009E97D3 /* Info.plist */,
-				9BA55E4425B80C940044B69B /* GoogleService-Info.plist */,
 				9B7DC97F25B336E4009E97D3 /* TravelLog.xcdatamodeld */,
+				9B80D20A25C26FAA0052570F /* GoogleService-Info.plist */,
 			);
 			path = TravelLog;
 			sourceTree = "<group>";
@@ -188,6 +200,15 @@
 			path = TravelLogUITests;
 			sourceTree = "<group>";
 		};
+		9B80D1E725C24F330052570F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9B80D1F525C250C30052570F /* MyCollectionViewCell.swift */,
+				9B80D1F625C250C30052570F /* MyCollectionViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		9BA55E3825B8085C0044B69B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +216,7 @@
 				9BA55E6825B81FB40044B69B /* RegisterController.swift */,
 				9BC2BD9825BDF6270097B582 /* EditController.swift */,
 				9B71979725C0F88200F9B51C /* EditDetailsController.swift */,
+				9B80D1DB25C24CB40052570F /* ProfileController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -214,6 +236,15 @@
 				9B2F8DC325BA00870009D9A1 /* Content.storyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		9BB8913125C2977300222158 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9BB8913225C2AE1300222158 /* DatabaseManager.swift */,
+				9BB8913A25C2BF2900222158 /* StorageManager.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,10 +356,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B7DC98625B336E5009E97D3 /* LaunchScreen.storyboard in Resources */,
-				9BA55E4525B80C940044B69B /* GoogleService-Info.plist in Resources */,
+				9B80D1F825C250C30052570F /* MyCollectionViewCell.xib in Resources */,
 				9B7DC98325B336E5009E97D3 /* Assets.xcassets in Resources */,
 				9B7DC97E25B336E4009E97D3 /* Main.storyboard in Resources */,
 				9B2F8DC425BA00870009D9A1 /* Content.storyboard in Resources */,
+				9B80D20B25C26FAA0052570F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,15 +488,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B80D1F725C250C30052570F /* MyCollectionViewCell.swift in Sources */,
 				9BC2BD9925BDF6270097B582 /* EditController.swift in Sources */,
 				9B7DC97B25B336E4009E97D3 /* ViewController.swift in Sources */,
 				9B7DC97725B336E4009E97D3 /* AppDelegate.swift in Sources */,
 				9B71979325BFDA2B00F9B51C /* Post.swift in Sources */,
 				9BA55E6925B81FB40044B69B /* RegisterController.swift in Sources */,
+				9B80D1DC25C24CB40052570F /* ProfileController.swift in Sources */,
 				9B7DC98125B336E4009E97D3 /* TravelLog.xcdatamodeld in Sources */,
+				9BB8913325C2AE1300222158 /* DatabaseManager.swift in Sources */,
 				9B7DC97925B336E4009E97D3 /* SceneDelegate.swift in Sources */,
 				9B71979825C0F88200F9B51C /* EditDetailsController.swift in Sources */,
 				9BA55E4025B809950044B69B /* LoginController.swift in Sources */,
+				9BB8913B25C2BF2900222158 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
