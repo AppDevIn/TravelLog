@@ -17,13 +17,18 @@ class ProfileController:UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var txt_name: UILabel!
     
-    let UID = Auth.auth().currentUser?.uid;
+    var UID:String?
     var posts:[Post] = []
     
     var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let _ = UID  {} else {
+            UID = Auth.auth().currentUser?.uid
+        }
+        
         
         //Set up the refresh for the collection view
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")

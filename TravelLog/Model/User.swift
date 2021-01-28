@@ -11,13 +11,16 @@ class User{
     
     var name:String
     var profileLink:URL?
+    var UID:String
     
-    init(userName name:String) {
+    init(id uid:String, userName name:String) {
         self.name = name
+        self.UID = uid
     }
     
-    init(userName name:String, dp profileLink:URL) {
+    init(id uid:String, userName name:String, dp profileLink:URL) {
         self.name = name
         self.profileLink = profileLink
+        self.UID = uid
     }
 }

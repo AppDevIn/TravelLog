@@ -21,6 +21,7 @@ class SearchController: UIViewController {
         tabelView.delegate = self
         tabelView.dataSource = self
     }
+    
     @IBAction func searching(_ sender: Any) {
         let textField = sender as! UITextField
         
@@ -29,6 +30,14 @@ class SearchController: UIViewController {
         DatabaseManager.shared.searchUser(name: value) { (users) in
             self.users = users
             self.tabelView.reloadData()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "userDatails", let indexPath = tabelView.indexPathForSelectedRow{
+            let destination = segue.destination as! ProfileController
+            let user:User = users[indexPath.item]
+            destination.UID = user.UID
         }
     }
 }
@@ -66,8 +75,9 @@ extension SearchController:UITableViewDataSource{
 
 extension SearchController:UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "userDatails", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
         
-        performSegue(withIdentifier: "userDatails", sender: self)
+        
     }
 }

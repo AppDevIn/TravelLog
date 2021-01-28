@@ -134,6 +134,7 @@ class DatabaseManager{
             } else {
                 for document in querySnapshot!.documents {
                     let data = document.data()
+                    let id = document.documentID
                     
                     
                     var user:User
@@ -141,9 +142,9 @@ class DatabaseManager{
                         //Cover string to URL
                         let url:URL = NSURL(string: profileLink as! String )! as URL
                         
-                        user = User(userName: name as! String, dp: url)
+                        user = User(id: id, userName: name as! String, dp: url)
                     } else if let name = data["name"]{
-                        user = User(userName: name as! String)
+                        user = User(id: id, userName: name as! String)
                     } else{
                         return
                     }
