@@ -8,5 +8,16 @@
 import Foundation
 
 class User{
-    init() {}
+    
+    var name:String
+    var profileLink:URL?
+    
+    init(userName name:String) {
+        self.name = name
+    }
+    
+    init(userName name:String, dp profileLink:URL) {
+        self.name = name
+        self.profileLink = profileLink
+    }
 }

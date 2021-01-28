@@ -20,6 +20,15 @@ class SearchController: UIViewController {
         
         tabelView.dataSource = self
     }
+    @IBAction func searching(_ sender: Any) {
+        let textField = sender as! UITextField
+        
+        guard let value = textField.text else {return}
+        
+        DatabaseManager.shared.searchUser(name: value) { (users) in
+            print(users[0].name)
+        }
+    }
 }
 
 

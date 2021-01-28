@@ -24,9 +24,22 @@ class DatabaseManager{
         let docRef = db.collection("users").document(UID)
         
         docRef.setData([
-            "name": link
+            "name": name,
+            "caseSearch": getArrayOfName(name:name)
         ])
         
+    }
+    
+    private func getArrayOfName(name:String) -> [String]{
+        var temp:String = ""
+        var arr:[String] = []
+        
+        for n in name{
+            temp += String(n)
+            arr.append(temp)
+        }
+        
+        return arr
     }
     
     func getUserName(userID UID:String, completionBlock: @escaping (String) -> Void) {
@@ -107,6 +120,41 @@ class DatabaseManager{
         
         
         
+    }
+    
+    
+    func searchUser(name prefix:String, completionBlock: @escaping ([User]) -> Void) {
+        let docRef = db.collection("users")
+        
+        var users:[User] = []
+        
+        docRef.whereField("caseSearch", arrayContains: prefix).getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    
+                    
+                    var user:User
+                    if let name = data["name"], let profileLink = data["profileLink"] {
+                        //Cover string to URL
+                        let url:URL = NSURL(string: profileLink as! String )! as URL
+                        
+                        user = User(userName: name as! String, dp: url)
+                    } else if let name = data["name"]{
+                        user = User(userName: name as! String)
+                    } else{
+                        return
+                    }
+                    
+                    users.append(user)
+                    
+                }
+                if users.count > 0 {completionBlock(users)}
+                
+            }
+        }
     }
     
 }
