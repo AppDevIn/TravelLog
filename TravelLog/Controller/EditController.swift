@@ -58,6 +58,8 @@ class EditController : UIViewController {
                 
             }
             
+        } else {
+            print("Unable to load the images")
         }
         
     }

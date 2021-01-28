@@ -12,7 +12,6 @@ import UIKit
 class ProfileController:UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {

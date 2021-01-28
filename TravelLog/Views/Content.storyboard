@@ -240,7 +240,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="40" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hvu-Fu-CYw">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="444.66666666666669"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FooterLogin" translatesAutoresizingMaskIntoConstraints="NO" id="lTh-AE-mTB">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FooterLogin" translatesAutoresizingMaskIntoConstraints="NO" id="lTh-AE-mTB">
                                                 <rect key="frame" x="0.0" y="8" width="414" height="374"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="374" id="kab-qz-VXp"/>
