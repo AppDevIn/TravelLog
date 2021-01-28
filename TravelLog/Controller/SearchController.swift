@@ -26,7 +26,8 @@ class SearchController: UIViewController {
         guard let value = textField.text else {return}
         
         DatabaseManager.shared.searchUser(name: value) { (users) in
-            print(users[0].name)
+            self.users = users
+            self.tabelView.reloadData()
         }
     }
 }
@@ -49,7 +50,7 @@ extension SearchController:UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell", for: indexPath)
         
         //Set the text based of the data
-        cell.textLabel!.text = "test cell"
+        cell.textLabel!.text = users[indexPath.item].name
         
         return cell
     }
