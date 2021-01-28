@@ -16,8 +16,16 @@ class ProfileController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.register(MyCollectionViewCell.nib(), forCellWithReuseIdentifier: MyCollectionViewCell.identifier)
+        
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 120, height: 120)
+        collectionView.collectionViewLayout = layout
+        
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         
     }
     
@@ -30,6 +38,12 @@ extension ProfileController:UICollectionViewDelegate{
     //When a cell is selected
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        
+        print("Image Collection Tapped")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+           return UIEdgeInsets(top: 25, left: 15, bottom: 0, right: 5)
     }
 }
 
@@ -39,14 +53,20 @@ extension ProfileController:UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.identifier, for: indexPath) as! MyCollectionViewCell
+        
+        cell.configure(with: UIImage(named: "FooterLogin")!)
         
         return cell
     }
 }
 
 //Can specify the padding and width
-extension ProfileController:UICollectionViewDelegateFlowLayout{}
+extension ProfileController:UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 120, height: 120)
+    }
+}
 
 
 
