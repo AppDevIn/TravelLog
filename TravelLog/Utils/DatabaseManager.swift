@@ -68,7 +68,7 @@ class DatabaseManager{
         
         docRef.setData([
             "profileLink": link
-        ])
+        ], merge: true)
         
     }
     
