@@ -90,6 +90,10 @@ extension ProfileController : PHPickerViewControllerDelegate {
                 DispatchQueue.main.async {
                     guard let image = image as? UIImage else {return}
                     self.imageView.image = image
+                    
+                    StorageManager.shared.setProfilePic(image: image, UID: self.UID!) { (success) in
+                        print(success ? "Image Uploaded" : "Image Fail to upload")
+                    }
                 }
                 
             }
