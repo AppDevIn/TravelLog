@@ -121,6 +121,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ZTf-FM-Rel"/>
+                    <connections>
+                        <outlet property="collectionView" destination="ovn-Ps-NfV" id="c1g-Eq-jKP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WLM-NZ-qZ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
