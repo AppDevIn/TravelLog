@@ -40,6 +40,12 @@ class LoginController : UIViewController {
             
             print("\(user.email!) loginned")
             
+            //Get the user
+            DatabaseManager.shared.getUser(userID: user.uid) { (user) in
+                Constants.currentUser = user
+            }
+            
+            
             //Move to the next storyboard
             let storyboard = UIStoryboard(name: "Content", bundle: nil) // File name of the story board
             let vc = storyboard.instantiateViewController(identifier: "Content") as UIViewController // name must set as the identifer in stroyboard

@@ -70,16 +70,11 @@ class ProfileController:UIViewController {
             self.posts = posts
             self.collectionView.reloadData()
         }
+
         
-        //Get the Profile picture
-        DatabaseManager.shared.getProfileImage(userID: UID!) { (url) in
-            self.setUrlToImage(url: url, imageView: self.imageView)
-        }
-        
-        //Get the name of the user
-        DatabaseManager.shared.getUserName(userID: UID!) { (username) in
-            self.txt_name.text = username
-        }
+        //Get the name of the user and profile
+        self.txt_name.text = Constants.currentUser?.name
+        self.setUrlToImage(url: (Constants.currentUser?.profileLink)!, imageView: self.imageView)
         
         
         if isCurrentUser {

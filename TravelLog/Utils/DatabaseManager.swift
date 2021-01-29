@@ -42,7 +42,7 @@ class DatabaseManager{
         return arr
     }
     
-    func getUserName(userID UID:String, completionBlock: @escaping (String) -> Void) {
+    func getUser(userID UID:String, completionBlock: @escaping (User) -> Void) {
         let docRef = db.collection("users").document(UID)
         
         docRef.getDocument { (document, error) in
@@ -53,7 +53,16 @@ class DatabaseManager{
                     return
                 }
                 
-                completionBlock(name as! String)
+                guard let profileLink = data["profileLink"] else {
+                    return
+                }
+                //Cover string to URL
+                let url:URL = NSURL(string: profileLink as! String )! as URL
+                let user:User = User(id: UID, userName: name as! String, dp: url)
+                
+                
+                
+                completionBlock(user)
                 
             } else {
                 print("Document does not exist")
@@ -71,30 +80,7 @@ class DatabaseManager{
         ], merge: true)
         
     }
-    
-    func getProfileImage(userID UID:String, completionBlock: @escaping (URL) -> Void) {
-        let docRef = db.collection("users").document(UID)
-        
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                guard let data = document.data() else {return}
-                
-                guard let profileLink = data["profileLink"] else {
-                    return
-                }
-                
-                //Cover string to URL
-                let url:URL = NSURL(string: profileLink as! String )! as URL
-                
-                completionBlock(url)
-                
-            } else {
-                print("Document does not exist")
-            }
-        }
 
-        
-    }
     
     func getPosts(userID UID:String, success: @escaping ([Post]) -> Void )  {
         var posts:[Post] = []
