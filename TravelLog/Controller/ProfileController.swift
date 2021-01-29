@@ -72,9 +72,12 @@ class ProfileController:UIViewController {
         }
 
         
-        //Get the name of the user and profile
-        self.txt_name.text = Constants.currentUser?.name
-        self.setUrlToImage(url: (Constants.currentUser?.profileLink)!, imageView: self.imageView)
+        //Get user if not the current user
+        DatabaseManager.shared.getUser(userID: UID!) { (user) in
+            self.txt_name.text = user.name
+            self.setUrlToImage(url: (user.profileLink)!, imageView: self.imageView)
+        }
+
         
         
         if isCurrentUser {
@@ -82,6 +85,10 @@ class ProfileController:UIViewController {
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
             imageView.isUserInteractionEnabled = true
             imageView.addGestureRecognizer(tapGestureRecognizer)
+            
+            //Get the name of the user and profile
+            self.txt_name.text = Constants.currentUser?.name
+            self.setUrlToImage(url: (Constants.currentUser?.profileLink)!, imageView: self.imageView)
             
             //Hide the button
             if btn_follow.tintColor != UIColor.clear {
