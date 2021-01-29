@@ -20,6 +20,7 @@ class MapController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         checkLocationServices()
+        
     }
     
     func setupLocationManager() {
@@ -44,6 +45,12 @@ class MapController : UIViewController {
             //Map code
             mapView.showsUserLocation = true // Show the blue dot
             zoomOnUserLocation()
+            if let coor = locationManager.location?.coordinate {
+                fetchPlaces(coordinate: coor) { (places) in
+                    print(places)
+                }
+            }
+            
             
             locationManager.startUpdatingLocation()
             
@@ -77,7 +84,54 @@ class MapController : UIViewController {
         }
     }
     
+    func fetchPlaces(coordinate coor:CLLocationCoordinate2D,completionHandler: @escaping (Place) -> Void) {
+        
+        let apiKey:String = "BziU0Uj8Q-hONi9AaTYikl8EsDT_bBdXE7MZt1dFQ8k"
+        
+        let url = URL(string: "https://places.ls.hereapi.com/places/v1/discover/explore?at=\(coor.latitude),\(coor.longitude)&cat=eat-drink&apiKey=\(apiKey)")!
+        print(url)
+
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+          if let error = error {
+            print("Error with fetching films: \(error)")
+            return
+          }
+          
+          guard let httpResponse = response as? HTTPURLResponse,
+                (200...299).contains(httpResponse.statusCode) else {
+            print("Error with the response, unexpected status code: \(String(describing: response))")
+            return
+          }
+            
+            
+            
+            
+          if let data = data  {
+            
+            
+
+            do {
+
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
+                let items:[NSDictionary] = (jsonResult?["results"] as! NSDictionary)["items"] as! [NSDictionary]
+                let next:String = (jsonResult?["results"] as! NSDictionary)["next"] as! String
+                print(next)
+                let result = Results(next: next, items: items)
+                print(result.items[0].position[0])
+//                completionHandler(welcome)
+            } catch {
+                print(error.localizedDescription)
+
+            }
+            
+            
+          }
+        })
+        task.resume()
+      }
+    
 }
+
 
 
 extension MapController : CLLocationManagerDelegate {
