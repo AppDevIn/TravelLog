@@ -12,6 +12,8 @@ class User{
     var name:String
     var profileLink:URL?
     var UID:String
+    var following:[String] = []
+    var follower:[String] = []
     
     init(id uid:String, userName name:String) {
         self.name = name

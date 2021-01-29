@@ -56,9 +56,23 @@ class DatabaseManager{
                 guard let profileLink = data["profileLink"] else {
                     return
                 }
+                
+                
                 //Cover string to URL
                 let url:URL = NSURL(string: profileLink as! String )! as URL
                 let user:User = User(id: UID, userName: name as! String, dp: url)
+                
+                //If got following
+                if let following = data["following"] {
+                    user.following = following as! [String]
+                }
+                
+                //If got followers
+                if let follower = data["follower"] {
+                    user.follower = follower as! [String]
+                }
+                
+                
                 
                 
                 

@@ -77,7 +77,7 @@ class ProfileController:UIViewController {
             self.txt_name.text = user.name
             self.setUrlToImage(url: (user.profileLink)!, imageView: self.imageView)
         }
-
+        
         
         
         if isCurrentUser {
@@ -98,6 +98,10 @@ class ProfileController:UIViewController {
                 btn_follow.isEnabled = false
             }
             
+        } else {
+            if let isFollwoing = Constants.currentUser?.following.contains(UID!) {
+                btn_follow.title = isFollwoing ? "Unfollow" : "Follow"
+            }
         }
         
     }
