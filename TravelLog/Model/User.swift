@@ -14,10 +14,16 @@ class User{
     var UID:String
     var following:[String] = []
     var follower:[String] = []
+
     
     init(id uid:String, userName name:String) {
         self.name = name
         self.UID = uid
+    }
+    
+    init() {
+        self.name = "Unable to find"
+        self.UID = "jdskjnjkdhjk"
     }
     
     init(id uid:String, userName name:String, dp profileLink:URL) {
