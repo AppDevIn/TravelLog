@@ -7,7 +7,20 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 class MapController : UIViewController {
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        mapView.delegate = self
+    }
+}
+
+
+extension MapController : MKMapViewDelegate {
     
 }
