@@ -19,6 +19,7 @@ class ProfileController:UIViewController {
     
     var UID:String?
     var posts:[Post] = []
+    var isCurrentUser:Bool = false
     
     var refreshControl = UIRefreshControl()
     
@@ -27,6 +28,7 @@ class ProfileController:UIViewController {
         
         if let _ = UID  {} else {
             UID = Auth.auth().currentUser?.uid
+            isCurrentUser = true
         }
         
         
@@ -75,11 +77,14 @@ class ProfileController:UIViewController {
             self.txt_name.text = username
         }
         
-        //Add tab gesture into imageview
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(tapGestureRecognizer)
         
+        if isCurrentUser {
+            //Add tab gesture into imageview
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            imageView.isUserInteractionEnabled = true
+            imageView.addGestureRecognizer(tapGestureRecognizer)
+            
+        }
         
     }
     
