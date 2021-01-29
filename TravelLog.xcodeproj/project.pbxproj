@@ -29,6 +29,9 @@
 		9BA55E6925B81FB40044B69B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA55E6825B81FB40044B69B /* RegisterController.swift */; };
 		9BB8913325C2AE1300222158 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8913225C2AE1300222158 /* DatabaseManager.swift */; };
 		9BB8913B25C2BF2900222158 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8913A25C2BF2900222158 /* StorageManager.swift */; };
+		9BB8914625C31B1A00222158 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8914525C31B1A00222158 /* SearchController.swift */; };
+		9BB8914B25C3222300222158 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8914A25C3222300222158 /* User.swift */; };
+		9BB8915025C3BFDA00222158 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8914F25C3BFDA00222158 /* Constants.swift */; };
 		9BC2BD9925BDF6270097B582 /* EditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC2BD9825BDF6270097B582 /* EditController.swift */; };
 		DBD8F3E4F95671F504A7D211 /* Pods_TravelLog_TravelLogUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B509B6B9BF0125265519D3 /* Pods_TravelLog_TravelLogUITests.framework */; };
 /* End PBXBuildFile section */
@@ -85,6 +88,9 @@
 		9BA55E6825B81FB40044B69B /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		9BB8913225C2AE1300222158 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		9BB8913A25C2BF2900222158 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		9BB8914525C31B1A00222158 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		9BB8914A25C3222300222158 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9BB8914F25C3BFDA00222158 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9BC2BD9825BDF6270097B582 /* EditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditController.swift; sourceTree = "<group>"; };
 		E168E8993381FED63DB1F912 /* Pods-TravelLog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelLog.release.xcconfig"; path = "Target Support Files/Pods-TravelLog/Pods-TravelLog.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -217,6 +223,7 @@
 				9BC2BD9825BDF6270097B582 /* EditController.swift */,
 				9B71979725C0F88200F9B51C /* EditDetailsController.swift */,
 				9B80D1DB25C24CB40052570F /* ProfileController.swift */,
+				9BB8914525C31B1A00222158 /* SearchController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -225,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				9B71979225BFDA2B00F9B51C /* Post.swift */,
+				9BB8914A25C3222300222158 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -243,6 +251,7 @@
 			children = (
 				9BB8913225C2AE1300222158 /* DatabaseManager.swift */,
 				9BB8913A25C2BF2900222158 /* StorageManager.swift */,
+				9BB8914F25C3BFDA00222158 /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -491,10 +500,13 @@
 				9B80D1F725C250C30052570F /* MyCollectionViewCell.swift in Sources */,
 				9BC2BD9925BDF6270097B582 /* EditController.swift in Sources */,
 				9B7DC97B25B336E4009E97D3 /* ViewController.swift in Sources */,
+				9BB8914625C31B1A00222158 /* SearchController.swift in Sources */,
 				9B7DC97725B336E4009E97D3 /* AppDelegate.swift in Sources */,
 				9B71979325BFDA2B00F9B51C /* Post.swift in Sources */,
 				9BA55E6925B81FB40044B69B /* RegisterController.swift in Sources */,
+				9BB8915025C3BFDA00222158 /* Constants.swift in Sources */,
 				9B80D1DC25C24CB40052570F /* ProfileController.swift in Sources */,
+				9BB8914B25C3222300222158 /* User.swift in Sources */,
 				9B7DC98125B336E4009E97D3 /* TravelLog.xcdatamodeld in Sources */,
 				9BB8913325C2AE1300222158 /* DatabaseManager.swift in Sources */,
 				9B7DC97925B336E4009E97D3 /* SceneDelegate.swift in Sources */,

@@ -15,14 +15,56 @@ class ProfileController:UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var txt_name: UILabel!
     
-    let UID = Auth.auth().currentUser?.uid;
+    @IBOutlet weak var txt_following: UILabel!
+    @IBOutlet weak var txt_follower: UILabel!
+    @IBOutlet weak var btn_follow: UIBarButtonItem!
+    
+    var UID:String?
     var posts:[Post] = []
+    var isCurrentUser:Bool = false
     
     var refreshControl = UIRefreshControl()
+    var user:User = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let _ = UID  {} else {
+            UID = Auth.auth().currentUser?.uid
+            isCurrentUser = true
+            
+            if let user = Constants.currentUser {
+                self.user = user
+            }
+            else {
+                //If don't have user stored
+                DatabaseManager.shared.getUser(userID: UID!) { (user) in
+                    self.user = user
+                }
+            }
+            
+        }
+        
+        //Set the name
+        self.txt_name.text = user.name
+        
+        //Set the profile
+        if let url = user.profileLink {
+            self.setUrlToImage(url: url, imageView: self.imageView)
+        }
+        
+        
+        //Ste the follower and following
+        self.txt_follower.text = "Follower: \(user.follower.count)"
+        self.txt_following.text = "Following: \(user.following.count)"
+        
+        //Set the title
+        self.btn_follow.title = user.follower.contains(self.UID!) ? "Unfollow" : "Follow"
+
+        
+        
         
         //Set up the refresh for the collection view
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -58,18 +100,30 @@ class ProfileController:UIViewController {
             self.posts = posts
             self.collectionView.reloadData()
         }
+
+
+
         
-        //Get the Profile picture
-        DatabaseManager.shared.getProfileImage(userID: UID!) { (url) in
-            self.setUrlToImage(url: url, imageView: self.imageView)
+        
+        if isCurrentUser {
+            //Add tab gesture into imageview
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            imageView.isUserInteractionEnabled = true
+            imageView.addGestureRecognizer(tapGestureRecognizer)
+            
+            //Get the name of the user and profile
+            self.txt_name.text = Constants.currentUser?.name
+            self.setUrlToImage(url: (Constants.currentUser?.profileLink)!, imageView: self.imageView)
+            
+            //Hide the button
+            if btn_follow.tintColor != UIColor.clear {
+                var tintColorsOfBarButtons = [UIBarButtonItem: UIColor]()
+                tintColorsOfBarButtons[btn_follow] = btn_follow.tintColor
+                btn_follow.tintColor = UIColor.clear
+                btn_follow.isEnabled = false
+            }
+            
         }
-        
-        
-        //Add tab gesture into imageview
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(tapGestureRecognizer)
-        
         
     }
     
@@ -110,6 +164,28 @@ class ProfileController:UIViewController {
         
     }
     
+    @IBAction func followUser(_ sender: Any) {
+        
+        
+        if btn_follow.title == "Follow"{
+            //Change button to text to unfollow
+            btn_follow.title = "Unfollow"
+            
+            //Insert the UID into database
+            let id = Auth.auth().currentUser?.uid
+            DatabaseManager.shared.insertFollow(UID: id!, followerID: UID!)
+        } else {
+            //Change button to text to follow
+            btn_follow.title = "Follow"
+            
+            //Remove the UID into database
+            let id = Auth.auth().currentUser?.uid
+            DatabaseManager.shared.removeFollow(UID: id!, followerID: UID!)
+        }
+        
+
+        
+    }
     
 }
 

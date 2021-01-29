@@ -16,6 +16,7 @@ class RegisterController : UIViewController {
     @IBOutlet weak var txt_email: UITextField!
     @IBOutlet weak var txt_password: UITextField!
     @IBOutlet weak var txt_cPassword: UITextField!
+    @IBOutlet weak var txt_name: UITextField!
     
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
@@ -28,6 +29,7 @@ class RegisterController : UIViewController {
         guard let email:String =  txt_email.text else { return }
         guard let password:String = txt_password.text else { return }
         guard let Cpassword:String = txt_cPassword.text else { return }
+        guard let userName:String = txt_name.text else { return }
         
         //Check if the password the same
         if password == Cpassword {
@@ -41,6 +43,9 @@ class RegisterController : UIViewController {
                 }
                 
                 print("\(user.email!) created")
+                
+                //Insert User deatils
+                DatabaseManager.shared.insertUser(userID: user.uid, userName: userName)
                 
                 //Move to the next storyboard
                 let storyboard = UIStoryboard(name: "Content", bundle: nil) // File name of the story board

@@ -155,16 +155,21 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Back" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gtw-gZ-KVP">
-                                                <rect key="frame" x="16" y="8" width="382" height="134"/>
+                                                <rect key="frame" x="16" y="8" width="382" height="76"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OVg-MY-4XT">
-                                                <rect key="frame" x="16" y="180" width="382" height="166"/>
+                                                <rect key="frame" x="16" y="122" width="382" height="224"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SK2-Kk-gBe">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qR9-B5-efI">
                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="50"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" smartDashesType="yes" textContentType="password"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SK2-Kk-gBe">
+                                                        <rect key="frame" x="0.0" y="58" width="382" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="IcO-e6-Nkl"/>
                                                         </constraints>
@@ -172,12 +177,12 @@
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AlB-BI-Mzi">
-                                                        <rect key="frame" x="0.0" y="58" width="382" height="50"/>
+                                                        <rect key="frame" x="0.0" y="116" width="382" height="50"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" smartDashesType="yes" textContentType="password"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fSU-rn-iLY">
-                                                        <rect key="frame" x="0.0" y="116" width="382" height="50"/>
+                                                        <rect key="frame" x="0.0" y="174" width="382" height="50"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" smartDashesType="yes" textContentType="password"/>
                                                     </textField>
@@ -245,6 +250,7 @@
                     <connections>
                         <outlet property="txt_cPassword" destination="fSU-rn-iLY" id="yOY-xR-AlN"/>
                         <outlet property="txt_email" destination="SK2-Kk-gBe" id="dgF-7X-DtU"/>
+                        <outlet property="txt_name" destination="qR9-B5-efI" id="Drl-Aq-80e"/>
                         <outlet property="txt_password" destination="AlB-BI-Mzi" id="cqr-NT-pfS"/>
                     </connections>
                 </viewController>
