@@ -56,7 +56,7 @@ class ProfileController:UIViewController {
         }
         
         
-        //Ste the follower and following
+        //Set the follower and following
         self.txt_follower.text = "Follower: \(user.follower.count)"
         self.txt_following.text = "Following: \(user.following.count)"
         

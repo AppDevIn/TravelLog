@@ -149,6 +149,16 @@ class DatabaseManager{
                         return
                     }
                     
+                    //If got following
+                    if let following = data["following"] {
+                        user.following = following as! [String]
+                    }
+                    
+                    //If got followers
+                    if let follower = data["follower"] {
+                        user.follower = follower as! [String]
+                    }
+                    
                     users.append(user)
                     
                 }
