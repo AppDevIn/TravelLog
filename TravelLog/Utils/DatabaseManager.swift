@@ -173,4 +173,19 @@ class DatabaseManager{
         ], merge: true)
     }
     
+    func removeFollow(UID uid:String, followerID followerId: String)  {
+        let userRef = db.collection("users").document(uid)
+        let followingRef = db.collection("users").document(followerId)
+        
+        //Insert the person the user follwing
+        userRef.setData([
+            "following": FieldValue.arrayRemove([followerId])
+        ], merge: true)
+        
+        //Let the follower know who is following
+        followingRef.setData([
+            "follower": FieldValue.arrayRemove([uid])
+        ], merge: true)
+    }
+    
 }

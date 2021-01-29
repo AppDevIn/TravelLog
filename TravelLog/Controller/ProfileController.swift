@@ -147,6 +147,13 @@ class ProfileController:UIViewController {
             //Insert the UID into database
             let id = Auth.auth().currentUser?.uid
             DatabaseManager.shared.insertFollow(UID: id!, followerID: UID!)
+        } else {
+            //Change button to text to follow
+            btn_follow.title = "Unfollow"
+            
+            //Remove the UID into database
+            let id = Auth.auth().currentUser?.uid
+            DatabaseManager.shared.removeFollow(UID: id!, followerID: UID!)
         }
         
 
