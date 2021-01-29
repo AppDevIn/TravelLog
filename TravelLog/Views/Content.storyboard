@@ -62,6 +62,7 @@
                     <navigationItem key="navigationItem" title="Search" id="2x7-tD-PXR"/>
                     <connections>
                         <outlet property="tabelView" destination="FVC-3D-KHr" id="Qt8-2T-SJ3"/>
+                        <outlet property="txt_field" destination="x20-d0-wSV" id="8cF-aH-87G"/>
                         <segue destination="uOx-Mj-DKm" kind="show" identifier="userDatails" id="FxK-XS-OWe"/>
                     </connections>
                 </viewController>
