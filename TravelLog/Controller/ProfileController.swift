@@ -31,23 +31,7 @@ class ProfileController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let _ = UID  {
-            
-            //Get user if not the current user
-            DatabaseManager.shared.getUser(userID: UID!) { (user) in
-                self.user = user
-                self.txt_name.text = user.name
-                self.setUrlToImage(url: (user.profileLink)!, imageView: self.imageView)
-                
-                //Ste the follower and following
-                self.txt_follower.text = "Follower: \(user.follower.count)"
-                self.txt_following.text = "Following: \(user.following.count)"
-                
-                //Set the title
-                self.btn_follow.title = user.follower.contains(self.UID!) ? "Unfollow" : "Follow"
-            }
-            
-        } else {
+        if let _ = UID  {} else {
             UID = Auth.auth().currentUser?.uid
             isCurrentUser = true
             
@@ -63,6 +47,22 @@ class ProfileController:UIViewController {
             
         }
         
+        //Set the name
+        self.txt_name.text = user.name
+        
+        //Set the profile
+        if let url = user.profileLink {
+            self.setUrlToImage(url: url, imageView: self.imageView)
+        }
+        
+        
+        //Ste the follower and following
+        self.txt_follower.text = "Follower: \(user.follower.count)"
+        self.txt_following.text = "Following: \(user.following.count)"
+        
+        //Set the title
+        self.btn_follow.title = user.follower.contains(self.UID!) ? "Unfollow" : "Follow"
+
         
         
         

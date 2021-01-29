@@ -38,6 +38,7 @@ class SearchController: UIViewController {
             let destination = segue.destination as! ProfileController
             let user:User = users[indexPath.item]
             destination.UID = user.UID
+            destination.user = user
         }
     }
 }

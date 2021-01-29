@@ -9,4 +9,5 @@ import Foundation
 
 class Constants {
     static var currentUser:User? = nil
+    static var searchUser:[User] = []
 }
