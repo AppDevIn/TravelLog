@@ -158,4 +158,19 @@ class DatabaseManager{
         }
     }
     
+    func insertFollow(UID uid:String, followerID followerId: String)  {
+        let userRef = db.collection("users").document(uid)
+        let followingRef = db.collection("users").document(followerId)
+        
+        //Insert the person the user follwing
+        userRef.setData([
+            "following": FieldValue.arrayUnion([followerId])
+        ], merge: true)
+        
+        //Let the follower know who is following
+        followingRef.setData([
+            "follower": FieldValue.arrayUnion([uid])
+        ], merge: true)
+    }
+    
 }

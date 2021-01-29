@@ -17,6 +17,10 @@ class ProfileController:UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var txt_name: UILabel!
     
+    @IBOutlet weak var txt_following: UILabel!
+    @IBOutlet weak var txt_follower: UILabel!
+    @IBOutlet weak var btn_follow: UIBarButtonItem!
+    
     var UID:String?
     var posts:[Post] = []
     var isCurrentUser:Bool = false
@@ -84,6 +88,14 @@ class ProfileController:UIViewController {
             imageView.isUserInteractionEnabled = true
             imageView.addGestureRecognizer(tapGestureRecognizer)
             
+            //Hide the button
+            if btn_follow.tintColor != UIColor.clear {
+                var tintColorsOfBarButtons = [UIBarButtonItem: UIColor]()
+                tintColorsOfBarButtons[btn_follow] = btn_follow.tintColor
+                btn_follow.tintColor = UIColor.clear
+                btn_follow.isEnabled = false
+            }
+            
         }
         
     }
@@ -125,6 +137,21 @@ class ProfileController:UIViewController {
         
     }
     
+    @IBAction func followUser(_ sender: Any) {
+        
+        
+        if btn_follow.title == "Follow"{
+            //Change button to text to unfollow
+            btn_follow.title = "Unfollow"
+            
+            //Insert the UID into database
+            let id = Auth.auth().currentUser?.uid
+            DatabaseManager.shared.insertFollow(UID: id!, followerID: UID!)
+        }
+        
+
+        
+    }
     
 }
 
