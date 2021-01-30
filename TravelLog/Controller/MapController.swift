@@ -17,13 +17,37 @@ class MapController : UIViewController {
     let locationManager = CLLocationManager()
     let regionMeters:Double = 1000
     
+    let centerMapButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "location")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(handleCenterOnUserLocation), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         checkLocationServices()
         mapView.delegate = self
         
+        
+        //Button configure
+        
+        view.addSubview(centerMapButton)
+        centerMapButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -94).isActive = true
+        centerMapButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12).isActive = true
+        centerMapButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        centerMapButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        centerMapButton.layer.cornerRadius = 50/2
+        centerMapButton.alpha = 1
+        
     }
     
+    @objc func handleCenterOnUserLocation () {
+        if let location = locationManager.location {
+            self.mapView.centerToLocation(location, regionRadius:1000 )
+        }
+    }
     func setupLocationManager() {
         locationManager.delegate = self
         
