@@ -29,13 +29,6 @@ class MapController : UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    func zoomOnUserLocation() {
-        if let location = locationManager.location?.coordinate {
-            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionMeters, longitudinalMeters: regionMeters)
-            mapView.setRegion(region, animated: true)
-        }
-    }
-    
     func checkLocationAuthorization() {
         switch locationManager.authorizationStatus {
         
@@ -43,7 +36,12 @@ class MapController : UIViewController {
         case .authorizedWhenInUse:
             //Map code
             mapView.showsUserLocation = true // Show the blue dot
-            zoomOnUserLocation()
+            
+            // Zoom on the location
+            if let location = locationManager.location {
+                self.mapView.centerToLocation(location)
+            }
+            
             
             locationManager.startUpdatingLocation()
             
@@ -97,4 +95,17 @@ extension MapController : CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
     }
+}
+
+private extension MKMapView {
+  func centerToLocation(
+    _ location: CLLocation,
+    regionRadius: CLLocationDistance = 1000
+  ) {
+    let coordinateRegion = MKCoordinateRegion(
+      center: location.coordinate,
+      latitudinalMeters: regionRadius,
+      longitudinalMeters: regionRadius)
+    setRegion(coordinateRegion, animated: true)
+  }
 }
