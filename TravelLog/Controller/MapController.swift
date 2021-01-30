@@ -15,11 +15,13 @@ class MapController : UIViewController {
     
     
     let locationManager = CLLocationManager()
-    let regionMeters:Double = 10000
+    let regionMeters:Double = 1000
     
     override func viewDidLoad() {
         super.viewDidLoad()
         checkLocationServices()
+        mapView.delegate = self
+        
     }
     
     func setupLocationManager() {
@@ -27,6 +29,26 @@ class MapController : UIViewController {
         
         //Accuracy
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    func attractionPin() {
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = "Attractions"
+        request.region = mapView.region
+        
+        let search = MKLocalSearch(request: request)
+        search.start { (response, error) in
+            guard let response = response else {
+                print("Search error: \(error)")
+                return
+            }
+            
+            for item in response.mapItems {
+                let place = Places(title: item.placemark.name, subtitle: nil, coordinate: item.placemark.coordinate, mapItem: item)
+                self.mapView.addAnnotation(place)
+                
+            }
+        }
     }
     
     func checkLocationAuthorization() {
@@ -42,6 +64,8 @@ class MapController : UIViewController {
                 self.mapView.centerToLocation(location)
             }
             
+            //Pin al the attractions
+            attractionPin()
             
             locationManager.startUpdatingLocation()
             
@@ -87,8 +111,8 @@ extension MapController : CLLocationManagerDelegate {
         //Where the map view center is, this is the users last known location
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         //Find the regison based on the location
-        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: regionMeters, longitudinalMeters: regionMeters)
-        mapView.setRegion(region, animated: true)
+        //        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: regionMeters, longitudinalMeters: regionMeters)
+        //        mapView.setRegion(region, animated: true)
     }
     
     //When the authrization is changed
@@ -97,15 +121,59 @@ extension MapController : CLLocationManagerDelegate {
     }
 }
 
+extension MapController: MKMapViewDelegate {
+    // 1
+    func mapView(
+        _ mapView: MKMapView,
+        viewFor annotation: MKAnnotation
+    ) -> MKAnnotationView? {
+        // 2
+        guard let annotation = annotation as? Places else {
+            return nil
+        }
+        // 3
+        let identifier = "places"
+        var view: MKMarkerAnnotationView
+        // 4
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(
+            withIdentifier: identifier) as? MKMarkerAnnotationView {
+            dequeuedView.annotation = annotation
+            view = dequeuedView
+        } else {
+            // 5
+            view = MKMarkerAnnotationView(
+                annotation: annotation,
+                reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        return view
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        guard let place = view.annotation as? Places else {
+            return
+          }
+
+          let launchOptions = [
+            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
+          ]
+          place.mapItem.openInMaps(launchOptions: launchOptions)
+    }
+    
+}
+
+
 private extension MKMapView {
-  func centerToLocation(
-    _ location: CLLocation,
-    regionRadius: CLLocationDistance = 1000
-  ) {
-    let coordinateRegion = MKCoordinateRegion(
-      center: location.coordinate,
-      latitudinalMeters: regionRadius,
-      longitudinalMeters: regionRadius)
-    setRegion(coordinateRegion, animated: true)
-  }
+    func centerToLocation(
+        _ location: CLLocation,
+        regionRadius: CLLocationDistance = 50000
+    ) {
+        let coordinateRegion = MKCoordinateRegion(
+            center: location.coordinate,
+            latitudinalMeters: regionRadius,
+            longitudinalMeters: regionRadius)
+        setRegion(coordinateRegion, animated: true)
+    }
 }
