@@ -20,13 +20,22 @@ class DatabaseManager{
         db = Firestore.firestore()
     }
     
-    func insertUser(userID UID:String, userName name:String) {
+    func insertUser(userID UID:String, userName name:String, completionHandler: @escaping (Bool) -> Void) {
         let docRef = db.collection("users").document(UID)
         
         docRef.setData([
             "name": name,
             "caseSearch": getArrayOfName(name:name)
-        ])
+        ]) { (err) in
+            guard let _ = err else {
+                completionHandler(true)
+                return
+            }
+            
+            completionHandler(false)
+            
+        }
+        
         
     }
     
