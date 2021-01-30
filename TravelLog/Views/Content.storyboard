@@ -69,21 +69,99 @@
             </objects>
             <point key="canvasLocation" x="1609" y="1811"/>
         </scene>
-        <!--View Controller-->
+        <!--Home Controller-->
         <scene sceneID="OjF-tH-F7f">
             <objects>
-                <viewController id="wJz-ZD-x4f" sceneMemberID="viewController">
+                <viewController id="wJz-ZD-x4f" customClass="HomeController" customModule="TravelLog" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4sg-Wd-96k">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZbF-U9-QO1">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Fbo-Kp-NU3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Fbo-Kp-NU3" firstAttribute="bottom" secondItem="ZbF-U9-QO1" secondAttribute="bottom" id="SlB-f2-yfC"/>
+                            <constraint firstItem="Fbo-Kp-NU3" firstAttribute="trailing" secondItem="ZbF-U9-QO1" secondAttribute="trailing" id="TAJ-mv-Ysz"/>
+                            <constraint firstItem="ZbF-U9-QO1" firstAttribute="leading" secondItem="Fbo-Kp-NU3" secondAttribute="leading" id="YX2-78-5dC"/>
+                            <constraint firstItem="ZbF-U9-QO1" firstAttribute="top" secondItem="Fbo-Kp-NU3" secondAttribute="top" id="cag-Az-IQb"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="JKX-Pa-15I"/>
+                    <connections>
+                        <outlet property="tableview" destination="ZbF-U9-QO1" id="mGH-Xe-Urh"/>
+                        <segue destination="fJF-MS-BMO" kind="presentation" identifier="detail" id="HzI-gE-mhb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zYo-wp-35d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2670" y="1811"/>
+        </scene>
+        <!--Post Detail Controller-->
+        <scene sceneID="CVG-uy-QdE">
+            <objects>
+                <viewController id="fJF-MS-BMO" customClass="PostDetailController" customModule="TravelLog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QzX-xk-G9D">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K83-Nu-nM1">
+                                <rect key="frame" x="20" y="20" width="374" height="268"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVB-mi-3P8">
+                                <rect key="frame" x="26" y="310" width="368" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="9gq-4j-hWR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6k7-s4-T9M">
+                                <rect key="frame" x="26" y="348" width="368" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2G-HL-A9q">
+                                <rect key="frame" x="20" y="377" width="374" height="431"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="em9-ku-u93"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eVB-mi-3P8" firstAttribute="top" secondItem="QzX-xk-G9D" secondAttribute="top" constant="310" id="Ivm-4g-5Rq"/>
+                            <constraint firstItem="6k7-s4-T9M" firstAttribute="top" secondItem="eVB-mi-3P8" secondAttribute="bottom" constant="8" id="KJM-O8-ZMj"/>
+                            <constraint firstItem="eVB-mi-3P8" firstAttribute="leading" secondItem="QzX-xk-G9D" secondAttribute="leadingMargin" constant="6" id="R6Q-07-UOH"/>
+                            <constraint firstItem="eVB-mi-3P8" firstAttribute="trailing" secondItem="6k7-s4-T9M" secondAttribute="trailing" id="TTu-sP-kqJ"/>
+                            <constraint firstItem="eVB-mi-3P8" firstAttribute="trailing" secondItem="K83-Nu-nM1" secondAttribute="trailing" id="VcM-Zb-O6B"/>
+                            <constraint firstItem="eVB-mi-3P8" firstAttribute="leading" secondItem="K83-Nu-nM1" secondAttribute="leading" constant="6" id="W5u-TF-Q3F"/>
+                            <constraint firstItem="eVB-mi-3P8" firstAttribute="leading" secondItem="6k7-s4-T9M" secondAttribute="leading" id="Wv2-bK-yk5"/>
+                            <constraint firstItem="eVB-mi-3P8" firstAttribute="top" secondItem="K83-Nu-nM1" secondAttribute="bottom" constant="22" id="YnQ-zJ-Rgt"/>
+                            <constraint firstItem="K83-Nu-nM1" firstAttribute="top" secondItem="em9-ku-u93" secondAttribute="top" constant="20" id="dhu-FT-X9v"/>
+                            <constraint firstItem="eVB-mi-3P8" firstAttribute="trailing" secondItem="QzX-xk-G9D" secondAttribute="trailingMargin" id="i2i-tJ-K9j"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="postBody" destination="a2G-HL-A9q" id="PYr-PT-UQe"/>
+                        <outlet property="postImg" destination="K83-Nu-nM1" id="BRZ-Ux-O12"/>
+                        <outlet property="postLocation" destination="6k7-s4-T9M" id="Vw1-tN-ENu"/>
+                        <outlet property="postTitle" destination="eVB-mi-3P8" id="TtV-rH-SiG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s3y-sQ-20p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2669.5652173913045" y="2519.1964285714284"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="aeD-gc-phK">
@@ -497,6 +575,9 @@
         <namedColor name="Blue">
             <color red="0.25099998712539673" green="0.43500000238418579" blue="0.70999997854232788" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

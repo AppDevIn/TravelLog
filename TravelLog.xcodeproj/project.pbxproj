@@ -33,6 +33,11 @@
 		9BB8914B25C3222300222158 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8914A25C3222300222158 /* User.swift */; };
 		9BB8915025C3BFDA00222158 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8914F25C3BFDA00222158 /* Constants.swift */; };
 		9BC2BD9925BDF6270097B582 /* EditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC2BD9825BDF6270097B582 /* EditController.swift */; };
+		BF67894125C3F9E500764854 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67894025C3F9E500764854 /* HomeController.swift */; };
+		BF67896025C40C6B00764854 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67895E25C40C6B00764854 /* PostTableViewCell.swift */; };
+		BF67896125C40C6B00764854 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF67895F25C40C6B00764854 /* PostTableViewCell.xib */; };
+		BF67896625C40E3C00764854 /* HomeFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67896525C40E3C00764854 /* HomeFeed.swift */; };
+		BF67896E25C5123A00764854 /* PostDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67896D25C5123A00764854 /* PostDetailController.swift */; };
 		DBD8F3E4F95671F504A7D211 /* Pods_TravelLog_TravelLogUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B509B6B9BF0125265519D3 /* Pods_TravelLog_TravelLogUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +97,11 @@
 		9BB8914A25C3222300222158 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9BB8914F25C3BFDA00222158 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9BC2BD9825BDF6270097B582 /* EditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditController.swift; sourceTree = "<group>"; };
+		BF67894025C3F9E500764854 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		BF67895E25C40C6B00764854 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		BF67895F25C40C6B00764854 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
+		BF67896525C40E3C00764854 /* HomeFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeed.swift; sourceTree = "<group>"; };
+		BF67896D25C5123A00764854 /* PostDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailController.swift; sourceTree = "<group>"; };
 		E168E8993381FED63DB1F912 /* Pods-TravelLog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelLog.release.xcconfig"; path = "Target Support Files/Pods-TravelLog/Pods-TravelLog.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -211,6 +221,8 @@
 			children = (
 				9B80D1F525C250C30052570F /* MyCollectionViewCell.swift */,
 				9B80D1F625C250C30052570F /* MyCollectionViewCell.xib */,
+				BF67895E25C40C6B00764854 /* PostTableViewCell.swift */,
+				BF67895F25C40C6B00764854 /* PostTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -224,6 +236,8 @@
 				9B71979725C0F88200F9B51C /* EditDetailsController.swift */,
 				9B80D1DB25C24CB40052570F /* ProfileController.swift */,
 				9BB8914525C31B1A00222158 /* SearchController.swift */,
+				BF67894025C3F9E500764854 /* HomeController.swift */,
+				BF67896D25C5123A00764854 /* PostDetailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -233,6 +247,7 @@
 			children = (
 				9B71979225BFDA2B00F9B51C /* Post.swift */,
 				9BB8914A25C3222300222158 /* User.swift */,
+				BF67896525C40E3C00764854 /* HomeFeed.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -368,6 +383,7 @@
 				9B80D1F825C250C30052570F /* MyCollectionViewCell.xib in Resources */,
 				9B7DC98325B336E5009E97D3 /* Assets.xcassets in Resources */,
 				9B7DC97E25B336E4009E97D3 /* Main.storyboard in Resources */,
+				BF67896125C40C6B00764854 /* PostTableViewCell.xib in Resources */,
 				9B2F8DC425BA00870009D9A1 /* Content.storyboard in Resources */,
 				9B80D20B25C26FAA0052570F /* GoogleService-Info.plist in Resources */,
 			);
@@ -505,6 +521,8 @@
 				9B71979325BFDA2B00F9B51C /* Post.swift in Sources */,
 				9BA55E6925B81FB40044B69B /* RegisterController.swift in Sources */,
 				9BB8915025C3BFDA00222158 /* Constants.swift in Sources */,
+				BF67896E25C5123A00764854 /* PostDetailController.swift in Sources */,
+				BF67894125C3F9E500764854 /* HomeController.swift in Sources */,
 				9B80D1DC25C24CB40052570F /* ProfileController.swift in Sources */,
 				9BB8914B25C3222300222158 /* User.swift in Sources */,
 				9B7DC98125B336E4009E97D3 /* TravelLog.xcdatamodeld in Sources */,
@@ -513,6 +531,8 @@
 				9B71979825C0F88200F9B51C /* EditDetailsController.swift in Sources */,
 				9BA55E4025B809950044B69B /* LoginController.swift in Sources */,
 				9BB8913B25C2BF2900222158 /* StorageManager.swift in Sources */,
+				BF67896625C40E3C00764854 /* HomeFeed.swift in Sources */,
+				BF67896025C40C6B00764854 /* PostTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
