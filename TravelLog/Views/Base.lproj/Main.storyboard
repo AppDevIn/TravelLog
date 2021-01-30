@@ -98,6 +98,11 @@
                                     <constraint firstItem="rst-6F-w2k" firstAttribute="leading" secondItem="kMg-ba-iZ0" secondAttribute="leading" id="uqG-Oe-IHk"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="9eI-Ud-U23">
+                                <rect key="frame" x="0.0" y="61" width="414" height="774"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="0.41412232249999997" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="Background"/>
@@ -110,6 +115,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="EJg-kk-Yxf"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="9eI-Ud-U23" id="2d6-bn-QgQ"/>
                         <outlet property="txt_email" destination="F4m-1b-byQ" id="yiE-y2-KWW"/>
                         <outlet property="txt_password" destination="R9G-ZI-AWm" id="aVh-K5-jdl"/>
                     </connections>
@@ -236,6 +242,10 @@
                                     <constraint firstAttribute="trailing" secondItem="9mp-IT-Oir" secondAttribute="trailing" id="j2k-R8-kA1"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Myu-m9-PHQ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" white="1" alpha="0.41412232253725167" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cH3-fu-wnv"/>
                         <color key="backgroundColor" name="Background"/>
@@ -244,10 +254,15 @@
                             <constraint firstItem="W59-c6-2Rt" firstAttribute="top" secondItem="cH3-fu-wnv" secondAttribute="top" id="6Dj-Bz-bnG"/>
                             <constraint firstItem="W59-c6-2Rt" firstAttribute="leading" secondItem="cH3-fu-wnv" secondAttribute="leading" id="7A2-LR-9kB"/>
                             <constraint firstAttribute="bottom" secondItem="W59-c6-2Rt" secondAttribute="bottom" id="7tn-yJ-ozt"/>
+                            <constraint firstItem="cH3-fu-wnv" firstAttribute="bottom" secondItem="Myu-m9-PHQ" secondAttribute="bottom" id="GGD-YD-fGU"/>
+                            <constraint firstItem="Myu-m9-PHQ" firstAttribute="leading" secondItem="cH3-fu-wnv" secondAttribute="leading" id="Xdn-Ci-J3S"/>
+                            <constraint firstItem="cH3-fu-wnv" firstAttribute="trailing" secondItem="Myu-m9-PHQ" secondAttribute="trailing" id="bhc-es-696"/>
+                            <constraint firstItem="Myu-m9-PHQ" firstAttribute="top" secondItem="cH3-fu-wnv" secondAttribute="top" id="hd7-Ga-Epu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="h62-P3-W5g"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Myu-m9-PHQ" id="z46-pM-8k0"/>
                         <outlet property="txt_cPassword" destination="fSU-rn-iLY" id="yOY-xR-AlN"/>
                         <outlet property="txt_email" destination="SK2-Kk-gBe" id="dgF-7X-DtU"/>
                         <outlet property="txt_name" destination="qR9-B5-efI" id="Drl-Aq-80e"/>

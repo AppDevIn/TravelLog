@@ -13,6 +13,7 @@ class LoginController : UIViewController {
     
     @IBOutlet weak var txt_email: UITextField!
     @IBOutlet weak var txt_password: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
@@ -20,6 +21,9 @@ class LoginController : UIViewController {
         
         txt_email.text = "jeyavishnu@gmail.com"
         txt_password.text = "Test123"
+        
+        //Hide the activity indictor when stopped
+        activityIndicator.hidesWhenStopped = true
     }
     
     @IBAction func loginClicked(_ sender: Any) {
@@ -28,9 +32,12 @@ class LoginController : UIViewController {
         guard let email:String =  txt_email.text else { return }
         guard let password:String = txt_password.text else { return }
         
+        //Start the indicator when started
+        self.activityIndicator.startAnimating()
         
         //Sign in into the user
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
+            
             
             //Check if there is error
             guard let user = authResult?.user, error == nil else {
@@ -44,6 +51,9 @@ class LoginController : UIViewController {
             DatabaseManager.shared.getUser(userID: user.uid) { (user) in
                 //Save the user to constant
                 Constants.currentUser = user
+                
+                //Stop the indicator when the data is recevied
+                self.activityIndicator.stopAnimating()
                 
                 //Move to the next storyboard
                 let storyboard = UIStoryboard(name: "Content", bundle: nil) // File name of the story board

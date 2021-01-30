@@ -17,9 +17,12 @@ class RegisterController : UIViewController {
     @IBOutlet weak var txt_password: UITextField!
     @IBOutlet weak var txt_cPassword: UITextField!
     @IBOutlet weak var txt_name: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
+        
+        
         
     }
 
@@ -33,7 +36,7 @@ class RegisterController : UIViewController {
         
         //Check if the password the same
         if password == Cpassword {
-            
+            activityIndicator.startAnimating()
             //Create a new user
             Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
                 //Check if there is error
@@ -46,6 +49,7 @@ class RegisterController : UIViewController {
                 
                 //Insert User deatils
                 DatabaseManager.shared.insertUser(userID: user.uid, userName: userName) { (isSuccess) in
+                    self.activityIndicator.stopAnimating()
                     if isSuccess {
                         
                         Constants.currentUser = User(id: user.uid, userName: userName)
