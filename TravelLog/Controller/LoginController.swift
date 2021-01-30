@@ -42,6 +42,7 @@ class LoginController : UIViewController {
             
             //Get the user
             DatabaseManager.shared.getUser(userID: user.uid) { (user) in
+                //Save the user to constant
                 Constants.currentUser = user
                 
                 //Move to the next storyboard

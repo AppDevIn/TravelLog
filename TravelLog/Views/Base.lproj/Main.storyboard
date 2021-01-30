@@ -199,7 +199,7 @@
                                                             <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="signUpClicked:" destination="n2T-m0-qTO" eventType="touchUpInside" id="9ok-WV-DzM"/>
+                                                            <action selector="signUpClicked:" destination="n2T-m0-qTO" eventType="touchUpInside" id="eUY-S2-mnu"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLV-cq-Pcv">
