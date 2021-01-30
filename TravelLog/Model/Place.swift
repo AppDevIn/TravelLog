@@ -18,10 +18,10 @@ class Place {
 
 // MARK: - Results
 class Results {
-    let next: String
+    let next: String?
     let items: [Item]
     
-    init(next: String, items: [NSDictionary]) {
+    init(next: String?, items: [NSDictionary]) {
         self.next = next
         self.items = items.map({ (NsDictionary) -> Item in
             return Item(item: NsDictionary)

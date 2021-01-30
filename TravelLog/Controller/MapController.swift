@@ -37,6 +37,13 @@ class MapController : UIViewController {
         }
     }
     
+    func addPin(coordinate coor: CLLocationCoordinate2D, _ title:String) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coor
+        annotation.title = title
+        mapView.addAnnotation(annotation)
+    }
+    
     func checkLocationAuthorization() {
         switch locationManager.authorizationStatus {
         
@@ -44,11 +51,10 @@ class MapController : UIViewController {
         case .authorizedWhenInUse:
             //Map code
             mapView.showsUserLocation = true // Show the blue dot
-            zoomOnUserLocation()
+//            zoomOnUserLocation()
             if let coor = locationManager.location?.coordinate {
-                fetchPlaces(coordinate: coor) { (places) in
-                    print(places)
-                }
+                
+                self.placesToPin(coordinate: CLLocationCoordinate2D(latitude: 1.3644, longitude: 103.9915), url: nil)
             }
             
             
@@ -84,51 +90,86 @@ class MapController : UIViewController {
         }
     }
     
-    func fetchPlaces(coordinate coor:CLLocationCoordinate2D,completionHandler: @escaping (Place) -> Void) {
-        
-        let apiKey:String = "BziU0Uj8Q-hONi9AaTYikl8EsDT_bBdXE7MZt1dFQ8k"
-        
-        let url = URL(string: "https://places.ls.hereapi.com/places/v1/discover/explore?at=\(coor.latitude),\(coor.longitude)&cat=eat-drink&apiKey=\(apiKey)")!
-        print(url)
-
-        let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-          if let error = error {
-            print("Error with fetching films: \(error)")
-            return
-          }
-          
-          guard let httpResponse = response as? HTTPURLResponse,
-                (200...299).contains(httpResponse.statusCode) else {
-            print("Error with the response, unexpected status code: \(String(describing: response))")
-            return
-          }
-            
-            
-            
-            
-          if let data = data  {
-            
-            
-
-            do {
-
-                let jsonResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
-                let items:[NSDictionary] = (jsonResult?["results"] as! NSDictionary)["items"] as! [NSDictionary]
-                let next:String = (jsonResult?["results"] as! NSDictionary)["next"] as! String
-                print(next)
-                let result = Results(next: next, items: items)
-                print(result.items[0].position[0])
-//                completionHandler(welcome)
-            } catch {
-                print(error.localizedDescription)
-
+    func placesToPin(coordinate coor:CLLocationCoordinate2D, url Url:String?){
+        fetchPlaces(coordinate: coor, url: Url) { (result) in
+  
+            for place in result.items {
+                self.addPin(coordinate: CLLocationCoordinate2D(latitude: place.position[0], longitude:place.position[1]), place.title)
             }
             
             
-          }
+            
+            if let url = result.next {
+                self.placesToPin(coordinate: coor, url:url)
+            }
+        }
+    }
+    
+    func fetchPlaces(coordinate coor:CLLocationCoordinate2D, url Url:String?,completionHandler: @escaping (Results) -> Void) {
+        
+        var url:URL
+        let apiKey:String = "BziU0Uj8Q-hONi9AaTYikl8EsDT_bBdXE7MZt1dFQ8k"
+        
+        if let link = Url {
+            url = URL(string: link)!
+        } else {
+            
+            
+            url = URL(string: "https://places.ls.hereapi.com/places/v1/discover/explore?at=\(coor.latitude),\(coor.longitude)&cat=sights-museums&apiKey=\(apiKey)")!
+        }
+        
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+            if let error = error {
+                print("Error with fetching films: \(error)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                print("Error with the response, unexpected status code: \(String(describing: response))")
+                return
+            }
+            
+            
+            
+            
+            if let data = data  {
+                
+                do {
+                    
+                    let jsonResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
+                    
+                    var items:[NSDictionary]
+                    var apiResult:NSDictionary
+                    
+                    if let result:NSDictionary = (jsonResult?["results"] as! NSDictionary?) {
+                        items = result["items"] as! [NSDictionary]
+                        apiResult = result
+                    } else {
+                        items = jsonResult?["items"] as! [NSDictionary]
+                        apiResult = jsonResult!
+                    }
+                    
+                    var result:Results
+                    if let next:String = apiResult["next"] as! String? {
+                        result = Results(next: next, items: items)
+                    } else {
+                        result = Results(next: nil, items: items)
+                    }
+                    
+                    
+                    
+                    completionHandler(result)
+                } catch {
+                    print(error.localizedDescription)
+                    
+                }
+                
+                
+            }
         })
         task.resume()
-      }
+    }
     
 }
 
