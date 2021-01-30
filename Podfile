@@ -11,6 +11,7 @@ target 'TravelLog' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  pod "BSImagePicker", "~> 3.1"
 
   target 'TravelLogTests' do
     inherit! :search_paths

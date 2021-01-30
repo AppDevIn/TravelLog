@@ -39,8 +39,6 @@ class EditController : UIViewController {
         swipeLeft.direction = .left
         self.imageview.addGestureRecognizer(swipeLeft)
         
-        
-        
     }
     
     /**

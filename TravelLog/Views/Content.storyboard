@@ -371,68 +371,75 @@
             </objects>
             <point key="canvasLocation" x="580" y="1067"/>
         </scene>
-        <!--Edit Controller-->
+        <!--Editbackup-->
         <scene sceneID="wod-2U-x8N">
             <objects>
-                <viewController id="Qf5-1X-vKy" customClass="EditController" customModule="TravelLog" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Qf5-1X-vKy" customClass="Editbackup" customModule="TravelLog" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FmT-Ed-jvY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wSy-Xh-LZ7">
-                                <rect key="frame" x="0.0" y="88.000000000000028" width="414" height="444.66666666666674"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="40" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hvu-Fu-CYw">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="444.66666666666669"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FooterLogin" translatesAutoresizingMaskIntoConstraints="NO" id="lTh-AE-mTB">
-                                                <rect key="frame" x="0.0" y="8" width="414" height="374"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="374" id="kab-qz-VXp"/>
-                                                </constraints>
-                                            </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PA4-ZD-2Z8">
-                                                <rect key="frame" x="0.0" y="396.66666666666669" width="414" height="40"/>
-                                                <color key="backgroundColor" name="AccentColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="ah1-PL-z8b"/>
-                                                </constraints>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                <state key="normal" title="Next">
-                                                    <color key="titleColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <segue destination="beL-5u-hqe" kind="show" identifier="addDeatils" id="xSk-e8-UGh"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="0.0"/>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PA4-ZD-2Z8">
+                                <rect key="frame" x="0.0" y="773" width="414" height="40"/>
+                                <color key="backgroundColor" name="AccentColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ah1-PL-z8b"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="beL-5u-hqe" kind="show" identifier="addDeatils" id="xSk-e8-UGh"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="70w-oa-QZ7">
+                                <rect key="frame" x="8" y="99" width="398" height="666"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zx7-nk-XXS">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="p6L-JF-oqm">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jXJ-6t-Szf">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dqV-vy-pbT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="wSy-Xh-LZ7" firstAttribute="leading" secondItem="dqV-vy-pbT" secondAttribute="leading" id="9Yd-NC-R0B"/>
-                            <constraint firstItem="wSy-Xh-LZ7" firstAttribute="top" secondItem="dqV-vy-pbT" secondAttribute="top" id="SBo-LQ-xNz"/>
-                            <constraint firstItem="wSy-Xh-LZ7" firstAttribute="trailing" secondItem="dqV-vy-pbT" secondAttribute="trailing" id="a7q-pm-i0N"/>
+                            <constraint firstItem="PA4-ZD-2Z8" firstAttribute="bottom" secondItem="dqV-vy-pbT" secondAttribute="bottom" id="8Fn-Ku-hdP"/>
+                            <constraint firstItem="PA4-ZD-2Z8" firstAttribute="top" secondItem="70w-oa-QZ7" secondAttribute="bottom" constant="8" id="NBr-ub-74c"/>
+                            <constraint firstItem="PA4-ZD-2Z8" firstAttribute="centerX" secondItem="FmT-Ed-jvY" secondAttribute="centerX" id="Qdx-26-Pjp"/>
+                            <constraint firstItem="70w-oa-QZ7" firstAttribute="top" secondItem="dqV-vy-pbT" secondAttribute="top" constant="11" id="Sob-Jy-azq"/>
+                            <constraint firstItem="70w-oa-QZ7" firstAttribute="leading" secondItem="dqV-vy-pbT" secondAttribute="leading" constant="8" id="VPt-ew-PlG"/>
+                            <constraint firstItem="PA4-ZD-2Z8" firstAttribute="centerX" secondItem="70w-oa-QZ7" secondAttribute="centerX" id="dmK-ML-n3b"/>
+                            <constraint firstItem="PA4-ZD-2Z8" firstAttribute="leading" secondItem="dqV-vy-pbT" secondAttribute="leading" id="qqq-Ty-OBg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dGQ-uZ-3sg">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="OTP-Lk-79A">
                             <connections>
-                                <action selector="presentPicker:" destination="Qf5-1X-vKy" id="wI1-sY-uBf"/>
+                                <action selector="presentPicker:" destination="Qf5-1X-vKy" id="wbH-38-2Wx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="imageview" destination="lTh-AE-mTB" id="cJf-GU-6Pr"/>
+                        <outlet property="collectionView" destination="70w-oa-QZ7" id="fGz-5M-SZR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3PP-Tl-9EC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="580" y="1811"/>
+            <point key="canvasLocation" x="579.71014492753625" y="1810.7142857142856"/>
         </scene>
         <!--Edit Details Controller-->
         <scene sceneID="1SV-qN-EzT">
