@@ -280,7 +280,13 @@
                             <constraint firstItem="3tf-8I-PXg" firstAttribute="bottom" secondItem="lG3-90-HDx" secondAttribute="bottom" id="mze-Fn-TcW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Map" id="5le-tg-Lxv"/>
+                    <navigationItem key="navigationItem" title="Map" id="5le-tg-Lxv">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="magnifyingglass" catalog="system" id="aHL-pa-1km">
+                            <connections>
+                                <action selector="searchButton:" destination="8ag-qa-fPs" id="Wrb-lo-0O9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="lG3-90-HDx" id="5JZ-WG-Qen"/>
                     </connections>

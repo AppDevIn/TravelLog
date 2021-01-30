@@ -30,8 +30,22 @@ class MapController : UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
+    @IBAction func searchButton(_ sender: Any) {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        present(searchController, animated: true, completion: nil)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)  {
+        //Ignoring User
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        
+    }
+    
     func zoomOnUserLocation() {
-        if let location = locationManager.location?.coordinate {
+        if let locations = locationManager.location?.coordinate {
+            let location = CLLocationCoordinate2D(latitude: 56.2639, longitude: 9.5018)
             let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionMeters, longitudinalMeters: regionMeters)
             mapView.setRegion(region, animated: true)
         }
@@ -51,10 +65,25 @@ class MapController : UIViewController {
         case .authorizedWhenInUse:
             //Map code
             mapView.showsUserLocation = true // Show the blue dot
-//            zoomOnUserLocation()
+                        zoomOnUserLocation()
             if let coor = locationManager.location?.coordinate {
                 
-                self.placesToPin(coordinate: CLLocationCoordinate2D(latitude: 1.3644, longitude: 103.9915), url: nil)
+                
+            }
+            
+            
+            let request = MKLocalSearch.Request()
+            request.naturalLanguageQuery = "Attractions"
+            request.region = mapView.region
+            
+            let search = MKLocalSearch(request: request)
+            search.start { response, _ in
+                guard let response = response else {
+                    return
+                }
+                for item in response.mapItems {
+                    self.addPin(coordinate: item.placemark.coordinate, item.name!)
+                }
             }
             
             
@@ -92,7 +121,7 @@ class MapController : UIViewController {
     
     func placesToPin(coordinate coor:CLLocationCoordinate2D, url Url:String?){
         fetchPlaces(coordinate: coor, url: Url) { (result) in
-  
+            
             for place in result.items {
                 self.addPin(coordinate: CLLocationCoordinate2D(latitude: place.position[0], longitude:place.position[1]), place.title)
             }
@@ -184,12 +213,36 @@ extension MapController : CLLocationManagerDelegate {
         //Where the map view center is, this is the users last known location
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         //Find the regison based on the location
-        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: regionMeters, longitudinalMeters: regionMeters)
-        mapView.setRegion(region, animated: true)
+//        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: regionMeters, longitudinalMeters: regionMeters)
+//        mapView.setRegion(region, animated: true)
     }
     
     //When the authrization is changed
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
     }
+}
+
+extension MapController : UISearchBarDelegate {
+    
+}
+
+extension MapController : MKMarkerAnnotationView {
+    override var annotation: MKAnnotation? {
+       willSet {
+         // 1
+         guard let artwork = newValue as? Artwork else {
+           return
+         }
+         canShowCallout = true
+         calloutOffset = CGPoint(x: -5, y: 5)
+         rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+
+         // 2
+         markerTintColor = artwork.markerTintColor
+         if let letter = artwork.discipline?.first {
+           glyphText = String(letter)
+         }
+       }
+     }
 }
