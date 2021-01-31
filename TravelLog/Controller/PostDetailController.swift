@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SDWebImage
+import MapKit
 
 class PostDetailController: UIViewController {
     
@@ -88,6 +89,27 @@ class PostDetailController: UIViewController {
             }
         }
     }
+    
+    func openMapForPlace(lat:Double, lng:Double) {
+
+        
+        let latitude:CLLocationDegrees =  lat
+        let longitude:CLLocationDegrees =  lng
+
+        let regionDistance:CLLocationDistance = 10000
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: 10000, longitudinalMeters: 10000)
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+        ]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = "\("self.venueName")"
+        mapItem.openInMaps(launchOptions: options)
+
+    }
+    
     
     
     func displayImages(i index:Int){
