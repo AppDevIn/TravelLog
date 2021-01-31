@@ -102,6 +102,7 @@ class EditDetailsController : UIViewController {
         if items != [] {
             dropDown.dataSource = self
             dropDown.delegate = self
+            location = items[0].name! // Default vale
         } else {
             txtx_location.isHidden = false
             dropDown.isHidden = true
@@ -139,9 +140,11 @@ class EditDetailsController : UIViewController {
             return
         }
         
-        guard !txtx_location.isHidden, let loc = txtx_location.text, loc != "" else {
-            print("No location")
-            return
+        if !txtx_location.isHidden {
+            guard let loc = txtx_location.text, loc != "" else {
+               print("No location")
+               return
+           }
         }
         
         //Create the post object
@@ -172,7 +175,8 @@ class EditDetailsController : UIViewController {
         self.db.collection("users").document(id).collection("posts").document(postId).setData([
             "title": p.title,
             "locations": p.locations,
-            "description": p.decription
+            "description": p.decription,
+            "date": Date()
             
         ]) { err in
             if let err = err {
