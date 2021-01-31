@@ -212,7 +212,11 @@ class DatabaseManager{
                         user.follower = follower as! [String]
                     }
                     
-                    users.append(user)
+                    //Don't add the current user
+                    if id != Constants.currentUser?.UID {
+                        users.append(user)
+                    }
+                    
                     
                 }
                 if users.count > 0 {completionBlock(users)}
