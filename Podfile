@@ -12,6 +12,7 @@ target 'TravelLog' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
   pod "BSImagePicker", "~> 3.1"
+  pod 'SDWebImage', '~> 5.0'
 
   target 'TravelLogTests' do
     inherit! :search_paths
