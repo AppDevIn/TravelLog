@@ -54,8 +54,6 @@ class ProfileController:UIViewController {
         
         //Set the title
         self.btn_follow.title = user.follower.contains(self.UID!) ? "Unfollow" : "Follow"
-
-        
         
         
         //Set up the refresh for the collection view
@@ -105,7 +103,12 @@ class ProfileController:UIViewController {
             
             //Get the name of the user and profile
             self.txt_name.text = Constants.currentUser?.name
-            self.setUrlToImage(url: (Constants.currentUser?.profileLink)!, imageView: self.imageView)
+            
+            //Check if the image is nil
+            if let url = Constants.currentUser?.profileLink {
+                self.setUrlToImage(url: url, imageView: self.imageView)
+            }
+            
             
             //Hide the button
             if btn_follow.tintColor != UIColor.clear {
@@ -120,7 +123,6 @@ class ProfileController:UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("Appear")
         
         if let user = Constants.currentUser {
             self.user = user
