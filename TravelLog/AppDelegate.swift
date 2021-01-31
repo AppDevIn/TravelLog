@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         locationManager.requestAlwaysAuthorization()
         
-//        locationManager.startMonitoringVisits()
+        locationManager.startMonitoringVisits()
         locationManager.delegate = self
         
         
@@ -62,7 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             locationManager.distanceFilter = 35 // 0
             locationManager.allowsBackgroundLocationUpdates = true // 1
             locationManager.startUpdatingLocation()  // 2
-            
             break
         default:
             print("Unkown location status")
@@ -132,7 +131,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
+
 // MARK: - Location
+
 extension AppDelegate: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
         // create CLLocation from the coordinates of CLVisit
@@ -161,6 +162,8 @@ extension AppDelegate: CLLocationManagerDelegate {
             if let place = placemarks?.first {
                 // 3
                 let description = "Fake visit: \(place)"
+                
+                
                 
                 //4
                 let fakeVisit = FakeVisit(
@@ -198,6 +201,8 @@ extension AppDelegate: CLLocationManagerDelegate {
     }
 }
 
+
+//MARK: - Fake Vist Class
 
 final class FakeVisit: CLVisit {
     private let myCoordinates: CLLocationCoordinate2D
