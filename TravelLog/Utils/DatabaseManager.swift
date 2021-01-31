@@ -67,7 +67,8 @@ class DatabaseManager{
                 
                 if let profileLink = data["profileLink"] {
                     //Cover string to URL
-                    let url:URL = NSURL(string: profileLink as! String )! as URL
+                    user.profileLink = profileLink as! String
+                    
                 }
                 
                 //If got following
@@ -116,9 +117,9 @@ class DatabaseManager{
             
             if let profileLink = data["profileLink"] {
                 //Cover string to URL
-                let url:URL = NSURL(string: profileLink as! String )! as URL
+                user.profileLink = profileLink as! String
+                
             }
-            
             //If got following
             if let following = data["following"] {
                 user.following = following as! [String]
@@ -240,7 +241,7 @@ class DatabaseManager{
                         //Cover string to URL
                         let url:URL = NSURL(string: profileLink as! String )! as URL
                         
-                        user = User(id: id, userName: name as! String, dp: url)
+                        user = User(id: id, userName: name as! String, dp: profileLink as! String)
                     } else if let name = data["name"]{
                         user = User(id: id, userName: name as! String)
                     } else{

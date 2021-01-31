@@ -107,7 +107,7 @@ class ProfileController:UIViewController {
             
             //Check if the image is nil
             if let url = Constants.currentUser?.profileLink {
-                self.imageView.sd_setImage(with: URL(string: url.absoluteString), placeholderImage: UIImage(named: "FooterLogin"))
+                self.imageView.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "FooterLogin"))
             }
             
             
@@ -130,6 +130,8 @@ class ProfileController:UIViewController {
         
         //Set the profile
         if let url = user.profileLink {
+            //Cover string to URL
+            let url:URL = NSURL(string: url)! as URL
             self.setUrlToImage(url: url, imageView: self.imageView)
         }
         
