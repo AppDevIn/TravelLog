@@ -38,6 +38,7 @@ class EditDetailsController : UIViewController {
     @IBOutlet weak var txt_title: UITextField!
     @IBOutlet weak var txt_description: UITextField!
     @IBOutlet weak var loading: UIActivityIndicatorView!
+    @IBOutlet weak var txtx_location: UITextField!
     @IBOutlet weak var dropDown: UIPickerView!
     
     var items:[CDPlace] = []
@@ -56,6 +57,7 @@ class EditDetailsController : UIViewController {
         //Set up text field delgate
         txt_title.delegate = self
         txt_description.delegate = self
+        txtx_location.delegate = self
         
         //Hide the loading bar when stopped
         loading.hidesWhenStopped = true
@@ -82,7 +84,7 @@ class EditDetailsController : UIViewController {
                 let hours = floor(elapsedTime / 60 / 60)
                 
                 if(hours > 24){
-                    context.delete(data as! NSManagedObject)
+                    context.delete(data)
                     try context.save()
                 } else {list.append(data)}
                 
@@ -96,10 +98,13 @@ class EditDetailsController : UIViewController {
             
         }
         
-        
-        dropDown.dataSource = self
-        dropDown.delegate = self
-        
+        if false {
+            dropDown.dataSource = self
+            dropDown.delegate = self
+        } else {
+            txtx_location.isHidden = false
+            dropDown.isHidden = true
+        }
         
     }
     
@@ -130,6 +135,11 @@ class EditDetailsController : UIViewController {
         //Check if the images is empty
         if ItemProviders.count <= 0 {
             print("No images")
+            return
+        }
+        
+        guard !txtx_location.isHidden, let loc = txtx_location.text, loc != "" else {
+            print("No location")
             return
         }
         

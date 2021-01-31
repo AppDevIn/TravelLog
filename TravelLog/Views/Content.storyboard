@@ -390,6 +390,11 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
+                                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="or2-d0-kCS">
+                                                <rect key="frame" x="0.0" y="43.666666666666657" width="404" height="0.0"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vfc-iq-lzy">
                                                 <rect key="frame" x="0.0" y="53" width="404" height="100"/>
                                                 <constraints>
@@ -449,6 +454,7 @@
                         <outlet property="loading" destination="wnb-bG-gjy" id="VYP-Aa-TWb"/>
                         <outlet property="txt_description" destination="wL5-8s-UYJ" id="mcd-jh-hCZ"/>
                         <outlet property="txt_title" destination="xOd-5u-aR8" id="fts-Fi-ELh"/>
+                        <outlet property="txtx_location" destination="or2-d0-kCS" id="GQE-yX-cJb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v1k-oU-4OH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
