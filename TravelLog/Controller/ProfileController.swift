@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import FirebaseAuth
 import PhotosUI
-
+import SDWebImage
 
 class ProfileController:UIViewController {
     
@@ -45,28 +45,16 @@ class ProfileController:UIViewController {
                 //If don't have user stored
                 DatabaseManager.shared.getUser(userID: UID!) { (user) in
                     self.user = user
+                    self.viewDidAppear(true)
                 }
             }
             
         }
         
-        //Set the name
-        self.txt_name.text = user.name
-        
-        //Set the profile
-        if let url = user.profileLink {
-            self.setUrlToImage(url: url, imageView: self.imageView)
-        }
-        
-        
-        //Set the follower and following
-        self.txt_follower.text = "Follower: \(user.follower.count)"
-        self.txt_following.text = "Following: \(user.following.count)"
+
         
         //Set the title
         self.btn_follow.title = user.follower.contains(self.UID!) ? "Unfollow" : "Follow"
-
-        
         
         
         //Set up the refresh for the collection view
@@ -116,7 +104,12 @@ class ProfileController:UIViewController {
             
             //Get the name of the user and profile
             self.txt_name.text = Constants.currentUser?.name
-            self.setUrlToImage(url: (Constants.currentUser?.profileLink)!, imageView: self.imageView)
+            
+            //Check if the image is nil
+            if let url = Constants.currentUser?.profileLink {
+                self.imageView.sd_setImage(with: URL(string: url.absoluteString), placeholderImage: UIImage(named: "FooterLogin"))
+            }
+            
             
             //Hide the button
             if btn_follow.tintColor != UIColor.clear {
@@ -128,6 +121,22 @@ class ProfileController:UIViewController {
             
         }
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        //Set the name
+        self.txt_name.text = user.name
+        
+        //Set the profile
+        if let url = user.profileLink {
+            self.setUrlToImage(url: url, imageView: self.imageView)
+        }
+        
+        
+        //Set the follower and following
+        self.txt_follower.text = "Follower: \(user.follower.count)"
+        self.txt_following.text = "Following: \(user.following.count)"
     }
     
     
@@ -231,6 +240,8 @@ extension ProfileController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
+        
+        
         print("Image Collection Tapped")
         collectionViewSelectedCell = indexPath.row
         self.performSegue(withIdentifier: "detail", sender: self)
@@ -256,7 +267,7 @@ extension ProfileController:UICollectionViewDataSource{
         
         //Cover string to URL
         let url:URL = NSURL(string: posts[indexPath.item].images[0])! as URL
-        setUrlToImage(url: url, imageView: cell.imageView)
+        cell.configure(url: url)
         
         
         

@@ -17,12 +17,15 @@ class RegisterController : UIViewController {
     @IBOutlet weak var txt_password: UITextField!
     @IBOutlet weak var txt_cPassword: UITextField!
     @IBOutlet weak var txt_name: UITextField!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
         
         
+        //Hide the password
+        txt_password.isSecureTextEntry = true
+        txt_cPassword.isSecureTextEntry = true
         
     }
 
@@ -36,37 +39,20 @@ class RegisterController : UIViewController {
         
         //Check if the password the same
         if password == Cpassword {
-            activityIndicator.startAnimating()
-            //Create a new user
-            Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
-                //Check if there is error
-                guard let user = authResult?.user, error == nil else {
-                    print(error!.localizedDescription)
-                    return
-                }
-                
-                print("\(user.email!) created")
-                
-                //Insert User deatils
-                DatabaseManager.shared.insertUser(userID: user.uid, userName: userName) { (isSuccess) in
-                    self.activityIndicator.stopAnimating()
-                    if isSuccess {
-                        
-                        Constants.currentUser = User(id: user.uid, userName: userName)
-                        
-                        //Move to the next storyboard
-                        let storyboard = UIStoryboard(name: "Content", bundle: nil) // File name of the story board
-                        let vc = storyboard.instantiateViewController(identifier: "Content") as UIViewController // name must set as the identifer in stroyboard
-                        vc.modalPresentationStyle = .fullScreen //
-                        self.present(vc, animated: true, completion: nil)
-                        
-                    } else {
-                        print("Failed to store data")
-                    }
-                }
-                
-                
-            }
+            //Move to the next storyboard
+            let storyboard = UIStoryboard(name: "Main", bundle: nil) // File name of the story board
+            let vc = storyboard.instantiateViewController(identifier: "Splash") as SplashScreenController // name must set as the identifer in stroyboard
+            
+            vc.usr = Login(email: email, password: password)
+            vc.usr.userName = userName
+            
+            
+            vc.isLogin = false
+            
+            vc.modalPresentationStyle = .fullScreen //
+            self.present(vc, animated: true, completion: nil)
+            
+  
         } else {
             print("Is not the same password")
         }

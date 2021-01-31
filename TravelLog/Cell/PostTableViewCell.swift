@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PostTableViewCell: UITableViewCell {
 
@@ -36,10 +37,11 @@ class PostTableViewCell: UITableViewCell {
     
     //configure the cell for imformation to display
     func configure(with model: HomeFeed){
+        
         self.profileImageView.loadURL(url: model.profileImg)
         self.titleLable.text = model.title
         self.usernameLable.text = model.username
-        self.postImageView.loadString(urlString: model.postImages)
+        self.postImageView.sd_setImage(with: URL(string: model.postImages), placeholderImage: UIImage(named: "FooterLogin"))
     }
     
 }

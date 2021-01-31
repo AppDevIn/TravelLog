@@ -91,7 +91,51 @@ class DatabaseManager{
                 print("Document does not exist")
             }
         }
-
+        
+        
+    }
+    
+    func updateUser(userID UID:String, completionBlock: @escaping (User) -> Void) {
+        
+        let docRef = db.collection("users").document(UID)
+        
+        
+        docRef.addSnapshotListener { (documentSnapshot, error) in
+            guard let document = documentSnapshot else {
+                print("Error fetching document: \(error!)")
+                return
+            }
+            
+            guard let data = document.data() else {return}
+            
+            guard let name = data["name"] else {
+                return
+            }
+            
+            guard let profileLink = data["profileLink"] else {
+                return
+            }
+            
+            
+            //Cover string to URL
+            let url:URL = NSURL(string: profileLink as! String )! as URL
+            let user:User = User(id: UID, userName: name as! String, dp: url)
+            
+            
+            //If got following
+            if let following = data["following"] {
+                user.following = following as! [String]
+            }
+            
+            //If got followers
+            if let follower = data["follower"] {
+                user.follower = follower as! [String]
+            }
+            
+            completionBlock(user)
+            
+            
+        }
         
     }
     
@@ -103,7 +147,7 @@ class DatabaseManager{
         ], merge: true)
         
     }
-
+    
     
     func getPosts(userID UID:String, success: @escaping ([Post]) -> Void )  {
         var posts:[Post] = []
@@ -168,7 +212,11 @@ class DatabaseManager{
                         user.follower = follower as! [String]
                     }
                     
-                    users.append(user)
+                    //Don't add the current user
+                    if id != Constants.currentUser?.UID {
+                        users.append(user)
+                    }
+                    
                     
                 }
                 if users.count > 0 {completionBlock(users)}

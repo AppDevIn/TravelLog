@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MyCollectionViewCell: UICollectionViewCell {
     
@@ -18,9 +19,14 @@ class MyCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
+    public func configure(url:URL){
+        self.imageView.sd_setImage(with: URL(string: url.absoluteString), placeholderImage: UIImage(named: "FooterLogin"))
+    }
+    
     public func configure(with image:UIImage){
         imageView.image = image
     }
+    
     
     static func nib() -> UINib {
         return UINib(nibName: "MyCollectionViewCell", bundle: nil)
