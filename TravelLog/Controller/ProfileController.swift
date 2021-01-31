@@ -40,9 +40,13 @@ class ProfileController:UIViewController {
             
             if let user = Constants.currentUser {
                 self.user = user
+                btn_follow.title = "Logout"
             }
             else {
                 //If don't have user stored
+                //Set the title
+                self.btn_follow.title = (Constants.currentUser?.following.contains(self.UID!))! ? "Unfollow" : "Follow"
+                
                 DatabaseManager.shared.getUser(userID: UID!) { (user) in
                     self.user = user
                     self.viewDidAppear(true)
@@ -53,9 +57,6 @@ class ProfileController:UIViewController {
         
 
         
-        //Set the title
-        
-        self.btn_follow.title = (Constants.currentUser?.following.contains(self.UID!))! ? "Unfollow" : "Follow"
         
         
         //Set up the refresh for the collection view
@@ -112,14 +113,7 @@ class ProfileController:UIViewController {
             }
             
             
-            //Hide the button
-            if btn_follow.tintColor != UIColor.clear {
-                var tintColorsOfBarButtons = [UIBarButtonItem: UIColor]()
-                tintColorsOfBarButtons[btn_follow] = btn_follow.tintColor
-                btn_follow.tintColor = UIColor.clear
-                btn_follow.isEnabled = false
-            }
-            
+
         }
         
     }
@@ -189,7 +183,10 @@ class ProfileController:UIViewController {
             //Insert the UID into database
             let id = Auth.auth().currentUser?.uid
             DatabaseManager.shared.insertFollow(UID: id!, followerID: UID!)
-        } else {
+        } else if btn_follow.title == "Logout" {
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        }
+        else {
             //Change button to text to follow
             btn_follow.title = "Follow"
             
@@ -253,6 +250,8 @@ extension ProfileController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 15, bottom: 0, right: 15)
     }
+    
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! PostDetailController
