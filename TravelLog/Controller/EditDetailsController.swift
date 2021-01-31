@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
@@ -14,9 +15,11 @@ import FirebaseStorage
 
 class EditDetailsController : UIViewController {
     
+    var appDelegate:AppDelegate = (UIApplication.shared.delegate) as! AppDelegate
     
     
     
+
     var ItemProviders: [UIImage] = []
     
     
@@ -34,13 +37,19 @@ class EditDetailsController : UIViewController {
     var lengthOfImage:Int = 0 //The number of images in the array
     
     @IBOutlet weak var txt_title: UITextField!
-    @IBOutlet weak var txt_locations: UITextField!
     @IBOutlet weak var txt_description: UITextField!
     @IBOutlet weak var loading: UIActivityIndicatorView!
+    @IBOutlet weak var txtx_location: UITextField!
+    @IBOutlet weak var dropDown: UIPickerView!
+    
+    var items:[CDPlace] = []
+    
+    var location:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let context:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
         
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
@@ -48,8 +57,8 @@ class EditDetailsController : UIViewController {
         
         //Set up text field delgate
         txt_title.delegate = self
-        txt_locations.delegate = self
         txt_description.delegate = self
+        txtx_location.delegate = self
         
         //Hide the loading bar when stopped
         loading.hidesWhenStopped = true
@@ -58,22 +67,57 @@ class EditDetailsController : UIViewController {
         lengthOfImage = ItemProviders.count
         
         
+        
+        
+        do {
+            let result = try context.fetch(CDPlace.fetchRequest())
+            var list:[CDPlace] = []
+            
+            let now = Date()
+            
+            
+            
+            for data in result as! [CDPlace]{
+                
+                let elapsedTime = now.timeIntervalSince(data.departure!)
+                
+                // convert from seconds to hours, rounding down to the nearest hour
+                let hours = floor(elapsedTime / 60 / 60)
+                
+                if(hours > 24){
+                    context.delete(data)
+                    try context.save()
+                } else {list.append(data)}
+                
+            }
+            items = list
+            
+            
+        } catch {
+            print(error)
+            
+            
+        }
+        
+        if false {
+            dropDown.dataSource = self
+            dropDown.delegate = self
+        } else {
+            txtx_location.isHidden = false
+            dropDown.isHidden = true
+        }
+        
     }
     
     @IBAction func uploadData(_ sender: Any) {
         
         self.view.endEditing(true)
         
-        loading.startAnimating()
+        
         
         //Change the text from String? to String
         guard let title = txt_title.text else {
             print("Empty title")
-            return
-        }
-        
-        guard let location = txt_locations.text else {
-            print("Empty location")
             return
         }
         
@@ -84,7 +128,7 @@ class EditDetailsController : UIViewController {
         }
         
         //Check if the text is empty
-        if (description == "" && title == "" && location == "") {
+        if (description == "" && title == "") {
             print("Empty text filed")
             return
         }
@@ -95,8 +139,16 @@ class EditDetailsController : UIViewController {
             return
         }
         
+        guard !txtx_location.isHidden, let loc = txtx_location.text, loc != "" else {
+            print("No location")
+            return
+        }
+        
         //Create the post object
         post = Post(title: title, decription: description, locations: location, images: [])
+        
+        //Start animating
+        loading.startAnimating()
         
         //Upload the the info but not the imzage
         uploadPostInfo(post: post)
@@ -148,7 +200,7 @@ class EditDetailsController : UIViewController {
     func clearTextField()  {
         //Empty the text fields
         txt_title.text = ""
-        txt_locations.text = ""
+        dropDown.selectedRow(inComponent: 0)
         txt_description.text = ""
         
         //Remove the array of images
@@ -246,7 +298,7 @@ class EditDetailsController : UIViewController {
     
 }
 
-
+//MARK: -TextField Delegate
 extension EditDetailsController:UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.view.endEditing(true)
@@ -256,3 +308,33 @@ extension EditDetailsController:UITextFieldDelegate{
         self.view.endEditing(true)
     }
 }
+
+//MARK: -UIPicker Delegate and Datasource
+extension EditDetailsController : UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        self.view.endEditing(true)
+        return items[row].name
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        self.location = items[row].name!
+        
+    }
+    
+}
+
+extension EditDetailsController : UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return items.count
+    }
+    
+    
+}
+
+

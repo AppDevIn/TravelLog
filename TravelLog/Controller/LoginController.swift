@@ -24,6 +24,8 @@ class LoginController : UIViewController {
         
         //Hide the activity indictor when stopped
         activityIndicator.hidesWhenStopped = true
+        
+        
     }
     
     @IBAction func loginClicked(_ sender: Any) {
@@ -34,6 +36,7 @@ class LoginController : UIViewController {
         
         //Start the indicator when started
         self.activityIndicator.startAnimating()
+        
         
         //Sign in into the user
         Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in

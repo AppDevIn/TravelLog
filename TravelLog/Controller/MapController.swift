@@ -60,6 +60,8 @@ class MapController : UIViewController {
         request.naturalLanguageQuery = "Attractions"
         request.region = mapView.region
         
+        
+        
         let search = MKLocalSearch(request: request)
         search.start { (response, error) in
             guard let response = response else {
@@ -106,6 +108,18 @@ class MapController : UIViewController {
             break
         //Even when the app is closed
         case .authorizedAlways:
+            //Map code
+            mapView.showsUserLocation = true // Show the blue dot
+            
+            // Zoom on the location
+            if let location = locationManager.location {
+                self.mapView.centerToLocation(location)
+            }
+            
+            //Pin al the attractions
+            attractionPin()
+            
+            locationManager.startUpdatingLocation()
             break
         default:
             print("Unkown location status")

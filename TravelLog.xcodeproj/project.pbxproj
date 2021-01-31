@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		40CF4275EFDE60F2F3DD6EE9 /* Pods_TravelLogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9553392FFA87464992ADE143 /* Pods_TravelLogTests.framework */; };
 		562C1BF13C27560F1C00A509 /* Pods_TravelLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 802FF8E9037EC6AFAED7DFC4 /* Pods_TravelLog.framework */; };
+		9B0BB2C025C69AE0009BE9ED /* CDPlace+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0BB2BE25C69AE0009BE9ED /* CDPlace+CoreDataClass.swift */; };
+		9B0BB2C125C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0BB2BF25C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift */; };
 		9B266BB425C4348600EE6843 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B266BB325C4348600EE6843 /* MapController.swift */; };
 		9B266BBC25C4775700EE6843 /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B266BBB25C4775700EE6843 /* Places.swift */; };
+		9B266BEA25C586F800EE6843 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B266BE925C586F800EE6843 /* Location.swift */; };
+		9B266C5525C66E8E00EE6843 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B266C5425C66E8E00EE6843 /* AppDelegate.swift */; };
 		9B2F8DC425BA00870009D9A1 /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2F8DC325BA00870009D9A1 /* Content.storyboard */; };
 		9B71979325BFDA2B00F9B51C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B71979225BFDA2B00F9B51C /* Post.swift */; };
 		9B71979825C0F88200F9B51C /* EditDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B71979725C0F88200F9B51C /* EditDetailsController.swift */; };
-		9B7DC97725B336E4009E97D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DC97625B336E4009E97D3 /* AppDelegate.swift */; };
 		9B7DC97925B336E4009E97D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DC97825B336E4009E97D3 /* SceneDelegate.swift */; };
 		9B7DC97B25B336E4009E97D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DC97A25B336E4009E97D3 /* ViewController.swift */; };
 		9B7DC97E25B336E4009E97D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B7DC97C25B336E4009E97D3 /* Main.storyboard */; };
@@ -70,13 +73,16 @@
 		802FF8E9037EC6AFAED7DFC4 /* Pods_TravelLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AA70F4DDE3AC80C02A139A4 /* Pods-TravelLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelLog.debug.xcconfig"; path = "Target Support Files/Pods-TravelLog/Pods-TravelLog.debug.xcconfig"; sourceTree = "<group>"; };
 		9553392FFA87464992ADE143 /* Pods_TravelLogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelLogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B0BB2BE25C69AE0009BE9ED /* CDPlace+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPlace+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		9B0BB2BF25C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPlace+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		9B266BB325C4348600EE6843 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		9B266BBB25C4775700EE6843 /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
+		9B266BE925C586F800EE6843 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		9B266C5425C66E8E00EE6843 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = TravelLog/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		9B2F8DC325BA00870009D9A1 /* Content.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Content.storyboard; sourceTree = "<group>"; };
 		9B71979225BFDA2B00F9B51C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		9B71979725C0F88200F9B51C /* EditDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDetailsController.swift; sourceTree = "<group>"; };
 		9B7DC97325B336E4009E97D3 /* TravelLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B7DC97625B336E4009E97D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B7DC97825B336E4009E97D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9B7DC97A25B336E4009E97D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9B7DC97D25B336E4009E97D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -187,12 +193,13 @@
 		9B7DC97525B336E4009E97D3 /* TravelLog */ = {
 			isa = PBXGroup;
 			children = (
+				9B0BB2BE25C69AE0009BE9ED /* CDPlace+CoreDataClass.swift */,
+				9B0BB2BF25C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift */,
 				9BB8913125C2977300222158 /* Utils */,
 				9B80D1E725C24F330052570F /* Cell */,
 				9BA55E3B25B808860044B69B /* Views */,
 				9BA55E3A25B8087E0044B69B /* Model */,
 				9BA55E3825B8085C0044B69B /* Controller */,
-				9B7DC97625B336E4009E97D3 /* AppDelegate.swift */,
 				9B7DC97825B336E4009E97D3 /* SceneDelegate.swift */,
 				9B7DC97A25B336E4009E97D3 /* ViewController.swift */,
 				9B7DC98225B336E5009E97D3 /* Assets.xcassets */,
@@ -236,6 +243,7 @@
 		9BA55E3825B8085C0044B69B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9B266C5425C66E8E00EE6843 /* AppDelegate.swift */,
 				9BA55E3F25B809950044B69B /* LoginController.swift */,
 				9BA55E6825B81FB40044B69B /* RegisterController.swift */,
 				9BC2BD9825BDF6270097B582 /* EditController.swift */,
@@ -257,6 +265,7 @@
 				9BB8914A25C3222300222158 /* User.swift */,
 				BF67896525C40E3C00764854 /* HomeFeed.swift */,
 				9B266BBB25C4775700EE6843 /* Places.swift */,
+				9B266BE925C586F800EE6843 /* Location.swift */,
 
 			);
 			path = Model;
@@ -523,12 +532,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B266C5525C66E8E00EE6843 /* AppDelegate.swift in Sources */,
 				9B80D1F725C250C30052570F /* MyCollectionViewCell.swift in Sources */,
 				9BC2BD9925BDF6270097B582 /* EditController.swift in Sources */,
 				9B7DC97B25B336E4009E97D3 /* ViewController.swift in Sources */,
 				9BB8914625C31B1A00222158 /* SearchController.swift in Sources */,
-				9B7DC97725B336E4009E97D3 /* AppDelegate.swift in Sources */,
 				9B71979325BFDA2B00F9B51C /* Post.swift in Sources */,
+				9B0BB2C025C69AE0009BE9ED /* CDPlace+CoreDataClass.swift in Sources */,
 				BF67897E25C5579300764854 /* editbackup.swift in Sources */,
 				9BA55E6925B81FB40044B69B /* RegisterController.swift in Sources */,
 				9BB8915025C3BFDA00222158 /* Constants.swift in Sources */,
@@ -537,9 +547,11 @@
 				9B80D1DC25C24CB40052570F /* ProfileController.swift in Sources */,
 				9BB8914B25C3222300222158 /* User.swift in Sources */,
 				9B7DC98125B336E4009E97D3 /* TravelLog.xcdatamodeld in Sources */,
+				9B0BB2C125C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift in Sources */,
 				9B266BB425C4348600EE6843 /* MapController.swift in Sources */,
 				9BB8913325C2AE1300222158 /* DatabaseManager.swift in Sources */,
 				9B7DC97925B336E4009E97D3 /* SceneDelegate.swift in Sources */,
+				9B266BEA25C586F800EE6843 /* Location.swift in Sources */,
 				9B71979825C0F88200F9B51C /* EditDetailsController.swift in Sources */,
 				9BA55E4025B809950044B69B /* LoginController.swift in Sources */,
 				9BB8913B25C2BF2900222158 /* StorageManager.swift in Sources */,
