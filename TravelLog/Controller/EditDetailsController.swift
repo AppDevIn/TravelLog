@@ -20,7 +20,7 @@ class EditDetailsController : UIViewController {
     
     
     var ItemProviders: [NSItemProvider] = []
-
+    
     
     var db: Firestore!
     
@@ -48,7 +48,7 @@ class EditDetailsController : UIViewController {
         super.viewDidLoad()
         
         let context:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-                
+        
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
@@ -62,15 +62,30 @@ class EditDetailsController : UIViewController {
         
         //Init the length of image
         lengthOfImage = ItemProviders.count
-
+        
+        
+        
         
         do {
             let result = try context.fetch(CDPlace.fetchRequest())
             var list:[CDPlace] = []
             
+            let now = Date()
+            
+            
+            
             for data in result as! [CDPlace]{
                 
-                list.append(data)
+                let elapsedTime = now.timeIntervalSince(data.departure!)
+                
+                // convert from seconds to hours, rounding down to the nearest hour
+                let hours = floor(elapsedTime / 60 / 60)
+                
+                if(hours > 24){
+                    context.delete(data as! NSManagedObject)
+                    try context.save()
+                } else {list.append(data)}
+                
             }
             items = list
             
@@ -292,17 +307,17 @@ extension EditDetailsController:UITextFieldDelegate{
 //MARK: -UIPicker Delegate and Datasource
 extension EditDetailsController : UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-
-         self.view.endEditing(true)
+        
+        self.view.endEditing(true)
         return items[row].name
-     }
-
-     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         self.location = items[row].name!
-         
-     }
-
+        
+    }
+    
 }
 
 extension EditDetailsController : UIPickerViewDataSource {

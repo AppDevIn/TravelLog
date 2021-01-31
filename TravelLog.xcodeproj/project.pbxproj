@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		40CF4275EFDE60F2F3DD6EE9 /* Pods_TravelLogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9553392FFA87464992ADE143 /* Pods_TravelLogTests.framework */; };
 		562C1BF13C27560F1C00A509 /* Pods_TravelLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 802FF8E9037EC6AFAED7DFC4 /* Pods_TravelLog.framework */; };
-		9B0BB2B625C67DBA009BE9ED /* CDPlace+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0BB2B425C67DBA009BE9ED /* CDPlace+CoreDataClass.swift */; };
-		9B0BB2B725C67DBA009BE9ED /* CDPlace+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0BB2B525C67DBA009BE9ED /* CDPlace+CoreDataProperties.swift */; };
+		9B0BB2C025C69AE0009BE9ED /* CDPlace+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0BB2BE25C69AE0009BE9ED /* CDPlace+CoreDataClass.swift */; };
+		9B0BB2C125C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0BB2BF25C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift */; };
 		9B266BB425C4348600EE6843 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B266BB325C4348600EE6843 /* MapController.swift */; };
 		9B266BBC25C4775700EE6843 /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B266BBB25C4775700EE6843 /* Places.swift */; };
 		9B266BEA25C586F800EE6843 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B266BE925C586F800EE6843 /* Location.swift */; };
@@ -67,8 +67,8 @@
 		802FF8E9037EC6AFAED7DFC4 /* Pods_TravelLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AA70F4DDE3AC80C02A139A4 /* Pods-TravelLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelLog.debug.xcconfig"; path = "Target Support Files/Pods-TravelLog/Pods-TravelLog.debug.xcconfig"; sourceTree = "<group>"; };
 		9553392FFA87464992ADE143 /* Pods_TravelLogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelLogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B0BB2B425C67DBA009BE9ED /* CDPlace+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPlace+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		9B0BB2B525C67DBA009BE9ED /* CDPlace+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPlace+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		9B0BB2BE25C69AE0009BE9ED /* CDPlace+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPlace+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		9B0BB2BF25C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDPlace+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		9B266BB325C4348600EE6843 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		9B266BBB25C4775700EE6843 /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
 		9B266BE925C586F800EE6843 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -181,8 +181,8 @@
 		9B7DC97525B336E4009E97D3 /* TravelLog */ = {
 			isa = PBXGroup;
 			children = (
-				9B0BB2B425C67DBA009BE9ED /* CDPlace+CoreDataClass.swift */,
-				9B0BB2B525C67DBA009BE9ED /* CDPlace+CoreDataProperties.swift */,
+				9B0BB2BE25C69AE0009BE9ED /* CDPlace+CoreDataClass.swift */,
+				9B0BB2BF25C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift */,
 				9BB8913125C2977300222158 /* Utils */,
 				9B80D1E725C24F330052570F /* Cell */,
 				9BA55E3B25B808860044B69B /* Views */,
@@ -518,13 +518,13 @@
 				9B7DC97B25B336E4009E97D3 /* ViewController.swift in Sources */,
 				9BB8914625C31B1A00222158 /* SearchController.swift in Sources */,
 				9B71979325BFDA2B00F9B51C /* Post.swift in Sources */,
-				9B0BB2B625C67DBA009BE9ED /* CDPlace+CoreDataClass.swift in Sources */,
+				9B0BB2C025C69AE0009BE9ED /* CDPlace+CoreDataClass.swift in Sources */,
 				9BA55E6925B81FB40044B69B /* RegisterController.swift in Sources */,
 				9BB8915025C3BFDA00222158 /* Constants.swift in Sources */,
 				9B80D1DC25C24CB40052570F /* ProfileController.swift in Sources */,
 				9BB8914B25C3222300222158 /* User.swift in Sources */,
 				9B7DC98125B336E4009E97D3 /* TravelLog.xcdatamodeld in Sources */,
-				9B0BB2B725C67DBA009BE9ED /* CDPlace+CoreDataProperties.swift in Sources */,
+				9B0BB2C125C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift in Sources */,
 				9B266BB425C4348600EE6843 /* MapController.swift in Sources */,
 				9BB8913325C2AE1300222158 /* DatabaseManager.swift in Sources */,
 				9B7DC97925B336E4009E97D3 /* SceneDelegate.swift in Sources */,

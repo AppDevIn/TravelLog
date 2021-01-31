@@ -199,6 +199,7 @@ extension AppDelegate: CLLocationManagerDelegate {
         
         let plcae = CDPlace(context: self.persistentContainer.viewContext)
         plcae.name = location.description
+        plcae.departure = visit.departureDate
         
         do {
             try self.persistentContainer.viewContext.save()
