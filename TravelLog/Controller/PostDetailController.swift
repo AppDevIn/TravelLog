@@ -32,8 +32,9 @@ class PostDetailController: UIViewController {
             self.postLocation.text = post.locations
             self.postBody.text = post.decription
         }
-        
     }
+    
+    
     
 }
 
