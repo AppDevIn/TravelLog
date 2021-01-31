@@ -99,7 +99,7 @@ class EditDetailsController : UIViewController {
             
         }
         
-        if false {
+        if items != [] {
             dropDown.dataSource = self
             dropDown.delegate = self
         } else {
