@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import FirebaseAuth
 import PhotosUI
-
+import SDWebImage
 
 class ProfileController:UIViewController {
     
@@ -107,7 +107,7 @@ class ProfileController:UIViewController {
             
             //Check if the image is nil
             if let url = Constants.currentUser?.profileLink {
-                self.setUrlToImage(url: url, imageView: self.imageView)
+                self.imageView.sd_setImage(with: URL(string: url.absoluteString), placeholderImage: UIImage(named: "FooterLogin"))
             }
             
             
@@ -267,7 +267,7 @@ extension ProfileController:UICollectionViewDataSource{
         
         //Cover string to URL
         let url:URL = NSURL(string: posts[indexPath.item].images[0])! as URL
-        setUrlToImage(url: url, imageView: cell.imageView)
+        cell.configure(url: url)
         
         
         
