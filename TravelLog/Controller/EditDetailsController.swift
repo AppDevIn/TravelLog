@@ -36,12 +36,13 @@ class EditDetailsController : UIViewController {
     var lengthOfImage:Int = 0 //The number of images in the array
     
     @IBOutlet weak var txt_title: UITextField!
-    @IBOutlet weak var txt_locations: UITextField!
     @IBOutlet weak var txt_description: UITextField!
     @IBOutlet weak var loading: UIActivityIndicatorView!
     @IBOutlet weak var dropDown: UIPickerView!
     
     var items:[CDPlace] = []
+    
+    var location:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +55,6 @@ class EditDetailsController : UIViewController {
         
         //Set up text field delgate
         txt_title.delegate = self
-        txt_locations.delegate = self
         txt_description.delegate = self
         
         //Hide the loading bar when stopped
@@ -100,11 +100,6 @@ class EditDetailsController : UIViewController {
             return
         }
         
-        guard let location = txt_locations.text else {
-            print("Empty location")
-            return
-        }
-        
         
         guard let description = txt_description.text else {
             print("Empty description")
@@ -112,7 +107,7 @@ class EditDetailsController : UIViewController {
         }
         
         //Check if the text is empty
-        if (description == "" && title == "" && location == "") {
+        if (description == "" && title == "") {
             print("Empty text filed")
             return
         }
@@ -184,7 +179,7 @@ class EditDetailsController : UIViewController {
     func clearTextField()  {
         //Empty the text fields
         txt_title.text = ""
-        txt_locations.text = ""
+        dropDown.selectedRow(inComponent: 0)
         txt_description.text = ""
         
         //Remove the array of images
@@ -283,7 +278,7 @@ class EditDetailsController : UIViewController {
     
 }
 
-
+//MARK: -TextField Delegate
 extension EditDetailsController:UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.view.endEditing(true)
@@ -294,6 +289,7 @@ extension EditDetailsController:UITextFieldDelegate{
     }
 }
 
+//MARK: -UIPicker Delegate and Datasource
 extension EditDetailsController : UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 
@@ -302,7 +298,8 @@ extension EditDetailsController : UIPickerViewDelegate {
      }
 
      func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
+        
+        self.location = items[row].name!
          
      }
 
