@@ -193,12 +193,16 @@ class DatabaseManager{
                         if let document = document, document.exists {
                             guard let userData = document.data() else {return}
                             
-                            let post = HomeFeed(postImages: data["images"]! as! [String],
+                            var post = HomeFeed(postImages: data["images"]! as! [String],
                                      username: userData["name"]! as! String,
                                      title: data["title"]! as! String,
                                      description: data["description"]! as! String,
                                      locations: data["locations"]! as! String
                             )
+                            
+                            if let url = userData["profileLink"]  {
+                                post.profileImg = NSURL(string: url as! String )! as URL
+                            }
                             
                             success(post)
                             
