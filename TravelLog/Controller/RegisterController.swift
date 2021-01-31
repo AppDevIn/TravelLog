@@ -32,10 +32,24 @@ class RegisterController : UIViewController {
     @IBAction func signUpClicked(_ sender: Any) {
         print("Clicked")
         //Get the text values
-        guard let email:String =  txt_email.text, email != "" else { return }
-        guard let password:String = txt_password.text, password != "" else { return }
-        guard let Cpassword:String = txt_cPassword.text, Cpassword != "" else { return }
-        guard let userName:String = txt_name.text, userName != "" else { return }
+        guard let email:String =  txt_email.text, email != "" else {
+            alert(title: "Empty Text", message: "The email text box is empty")
+            return
+        }
+        guard let password:String = txt_password.text, password != "" else {
+            alert(title: "Empty Text", message: "The password text box is empty")
+            return
+        }
+        
+        guard let Cpassword:String = txt_cPassword.text, Cpassword != "" else {
+            alert(title: "Empty Text", message: "The confirm password text box is empty")
+            return
+        }
+        
+        guard let userName:String = txt_name.text, userName != "" else {
+            alert(title: "Empty Text", message: "The user name text box is empty")
+            return
+        }
         
         //Check if the password the same
         if password == Cpassword {
@@ -54,6 +68,7 @@ class RegisterController : UIViewController {
             
   
         } else {
+            alert(title: "Password Error", message: "Password and confirm password must be the same")
             print("Is not the same password")
         }
         
@@ -67,6 +82,18 @@ class RegisterController : UIViewController {
         let vc = storyboard.instantiateViewController(identifier: "login") as UIViewController // name must set as the identifer in stroyboard
         vc.modalPresentationStyle = .fullScreen //
         present(vc, animated: true, completion: nil)
+    }
+    
+    
+    func alert(title:String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+        NSLog("The \"OK\" alert occured.")
+        }))
+        
+        
+        self.present(alert, animated: true, completion: nil)
+
     }
 }
 

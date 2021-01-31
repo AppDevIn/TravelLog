@@ -27,8 +27,15 @@ class LoginController : UIViewController {
     @IBAction func loginClicked(_ sender: Any) {
         
         //Get the text values
-        guard let email:String =  txt_email.text else { return }
-        guard let password:String = txt_password.text else { return }
+        guard let email:String =  txt_email.text, email != "" else {
+            alert(title: "Empty Text", message: "The email text box is empty")
+            return
+        }
+        
+        guard let password:String = txt_password.text, password != "" else {
+            alert(title: "Empty Text", message: "The password text box is empty")
+            return
+        }
         
         
         
@@ -51,6 +58,18 @@ class LoginController : UIViewController {
         let vc = storyboard.instantiateViewController(identifier: "register") as UIViewController // name must set as the identifer in stroyboard
         vc.modalPresentationStyle = .fullScreen //
         present(vc, animated: true, completion: nil)
+    }
+    
+    
+    func alert(title:String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+        NSLog("The \"OK\" alert occured.")
+        }))
+        
+        
+        self.present(alert, animated: true, completion: nil)
+
     }
     
 }

@@ -30,7 +30,9 @@ class SplashScreenController : UIViewController {
                 //Check if there is error
                 guard let user = authResult?.user, error == nil else {
                     print(error!.localizedDescription)
-                    self.dismiss(animated: true, completion: nil)
+                    self.alert(title: "Error", message: error!.localizedDescription)
+                    
+                    
                     return
                 }
                 
@@ -63,8 +65,7 @@ class SplashScreenController : UIViewController {
                 //Check if there is error
                 guard let user = authResult?.user, error == nil else {
                     print(error!.localizedDescription)
-                    self.dismiss(animated: true, completion: nil)
-                    
+                    self.alert(title: "Error", message: error!.localizedDescription)
                     return
                 }
                 
@@ -102,7 +103,17 @@ class SplashScreenController : UIViewController {
     }
     
     
-    
+    func alert(title:String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+        NSLog("The \"OK\" alert occured.")
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        
+        self.present(alert, animated: true, completion: nil)
+
+    }
     
 }
 
