@@ -380,18 +380,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="drj-G1-zAt">
-                                <rect key="frame" x="5" y="98" width="404" height="399"/>
+                                <rect key="frame" x="5" y="98" width="404" height="468"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="QhI-eb-b2R">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="119"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="188"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xOd-5u-aR8">
                                                 <rect key="frame" x="0.0" y="0.0" width="404" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Dropdown" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nh0-xZ-Nc6">
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vfc-iq-lzy">
                                                 <rect key="frame" x="0.0" y="69" width="404" height="50"/>
+                                            </pickerView>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Dropdown" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nh0-xZ-Nc6">
+                                                <rect key="frame" x="0.0" y="138" width="404" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="3Zy-A5-Un5"/>
                                                 </constraints>
@@ -401,7 +404,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="k6t-nV-5Il">
-                                        <rect key="frame" x="0.0" y="139" width="404" height="260"/>
+                                        <rect key="frame" x="0.0" y="208" width="404" height="260"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wL5-8s-UYJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="404" height="200"/>
@@ -447,6 +450,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Tds-cM-b87"/>
                     <connections>
+                        <outlet property="dropDown" destination="Vfc-iq-lzy" id="hp6-mq-25n"/>
                         <outlet property="loading" destination="wnb-bG-gjy" id="VYP-Aa-TWb"/>
                         <outlet property="txt_description" destination="wL5-8s-UYJ" id="mcd-jh-hCZ"/>
                         <outlet property="txt_locations" destination="nh0-xZ-Nc6" id="hYD-r8-hVq"/>

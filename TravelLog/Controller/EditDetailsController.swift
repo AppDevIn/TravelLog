@@ -37,6 +37,7 @@ class EditDetailsController : UIViewController {
     @IBOutlet weak var txt_locations: UITextField!
     @IBOutlet weak var txt_description: UITextField!
     @IBOutlet weak var loading: UIActivityIndicatorView!
+    @IBOutlet weak var dropDown: UIPickerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,10 @@ class EditDetailsController : UIViewController {
         
         //Init the length of image
         lengthOfImage = ItemProviders.count
+        
+        
+        dropDown.dataSource = self
+        dropDown.delegate = self
         
         
     }
@@ -265,3 +270,31 @@ extension EditDetailsController:UITextFieldDelegate{
         self.view.endEditing(true)
     }
 }
+
+extension EditDetailsController : UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+
+         self.view.endEditing(true)
+         return "Hello \(row)"
+     }
+
+     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+
+         
+     }
+
+}
+
+extension EditDetailsController : UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 2
+    }
+    
+    
+}
+
+
