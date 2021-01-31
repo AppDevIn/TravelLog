@@ -14,6 +14,7 @@ class User{
     var UID:String
     var following:[String] = []
     var follower:[String] = []
+    var post: [Post] = []
 
     
     init(id uid:String, userName name:String) {
