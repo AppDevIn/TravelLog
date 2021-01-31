@@ -24,6 +24,8 @@ class LoginController : UIViewController {
         
         //Hide the activity indictor when stopped
         activityIndicator.hidesWhenStopped = true
+        
+        
     }
     
     @IBAction func loginClicked(_ sender: Any) {

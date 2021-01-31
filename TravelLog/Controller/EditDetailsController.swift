@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
@@ -14,6 +15,7 @@ import FirebaseStorage
 
 class EditDetailsController : UIViewController {
     
+    var appDelegate:AppDelegate = (UIApplication.shared.delegate) as! AppDelegate
     
     
     
@@ -39,10 +41,13 @@ class EditDetailsController : UIViewController {
     @IBOutlet weak var loading: UIActivityIndicatorView!
     @IBOutlet weak var dropDown: UIPickerView!
     
+    var items:[CDPlace] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        let context:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+                
         let settings = FirestoreSettings()
         Firestore.firestore().settings = settings
         db = Firestore.firestore()
@@ -57,6 +62,24 @@ class EditDetailsController : UIViewController {
         
         //Init the length of image
         lengthOfImage = ItemProviders.count
+
+        
+        do {
+            let result = try context.fetch(CDPlace.fetchRequest())
+            var list:[CDPlace] = []
+            
+            for data in result as! [CDPlace]{
+                
+                list.append(data)
+            }
+            items = list
+            
+            
+        } catch {
+            print(error)
+            
+            
+        }
         
         
         dropDown.dataSource = self
@@ -275,7 +298,7 @@ extension EditDetailsController : UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 
          self.view.endEditing(true)
-         return "Hello \(row)"
+        return items[row].name
      }
 
      func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -291,7 +314,7 @@ extension EditDetailsController : UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 2
+        return items.count
     }
     
     

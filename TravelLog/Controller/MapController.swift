@@ -60,6 +60,8 @@ class MapController : UIViewController {
         request.naturalLanguageQuery = "Attractions"
         request.region = mapView.region
         
+        
+        
         let search = MKLocalSearch(request: request)
         search.start { (response, error) in
             guard let response = response else {

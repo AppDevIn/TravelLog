@@ -157,6 +157,8 @@ extension AppDelegate: CLLocationManagerDelegate {
             return
         }
         
+        
+        
         // 2
         AppDelegate.geoCoder.reverseGeocodeLocation(location) { placemarks, _ in
             if let place = placemarks?.first {
@@ -184,6 +186,17 @@ extension AppDelegate: CLLocationManagerDelegate {
     
     func newVisitReceived(_ visit: CLVisit, description: String) {
         let location = Location(visit: visit, descriptionString: description)
+        
+        
+        let plcae = CDPlace(context: self.persistentContainer.viewContext)
+        plcae.name = location.description
+        
+        do {
+            try self.persistentContainer.viewContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        
         
         // 1
         let content = UNMutableNotificationContent()
