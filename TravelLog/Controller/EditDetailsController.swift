@@ -112,7 +112,7 @@ class EditDetailsController : UIViewController {
         
         self.view.endEditing(true)
         
-        loading.startAnimating()
+        
         
         //Change the text from String? to String
         guard let title = txt_title.text else {
@@ -145,6 +145,9 @@ class EditDetailsController : UIViewController {
         
         //Create the post object
         post = Post(title: title, decription: description, locations: location, images: [])
+        
+        //Start animating
+        loading.startAnimating()
         
         //Upload the the info but not the imzage
         uploadPostInfo(post: post)
