@@ -281,6 +281,9 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </collectionViewCellContentView>
+                                                        <connections>
+                                                            <segue destination="fJF-MS-BMO" kind="presentation" identifier="detail" id="olr-KP-1dk"/>
+                                                        </connections>
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
@@ -587,6 +590,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="FxK-XS-OWe"/>
+        <segue reference="olr-KP-1dk"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="FooterLogin" width="374" height="374"/>

@@ -14,15 +14,24 @@ class PostDetailController: UIViewController {
     @IBOutlet weak var postTitle: UILabel!
     @IBOutlet weak var postLocation: UILabel!
     @IBOutlet weak var postBody: UITextView!
-    var post:HomeFeed?
+    var feed:HomeFeed?
+    var post: Post!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.postImg.loadString(urlString: post!.postImages)
-        self.postTitle.text = post?.title
-        self.postLocation.text = post?.locations
-        self.postBody.text = post?.description
+        if (feed != nil) {
+            self.postImg.loadString(urlString: feed!.postImages)
+            self.postTitle.text = feed?.title
+            self.postLocation.text = feed?.locations
+            self.postBody.text = feed?.description
+        }
+        else{
+            self.postImg.loadString(urlString: post.images[0])
+            self.postTitle.text = post.title
+            self.postLocation.text = post.locations
+            self.postBody.text = post.decription
+        }
         
     }
     

@@ -134,7 +134,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //pass current selected HomeFeed object to next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! PostDetailController
-        destVC.post = feed[tableview.indexPathForSelectedRow!.row]
+        destVC.feed = feed[tableview.indexPathForSelectedRow!.row]
     }
     
 }

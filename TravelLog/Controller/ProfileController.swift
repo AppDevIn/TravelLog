@@ -28,6 +28,9 @@ class ProfileController:UIViewController {
     var refreshControl = UIRefreshControl()
     var user:User = User()
     
+    var collectionViewSelectedCell = 0
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -217,6 +220,7 @@ extension ProfileController : PHPickerViewControllerDelegate {
         
         
     }
+    
 }
 
 
@@ -228,10 +232,17 @@ extension ProfileController:UICollectionViewDelegate{
         collectionView.deselectItem(at: indexPath, animated: true)
         
         print("Image Collection Tapped")
+        collectionViewSelectedCell = indexPath.row
+        self.performSegue(withIdentifier: "detail", sender: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 15, bottom: 0, right: 15)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destVC = segue.destination as! PostDetailController
+        destVC.post = posts[collectionViewSelectedCell]
     }
 }
 
