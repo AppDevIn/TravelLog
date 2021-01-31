@@ -19,7 +19,7 @@ class EditDetailsController : UIViewController {
     
     
     
-
+    
     var ItemProviders: [UIImage] = []
     
     
@@ -117,34 +117,26 @@ class EditDetailsController : UIViewController {
         
         
         //Change the text from String? to String
-        guard let title = txt_title.text else {
+        guard let title = txt_title.text, title != "" else {
             print("Empty title")
+            alert(title: "Empty Text", message: "The title text box is empty")
             return
         }
         
         
-        guard let description = txt_description.text else {
+        guard let description = txt_description.text, description != "" else {
             print("Empty description")
+            alert(title: "Empty Text", message: "The description text box is empty")
             return
         }
         
-        //Check if the text is empty
-        if (description == "" && title == "") {
-            print("Empty text filed")
-            return
-        }
-        
-        //Check if the images is empty
-        if ItemProviders.count <= 0 {
-            print("No images")
-            return
-        }
         
         if !txtx_location.isHidden {
             guard let loc = txtx_location.text, loc != "" else {
-               print("No location")
-               return
-           }
+                print("No location")
+                alert(title: "Empty Text", message: "The location text bos is empty")
+                return
+            }
         }
         
         //Create the post object
@@ -327,6 +319,17 @@ class EditDetailsController : UIViewController {
             
         }
         
+        
+    }
+    
+    func alert(title:String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        
+        
+        self.present(alert, animated: true, completion: nil)
         
     }
     

@@ -452,6 +452,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="btn_next" destination="PA4-ZD-2Z8" id="1bQ-Gs-Vut"/>
                         <outlet property="collectionView" destination="70w-oa-QZ7" id="fGz-5M-SZR"/>
                     </connections>
                 </viewController>

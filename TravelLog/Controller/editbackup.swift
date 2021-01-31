@@ -19,7 +19,8 @@ class Editbackup : UIViewController {
     
     var selectedAssets = [PHAsset]()
     var images = [UIImage]()
-  
+    @IBOutlet weak var btn_next: UIButton!
+    
     
     
     @IBOutlet var collectionView: UICollectionView!
@@ -35,9 +36,10 @@ class Editbackup : UIViewController {
         collectionView.collectionViewLayout = layout
         collectionView.register(MyCollectionViewCell.nib(), forCellWithReuseIdentifier: MyCollectionViewCell.identifier)
         
+        btn_next.isEnabled = false
     }
     
-   
+    
     
     //The is add the naviagtion button function
     @IBAction func presentPicker(_ sender: Any) {
@@ -47,12 +49,12 @@ class Editbackup : UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //Check if that is the seque using an identifier
-
+        
         //Move to EditDeatailController
         if segue.identifier == "addDeatils" {
             let destination = segue.destination as! EditDetailsController
             destination.ItemProviders = self.images
-
+            
         }
     }
     
@@ -79,46 +81,50 @@ class Editbackup : UIViewController {
         }, completion: nil)
     }
     
-   
+    
     
     func convertAssetsToImg() -> Void {
         
         if selectedAssets.count != 0{
-                    
-                    images = []
-                    for i in 0..<selectedAssets.count{
-                        
-                        // reciving request to convert assets to images
-                        let manager = PHImageManager.default()
-                        let option = PHImageRequestOptions()
-                        var thumbnail = UIImage()
-                        
-                        option.isSynchronous = true
-                        manager.requestImage(for: selectedAssets[i], targetSize: .zero, contentMode: .aspectFill, options: option, resultHandler: {(result, info)->Void in thumbnail = result!
-                        })
-                        
-                        let data = thumbnail.jpegData(compressionQuality: 0.7)
-                        let newImage = UIImage(data: data!)
-                        if images.contains(newImage!){
-                            print("image exist")
-                        }
-                        else{
-                              self.images.append(newImage! as UIImage)
-
-                        }
-                    }
+            
+            images = []
+            for i in 0..<selectedAssets.count{
+                
+                // reciving request to convert assets to images
+                let manager = PHImageManager.default()
+                let option = PHImageRequestOptions()
+                var thumbnail = UIImage()
+                
+                option.isSynchronous = true
+                manager.requestImage(for: selectedAssets[i], targetSize: .zero, contentMode: .aspectFill, options: option, resultHandler: {(result, info)->Void in thumbnail = result!
+                })
+                
+                let data = thumbnail.jpegData(compressionQuality: 0.7)
+                let newImage = UIImage(data: data!)
+                if images.contains(newImage!){
+                    print("image exist")
+                }
+                else{
+                    self.images.append(newImage! as UIImage)
                     
                 }
-                
-                print("complete photo array \(self.images)")
             }
+            
+            //The button is enabled if there is images
+            btn_next.isEnabled = (images.count >= 0)
+            
+            
+        }
+        
+        print("complete photo array \(self.images)")
     }
+}
 
 
 
-  
 
-    
+
+
 
 extension Editbackup: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
