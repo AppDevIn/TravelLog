@@ -9,17 +9,21 @@ import Foundation
 import UIKit
 
 
-class SearchController: UIViewController {
+class SearchController : UIViewController {
     
     var users:[User] = []
     
     @IBOutlet weak var tabelView: UITableView!
+    @IBOutlet weak var txt_field: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tabelView.delegate = self
         tabelView.dataSource = self
+    
+        //Set the text field delgate
+        txt_field.delegate = self
     }
     
     @IBAction func searching(_ sender: Any) {
@@ -44,7 +48,7 @@ class SearchController: UIViewController {
 }
 
 
-extension SearchController:UITableViewDataSource{
+extension SearchController : UITableViewDataSource {
     //The number of section the table have
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -74,11 +78,22 @@ extension SearchController:UITableViewDataSource{
     }
 }
 
-extension SearchController:UITableViewDelegate{
+extension SearchController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "userDatails", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
         
         
+    }
+}
+
+extension SearchController : UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        //Dismiss the keyboard
+        textField.resignFirstResponder()
+        print("Search ended")
+        return false
     }
 }

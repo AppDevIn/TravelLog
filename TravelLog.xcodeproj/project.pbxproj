@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		40CF4275EFDE60F2F3DD6EE9 /* Pods_TravelLogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9553392FFA87464992ADE143 /* Pods_TravelLogTests.framework */; };
 		562C1BF13C27560F1C00A509 /* Pods_TravelLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 802FF8E9037EC6AFAED7DFC4 /* Pods_TravelLog.framework */; };
+		9B266BB425C4348600EE6843 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B266BB325C4348600EE6843 /* MapController.swift */; };
+		9B266BBC25C4775700EE6843 /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B266BBB25C4775700EE6843 /* Places.swift */; };
 		9B2F8DC425BA00870009D9A1 /* Content.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2F8DC325BA00870009D9A1 /* Content.storyboard */; };
 		9B71979325BFDA2B00F9B51C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B71979225BFDA2B00F9B51C /* Post.swift */; };
 		9B71979825C0F88200F9B51C /* EditDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B71979725C0F88200F9B51C /* EditDetailsController.swift */; };
@@ -68,6 +70,8 @@
 		802FF8E9037EC6AFAED7DFC4 /* Pods_TravelLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AA70F4DDE3AC80C02A139A4 /* Pods-TravelLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelLog.debug.xcconfig"; path = "Target Support Files/Pods-TravelLog/Pods-TravelLog.debug.xcconfig"; sourceTree = "<group>"; };
 		9553392FFA87464992ADE143 /* Pods_TravelLogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelLogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B266BB325C4348600EE6843 /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		9B266BBB25C4775700EE6843 /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
 		9B2F8DC325BA00870009D9A1 /* Content.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Content.storyboard; sourceTree = "<group>"; };
 		9B71979225BFDA2B00F9B51C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		9B71979725C0F88200F9B51C /* EditDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDetailsController.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 				9BB8914525C31B1A00222158 /* SearchController.swift */,
 				BF67894025C3F9E500764854 /* HomeController.swift */,
 				BF67896D25C5123A00764854 /* PostDetailController.swift */,
+				9B266BB325C4348600EE6843 /* MapController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -251,6 +256,8 @@
 				9B71979225BFDA2B00F9B51C /* Post.swift */,
 				9BB8914A25C3222300222158 /* User.swift */,
 				BF67896525C40E3C00764854 /* HomeFeed.swift */,
+				9B266BBB25C4775700EE6843 /* Places.swift */,
+
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -530,6 +537,7 @@
 				9B80D1DC25C24CB40052570F /* ProfileController.swift in Sources */,
 				9BB8914B25C3222300222158 /* User.swift in Sources */,
 				9B7DC98125B336E4009E97D3 /* TravelLog.xcdatamodeld in Sources */,
+				9B266BB425C4348600EE6843 /* MapController.swift in Sources */,
 				9BB8913325C2AE1300222158 /* DatabaseManager.swift in Sources */,
 				9B7DC97925B336E4009E97D3 /* SceneDelegate.swift in Sources */,
 				9B71979825C0F88200F9B51C /* EditDetailsController.swift in Sources */,
@@ -537,6 +545,8 @@
 				9BB8913B25C2BF2900222158 /* StorageManager.swift in Sources */,
 				BF67896625C40E3C00764854 /* HomeFeed.swift in Sources */,
 				BF67896025C40C6B00764854 /* PostTableViewCell.swift in Sources */,
+				9B266BBC25C4775700EE6843 /* Places.swift in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
