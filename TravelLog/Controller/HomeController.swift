@@ -43,6 +43,19 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableview.refreshControl = refreshControl
+        
+        
+        DatabaseManager.shared.updateUser(userID: Constants.currentUser!.UID) { (user) in
+            
+            Constants.currentUser!.name = user.name
+            Constants.currentUser!.profileLink = user.profileLink
+            Constants.currentUser!.follower = user.follower
+            Constants.currentUser!.following = user.following
+            
+            let u = Constants.currentUser
+        }
+        
+        
     }
     
     func loadData(){

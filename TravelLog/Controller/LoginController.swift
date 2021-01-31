@@ -22,10 +22,6 @@ class LoginController : UIViewController {
         txt_email.text = "jeyavishnu@gmail.com"
         txt_password.text = "Test123"
         
-    
-        
-        
-        
     }
     
     @IBAction func loginClicked(_ sender: Any) {
