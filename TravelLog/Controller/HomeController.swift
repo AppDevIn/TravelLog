@@ -59,63 +59,48 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func loadData(){
-        DatabaseManager.shared.getUser(userID: userID!) { (user) in
-            //get the ID of the accounts the user is following
-            Constants.currentUser = user
-            self.user = user
-            print(self.user?.following ?? "")
+        guard let following = Constants.currentUser?.following, following != [] else {return}
+        
+        DatabaseManager.shared.getPosts(users: following) { (post) in
             
-            //get all the account post that the user is following
-            for x in self.user!.following{
-                DatabaseManager.shared.getUser(userID: x) { (User) in
-                    self.following = User
-                    print(self.following?.post ?? "")
-                    
-                    // get the posts
-                    DatabaseManager.shared.getPosts(userID: self.following!.UID) { (Post) in
-                        self.posts = Post
-                        
-                        //adding HomeFeed object base on the amount of post the user have
-                        for i in self.posts{
-                            self.feed.append(HomeFeed(postImages: i.images[0], porfileImg: (self.following?.profileLink)!, username: self.following!.name, title: i.title, description: i.decription, locations: i.locations))
-                        }
-                        print(self.feed)
-                        self.tableview.reloadData()
-                    }
-                }
-            }
+            self.feed.append(post)
+            
+            print(self.feed)
+            self.tableview.reloadData()
         }
+        
+
     }
     
     @objc func refresh(_ sender: AnyObject ){
         
-        DatabaseManager.shared.getUser(userID: userID!) { (user) in
-            //get the ID of the accounts the user is following
-            Constants.currentUser = user
-            self.user = user
-            print(self.user?.following ?? "")
-            
-            //get all the account post that the user is following
-            for x in self.user!.following{
-                DatabaseManager.shared.getUser(userID: x) { (User) in
-                    self.following = User
-                    print(self.following?.post ?? "")
-                    
-                    // get the posts
-                    DatabaseManager.shared.getPosts(userID: self.following!.UID) { (Post) in
-                        self.posts = Post
-                        self.feed = []
-                        //adding HomeFeed object base on the amount of post the user have
-                        for i in self.posts{
-                            self.feed.append(HomeFeed(postImages: i.images[0], porfileImg: (self.following?.profileLink)!, username: self.following!.name, title: i.title, description: i.decription, locations: i.locations))
-                        }
-                        print(self.feed)
-                        self.tableview.reloadData()
-                        self.refreshControl.endRefreshing()
-                    }
-                }
-            }
-        }
+//        DatabaseManager.shared.getUser(userID: userID!) { (user) in
+//            //get the ID of the accounts the user is following
+//            Constants.currentUser = user
+//            self.user = user
+//            print(self.user?.following ?? "")
+//            
+//            //get all the account post that the user is following
+//            for x in self.user!.following{
+//                DatabaseManager.shared.getUser(userID: x) { (User) in
+//                    self.following = User
+//                    print(self.following?.post ?? "")
+//                    
+//                    // get the posts
+//                    DatabaseManager.shared.getPosts(userID: self.following!.UID) { (Post) in
+//                        self.posts = Post
+//                        self.feed = []
+//                        //adding HomeFeed object base on the amount of post the user have
+//                        for i in self.posts{
+//                            self.feed.append(HomeFeed(postImages: i.images[0], porfileImg: (self.following?.profileLink)!, username: self.following!.name, title: i.title, description: i.decription, locations: i.locations))
+//                        }
+//                        print(self.feed)
+//                        self.tableview.reloadData()
+//                        self.refreshControl.endRefreshing()
+//                    }
+//                }
+//            }
+//        }
     }
     
     

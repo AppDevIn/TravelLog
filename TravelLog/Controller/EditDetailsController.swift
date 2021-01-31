@@ -185,6 +185,22 @@ class EditDetailsController : UIViewController {
                 print("Document added with ID: \(id)")
             }
         }
+        
+        self.db.collection("posts").document(postId).setData([
+            "title": p.title,
+            "locations": p.locations,
+            "description": p.decription,
+            "date": Date(),
+            "uid":id,
+            "userRef": db.document("users/\(id)")
+            
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(id)")
+            }
+        }
     }
     
     //To upload the images with the addImage helper
@@ -221,8 +237,8 @@ class EditDetailsController : UIViewController {
         if self.count >= self.lengthOfImage {
             self.loading.stopAnimating()
             let editController = self.navigationController?.viewControllers.first as! Editbackup
-            editController.images = []
             
+            editController.images = []
             self.navigationController?.popViewController(animated: true)
             
             
@@ -278,7 +294,22 @@ class EditDetailsController : UIViewController {
                     "images":FieldValue.arrayUnion([downloadURL.absoluteString])
                     
                 ], merge: true) { err in
-                    self.completed()
+                    
+                    
+                    if let err = err {
+                        self.completed()
+                        print("Error adding document: \(err)")
+                        
+                    } else {
+                        print("Document added with ID: \(id)")
+                    }
+                }
+                
+                self.db.collection("posts").document(self.postId).setData([
+                    "images":FieldValue.arrayUnion([downloadURL.absoluteString])
+                    
+                ], merge: true) { err in
+                    
                     
                     if let err = err {
                         
@@ -286,6 +317,7 @@ class EditDetailsController : UIViewController {
                         
                     } else {
                         print("Document added with ID: \(id)")
+                        self.completed()
                     }
                 }
                 

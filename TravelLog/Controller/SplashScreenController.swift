@@ -64,6 +64,7 @@ class SplashScreenController : UIViewController {
                 guard let user = authResult?.user, error == nil else {
                     print(error!.localizedDescription)
                     self.dismiss(animated: true, completion: nil)
+                    
                     return
                 }
                 
