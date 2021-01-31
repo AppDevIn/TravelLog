@@ -165,8 +165,7 @@ class EditDetailsController : UIViewController {
         if self.count >= self.lengthOfImage {
             self.loading.stopAnimating()
             let editController = self.navigationController?.viewControllers.first as! Editbackup
-            editController.ItemProviders = []
-            editController.imageview.image = UIImage(named: "FooterLogin")
+            editController.images = []
             
             self.navigationController?.popViewController(animated: true)
             
