@@ -52,7 +52,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             Constants.currentUser!.follower = user.follower
             Constants.currentUser!.following = user.following
             
-            let u = Constants.currentUser
+            
         }
         
         

@@ -47,18 +47,7 @@ class ProfileController:UIViewController {
             
         }
         
-        //Set the name
-        self.txt_name.text = user.name
-        
-        //Set the profile
-        if let url = user.profileLink {
-            self.setUrlToImage(url: url, imageView: self.imageView)
-        }
-        
-        
-        //Set the follower and following
-        self.txt_follower.text = "Follower: \(user.follower.count)"
-        self.txt_following.text = "Following: \(user.following.count)"
+
         
         //Set the title
         self.btn_follow.title = user.follower.contains(self.UID!) ? "Unfollow" : "Follow"
@@ -125,6 +114,27 @@ class ProfileController:UIViewController {
             
         }
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("Appear")
+        
+        if let user = Constants.currentUser {
+            self.user = user
+        }
+        
+        //Set the name
+        self.txt_name.text = user.name
+        
+        //Set the profile
+        if let url = user.profileLink {
+            self.setUrlToImage(url: url, imageView: self.imageView)
+        }
+        
+        
+        //Set the follower and following
+        self.txt_follower.text = "Follower: \(user.follower.count)"
+        self.txt_following.text = "Following: \(user.following.count)"
     }
     
     
