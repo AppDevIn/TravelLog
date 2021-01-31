@@ -21,30 +21,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let center = UNUserNotificationCenter.current()
     let locationManager = CLLocationManager()
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
         FirebaseApp.configure()
         
-  
+        center.requestAuthorization(options: [.alert, .sound]) { granted, error in
+        }
         
-//        locationManager.requestAlwaysAuthorization()
-//        
+        locationManager.requestAlwaysAuthorization()
+        
 //        locationManager.startMonitoringVisits()
-//        locationManager.delegate = self
-//
-////        // 1
-////        locationManager.distanceFilter = 35
-////
-////        // 2
-////        locationManager.allowsBackgroundLocationUpdates = true
-////
-////        // 3
-////        locationManager.startUpdatingLocation()
-
+        locationManager.delegate = self
         
         
         return true
     }
+    
+    func checkLocationAuthorization() {
+        switch locationManager.authorizationStatus {
+        
+        //When the app is open
+        case .authorizedWhenInUse:
+            
+            break
+        //The app is not allowed one time pop up
+        case .denied:
+            //Show alert with instruction on how to turn on permission
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            break
+        case .restricted:
+            //Show an alert letting them know what's up
+            break
+        //Even when the app is closed
+        case .authorizedAlways:
+            
+            //     Uncomment following code to enable fake visits
+            locationManager.distanceFilter = 35 // 0
+            locationManager.allowsBackgroundLocationUpdates = true // 1
+            locationManager.startUpdatingLocation()  // 2
+            
+            break
+        default:
+            print("Unkown location status")
+        }
+    }
+    
     
     // MARK: UISceneSession Lifecycle
     
@@ -108,7 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
-
+// MARK: - Location
 extension AppDelegate: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
         // create CLLocation from the coordinates of CLVisit
@@ -116,36 +140,90 @@ extension AppDelegate: CLLocationManagerDelegate {
         
         // Get location description
         AppDelegate.geoCoder.reverseGeocodeLocation(clLocation) { placemarks, _ in
-          if let place = placemarks?.first {
-            let description = "\(place)"
-            self.newVisitReceived(visit, description: description)
-          }
+            if let place = placemarks?.first {
+                let description = "\(place)"
+                self.newVisitReceived(visit, description: description)
+            }
         }
-
+        
+        
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // 1
+        guard let location = locations.first else {
+            return
+        }
+        
+        // 2
+        AppDelegate.geoCoder.reverseGeocodeLocation(location) { placemarks, _ in
+            if let place = placemarks?.first {
+                // 3
+                let description = "Fake visit: \(place)"
+                
+                //4
+                let fakeVisit = FakeVisit(
+                    coordinates: location.coordinate,
+                    arrivalDate: Date(),
+                    departureDate: Date())
+                self.newVisitReceived(fakeVisit, description: description)
+            }
+        }
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        checkLocationAuthorization()
     }
     
     
     
-    
-    
-    
     func newVisitReceived(_ visit: CLVisit, description: String) {
-//        let location = Location(visit: visit, descriptionString: description)
-//
-//        // 1
-//        let content = UNMutableNotificationContent()
-//        content.title = "New Journal entry 📌"
-//        content.body = location.description
-//        content.sound = .default
-//
-//        // 2
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-//        let request = UNNotificationRequest(identifier: location.dateString, content: content, trigger: trigger)
-//
-//        // 3
-//        center.add(request, withCompletionHandler: nil)
+        let location = Location(visit: visit, descriptionString: description)
+        
+        // 1
+        let content = UNMutableNotificationContent()
+        content.title = "New Journal entry 📌"
+        content.body = location.description
+        content.sound = .default
+        
+        // 2
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(identifier: location.dateString, content: content, trigger: trigger)
+        
+        // 3
+        center.add(request, withCompletionHandler: nil)
         
     }
 }
 
 
+final class FakeVisit: CLVisit {
+    private let myCoordinates: CLLocationCoordinate2D
+    private let myArrivalDate: Date
+    private let myDepartureDate: Date
+    
+    override var coordinate: CLLocationCoordinate2D {
+        return myCoordinates
+    }
+    
+    override var arrivalDate: Date {
+        return myArrivalDate
+    }
+    
+    override var departureDate: Date {
+        return myDepartureDate
+    }
+    
+    init(coordinates: CLLocationCoordinate2D, arrivalDate: Date, departureDate: Date) {
+        myCoordinates = coordinates
+        myArrivalDate = arrivalDate
+        myDepartureDate = departureDate
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

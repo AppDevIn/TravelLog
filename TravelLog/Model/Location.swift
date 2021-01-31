@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 class Location {
     let latitude: Double
@@ -13,12 +14,23 @@ class Location {
     let date: Date
     let dateString: String
     let description: String
+    
+    static let dateFormatter: DateFormatter = {
+      let formatter = DateFormatter()
+      formatter.dateStyle = .medium
+      formatter.timeStyle = .medium
+      return formatter
+    }()
 
-    init(latitude lat: Double, longitude lng: Double, date d: Date, dateString ds: String, description des: String) {
-        self.latitude = lat
-        self.longitude = lng
-        self.date = d
-        self.dateString = ds
-        self.description = des
+    init(_ location: CLLocationCoordinate2D, date: Date, descriptionString: String) {
+      latitude =  location.latitude
+      longitude =  location.longitude
+      self.date = date
+      dateString = Location.dateFormatter.string(from: date)
+      description = descriptionString
+    }
+    
+    convenience init(visit: CLVisit, descriptionString: String) {
+      self.init(visit.coordinate, date: visit.arrivalDate, descriptionString: descriptionString)
     }
 }
