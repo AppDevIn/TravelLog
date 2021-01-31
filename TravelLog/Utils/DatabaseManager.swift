@@ -62,14 +62,14 @@ class DatabaseManager{
                     return
                 }
                 
-                guard let profileLink = data["profileLink"] else {
-                    return
+                let user:User = User(id: UID, userName: name as! String)
+                
+                
+                if let profileLink = data["profileLink"] {
+                    //Cover string to URL
+                    user.profileLink = profileLink as! String
+                    
                 }
-                
-                
-                //Cover string to URL
-                let url:URL = NSURL(string: profileLink as! String )! as URL
-                let user:User = User(id: UID, userName: name as! String, dp: url)
                 
                 //If got following
                 if let following = data["following"] {
@@ -112,16 +112,14 @@ class DatabaseManager{
                 return
             }
             
-            guard let profileLink = data["profileLink"] else {
-                return
+            let user:User = User(id: UID, userName: name as! String)
+            
+            
+            if let profileLink = data["profileLink"] {
+                //Cover string to URL
+                user.profileLink = profileLink as! String
+                
             }
-            
-            
-            //Cover string to URL
-            let url:URL = NSURL(string: profileLink as! String )! as URL
-            let user:User = User(id: UID, userName: name as! String, dp: url)
-            
-            
             //If got following
             if let following = data["following"] {
                 user.following = following as! [String]
@@ -131,6 +129,7 @@ class DatabaseManager{
             if let follower = data["follower"] {
                 user.follower = follower as! [String]
             }
+            
             
             completionBlock(user)
             
@@ -152,13 +151,16 @@ class DatabaseManager{
     func getPosts(userID UID:String, success: @escaping ([Post]) -> Void )  {
         var posts:[Post] = []
         
-        let docRef = db.collection("users").document(UID).collection("posts")
+        let docRef = db.collection("users").document(UID).collection("posts").order(by: "date", descending: true)
+        
+        
         
         docRef.getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
+                    
                     let data = document.data()
                     
                     let post = Post(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: data["images"]! as! [String])
@@ -171,7 +173,51 @@ class DatabaseManager{
             }
         }
         
+    }
+    
+    func getPosts(users:[String], success: @escaping (HomeFeed) -> Void )  {
+        var posts:[HomeFeed] = []
         
+        let docRef = db.collection("posts").order(by: "date", descending: true).whereField("uid", in: users)
+        
+        
+        
+        docRef.getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    
+                    let data = document.data()
+                    
+                    (data["userRef"] as! DocumentReference).getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            guard let userData = document.data() else {return}
+                            
+                            var post = HomeFeed(postImages: data["images"]! as! [String],
+                                     username: userData["name"]! as! String,
+                                     title: data["title"]! as! String,
+                                     description: data["description"]! as! String,
+                                     locations: data["locations"]! as! String
+                            )
+                            
+                            if let url = userData["profileLink"]  {
+                                post.profileImg = NSURL(string: url as! String )! as URL
+                            }
+                            
+                            success(post)
+                            
+                            
+                        }
+                    }
+                    
+                }
+                
+                
+                
+                
+            }
+        }
         
     }
     
@@ -195,7 +241,7 @@ class DatabaseManager{
                         //Cover string to URL
                         let url:URL = NSURL(string: profileLink as! String )! as URL
                         
-                        user = User(id: id, userName: name as! String, dp: url)
+                        user = User(id: id, userName: name as! String, dp: profileLink as! String)
                     } else if let name = data["name"]{
                         user = User(id: id, userName: name as! String)
                     } else{
@@ -256,3 +302,4 @@ class DatabaseManager{
     }
     
 }
+

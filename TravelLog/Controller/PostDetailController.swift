@@ -21,7 +21,7 @@ class PostDetailController: UIViewController {
         super.viewDidLoad()
         
         if (feed != nil) {
-            self.postImg.loadString(urlString: feed!.postImages)
+            self.postImg.loadString(urlString: feed!.postImages[0])
             self.postTitle.text = feed?.title
             self.postLocation.text = feed?.locations
             self.postBody.text = feed?.description

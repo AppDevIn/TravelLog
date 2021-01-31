@@ -102,6 +102,7 @@ class EditDetailsController : UIViewController {
         if items != [] {
             dropDown.dataSource = self
             dropDown.delegate = self
+            location = items[0].name! // Default vale
         } else {
             txtx_location.isHidden = false
             dropDown.isHidden = true
@@ -139,9 +140,11 @@ class EditDetailsController : UIViewController {
             return
         }
         
-        guard !txtx_location.isHidden, let loc = txtx_location.text, loc != "" else {
-            print("No location")
-            return
+        if !txtx_location.isHidden {
+            guard let loc = txtx_location.text, loc != "" else {
+               print("No location")
+               return
+           }
         }
         
         //Create the post object
@@ -172,7 +175,24 @@ class EditDetailsController : UIViewController {
         self.db.collection("users").document(id).collection("posts").document(postId).setData([
             "title": p.title,
             "locations": p.locations,
-            "description": p.decription
+            "description": p.decription,
+            "date": Date()
+            
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(id)")
+            }
+        }
+        
+        self.db.collection("posts").document(postId).setData([
+            "title": p.title,
+            "locations": p.locations,
+            "description": p.decription,
+            "date": Date(),
+            "uid":id,
+            "userRef": db.document("users/\(id)")
             
         ]) { err in
             if let err = err {
@@ -217,8 +237,8 @@ class EditDetailsController : UIViewController {
         if self.count >= self.lengthOfImage {
             self.loading.stopAnimating()
             let editController = self.navigationController?.viewControllers.first as! Editbackup
-            editController.images = []
             
+            editController.images = []
             self.navigationController?.popViewController(animated: true)
             
             
@@ -274,7 +294,22 @@ class EditDetailsController : UIViewController {
                     "images":FieldValue.arrayUnion([downloadURL.absoluteString])
                     
                 ], merge: true) { err in
-                    self.completed()
+                    
+                    
+                    if let err = err {
+                        self.completed()
+                        print("Error adding document: \(err)")
+                        
+                    } else {
+                        print("Document added with ID: \(id)")
+                    }
+                }
+                
+                self.db.collection("posts").document(self.postId).setData([
+                    "images":FieldValue.arrayUnion([downloadURL.absoluteString])
+                    
+                ], merge: true) { err in
+                    
                     
                     if let err = err {
                         
@@ -282,6 +317,7 @@ class EditDetailsController : UIViewController {
                         
                     } else {
                         print("Document added with ID: \(id)")
+                        self.completed()
                     }
                 }
                 

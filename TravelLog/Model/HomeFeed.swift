@@ -11,8 +11,8 @@ import UIKit
 
 struct HomeFeed {
     
-    var postImages: String
-    var profileImg: URL
+    var postImages: [String]
+    var profileImg: URL?
     var username: String
     var title:  String
     var description: String
@@ -20,7 +20,7 @@ struct HomeFeed {
     
     
     init() {
-        postImages = ""
+        postImages = []
         username = ""
         profileImg = NSURL(string: "")! as URL
         title = ""
@@ -29,9 +29,9 @@ struct HomeFeed {
         
     }
     
-    init(postImages post:String, porfileImg profile: URL, username name:String, title t: String, description desc: String, locations location: String) {
+    init(postImages post:[String], username name:String, title t: String, description desc: String, locations location: String) {
         self.postImages = post
-        self.profileImg = profile
+        
         self.username = name
         self.title = t
         self.description = desc

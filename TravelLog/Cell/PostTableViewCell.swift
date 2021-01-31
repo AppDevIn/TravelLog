@@ -38,10 +38,12 @@ class PostTableViewCell: UITableViewCell {
     //configure the cell for imformation to display
     func configure(with model: HomeFeed){
         
-        self.profileImageView.loadURL(url: model.profileImg)
+        if let url = model.profileImg {
+            self.profileImageView.loadURL(url: url)
+        }
         self.titleLable.text = model.title
         self.usernameLable.text = model.username
-        self.postImageView.sd_setImage(with: URL(string: model.postImages), placeholderImage: UIImage(named: "FooterLogin"))
+        self.postImageView.sd_setImage(with: URL(string: model.postImages[0]), placeholderImage: UIImage(named: "FooterLogin"))
     }
     
 }
