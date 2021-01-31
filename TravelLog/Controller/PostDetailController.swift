@@ -25,13 +25,15 @@ class PostDetailController: UIViewController {
         super.viewDidLoad()
         
         if (feed != nil) {
-            self.postImg.loadString(urlString: feed!.postImages[0])
+            let url:URL = NSURL(string: feed?.postImages[0] as! String )! as URL
+            self.postImg.sd_setImage(with: url)
             self.postTitle.text = feed?.title
             self.postLocation.text = feed?.locations
             self.postBody.text = feed?.description
         }
         else{
-            self.postImg.loadString(urlString: post.images[0])
+            let url:URL = NSURL(string: post.images[0] as! String )! as URL
+            self.postImg.sd_setImage(with: url)
             self.postTitle.text = post.title
             self.postLocation.text = post.locations
             self.postBody.text = post.decription
@@ -92,7 +94,7 @@ class PostDetailController: UIViewController {
         
         //Cover string to URL
         let url:URL = NSURL(string: feed?.postImages[index] as! String )! as URL
-        self.postImg.sd_setImage(with: url, placeholderImage: UIImage(named: "FooterLogin"))
+        self.postImg.sd_setImage(with: url)
         
     }
     
