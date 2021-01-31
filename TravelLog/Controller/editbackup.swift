@@ -33,7 +33,7 @@ class Editbackup : UIViewController {
         collectionView.dataSource = self
         collectionView.register(MyCollectionViewCell.nib(), forCellWithReuseIdentifier: MyCollectionViewCell.identifier)
         view.addSubview(collectionView)
-        collectionView.frame = CGRect(x: 0, y: 0, width: 398, height: 720)
+        collectionView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 720)
         collectionView.backgroundColor = UIColor(named: "White")
     }
         
@@ -113,11 +113,6 @@ class Editbackup : UIViewController {
     
     
 }
-
-
-
-
-
 
 
 extension Editbackup: UICollectionViewDelegate{
