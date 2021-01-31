@@ -54,7 +54,8 @@ class ProfileController:UIViewController {
 
         
         //Set the title
-        self.btn_follow.title = user.follower.contains(self.UID!) ? "Unfollow" : "Follow"
+        
+        self.btn_follow.title = (Constants.currentUser?.following.contains(self.UID!))! ? "Unfollow" : "Follow"
         
         
         //Set up the refresh for the collection view
