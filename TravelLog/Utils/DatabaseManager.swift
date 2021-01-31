@@ -44,7 +44,7 @@ class DatabaseManager{
         var arr:[String] = []
         
         for n in name{
-            temp += String(n)
+            temp += String(n).lowercased()
             arr.append(temp)
         }
         
@@ -227,7 +227,7 @@ class DatabaseManager{
         
         var users:[User] = []
         
-        docRef.whereField("caseSearch", arrayContains: prefix).getDocuments { (querySnapshot, err) in
+        docRef.whereField("caseSearch", arrayContains: prefix.lowercased()).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
