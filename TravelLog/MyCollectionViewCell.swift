@@ -12,6 +12,7 @@ class MyCollectionViewCell: UICollectionViewCell {
     static let identifier =  "MyCollectionViewCell"
 
     @IBOutlet weak var imageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,5 +25,6 @@ class MyCollectionViewCell: UICollectionViewCell {
     static func nib() -> UINib {
         return UINib(nibName: "MyCollectionViewCell", bundle: nil)
     }
-
+    
+    
 }

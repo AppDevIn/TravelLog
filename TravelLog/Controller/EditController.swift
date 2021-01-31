@@ -39,8 +39,6 @@ class EditController : UIViewController {
         swipeLeft.direction = .left
         self.imageview.addGestureRecognizer(swipeLeft)
         
-        
-        
     }
     
     /**
@@ -122,17 +120,17 @@ class EditController : UIViewController {
     }
 
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //Check if that is the seque using an identifier
-        
-        //Move to EditDeatailController
-        if segue.identifier == "addDeatils" {
-            let destination = segue.destination as! EditDetailsController
-            destination.ItemProviders = self.ItemProviders
-
-        }
-    }
-    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        //Check if that is the seque using an identifier
+//        
+//        //Move to EditDeatailController
+//        if segue.identifier == "addDeatils" {
+//            let destination = segue.destination as! EditDetailsController
+//            destination.ItemProviders = self.ItemProviders
+//
+//        }
+//    }
+//    
     
 }
 

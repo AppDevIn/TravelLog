@@ -17,8 +17,8 @@ class EditDetailsController : UIViewController {
     
     
     
-    var ItemProviders: [NSItemProvider] = []
-
+    var ItemProviders: [UIImage] = []
+    
     
     var db: Firestore!
     
@@ -132,21 +132,13 @@ class EditDetailsController : UIViewController {
     }
     
     //To upload the images with the addImage helper
-    func uploadPostImages(images img:[NSItemProvider]){
+    func uploadPostImages(images img:[UIImage]){
         
-        for i in 0..<img.count {
-            if ItemProviders[i].canLoadObject(ofClass: UIImage.self){
-                ItemProviders[i].loadObject(ofClass: UIImage.self) { (image, error) in
-                    
-                    //Convert to UIImage
-                    guard let image = image as? UIImage else {return}
-                    
-                    //Add the image to firestoage
-                    self.addImages(image, self.postId)
-                    
-                }
-                
-            }
+        for image in img {
+            
+            //Add the image to firestoage
+            self.addImages(image, self.postId)            
+            
         }
     }
     
@@ -172,9 +164,8 @@ class EditDetailsController : UIViewController {
         
         if self.count >= self.lengthOfImage {
             self.loading.stopAnimating()
-            let editController = self.navigationController?.viewControllers.first as! EditController
-            editController.ItemProviders = []
-            editController.imageview.image = UIImage(named: "FooterLogin")
+            let editController = self.navigationController?.viewControllers.first as! Editbackup
+            editController.images = []
             
             self.navigationController?.popViewController(animated: true)
             
