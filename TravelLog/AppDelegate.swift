@@ -164,7 +164,14 @@ extension AppDelegate: CLLocationManagerDelegate {
         AppDelegate.geoCoder.reverseGeocodeLocation(location) { placemarks, _ in
             if let place = placemarks?.first {
                 // 3
-                let description = "Fake visit: \(place)"
+                var description:String
+                if let name = place.name {
+                    description = "Fake visit: \(name)"
+                } else {
+                    description = "Fake visit: \(place.description)"
+                }
+                
+                
                 
                 
                 
@@ -173,6 +180,7 @@ extension AppDelegate: CLLocationManagerDelegate {
                     coordinates: location.coordinate,
                     arrivalDate: Date(),
                     departureDate: Date())
+                
                 self.newVisitReceived(fakeVisit, description: description)
             }
         }
