@@ -31,6 +31,8 @@ class MapController : UIViewController {
         mapView.delegate = self
         
         
+        
+        
         //Button configure
         
         view.addSubview(centerMapButton)

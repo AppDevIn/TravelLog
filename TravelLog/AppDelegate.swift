@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         locationManager.startMonitoringVisits()
         locationManager.delegate = self
         
+        checkLocationAuthorization()
         
         return true
     }
@@ -50,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //Show alert with instruction on how to turn on permission
             break
         case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
+            self.locationManager.requestAlwaysAuthorization()
             break
         case .restricted:
             //Show an alert letting them know what's up
