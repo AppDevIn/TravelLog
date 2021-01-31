@@ -154,8 +154,7 @@ extension Editbackup: UICollectionViewDataSource{
 extension Editbackup: UICollectionViewDelegateFlowLayout{
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: (view.frame.size.width/3)-3, height: (view.frame.size.width/3)-3)
-        return CGSize(width: 120, height: 120)
+        return CGSize(width: (view.frame.size.width/3)-3, height: (view.frame.size.width/3)-3)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

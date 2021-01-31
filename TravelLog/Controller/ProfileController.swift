@@ -13,7 +13,7 @@ import SDWebImage
 
 class ProfileController:UIViewController {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet var collectionView: UICollectionView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var txt_name: UILabel!
     
@@ -71,14 +71,18 @@ class ProfileController:UIViewController {
         imageView.layer.cornerRadius = imageView.frame.height/2
         imageView.clipsToBounds = true
         
+        let layout = UICollectionViewFlowLayout()
+//        layout.itemSize = CGSize(width: 120, height: 120)
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         //Register the custom cell
         collectionView.register(MyCollectionViewCell.nib(), forCellWithReuseIdentifier: MyCollectionViewCell.identifier)
         
         
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 120, height: 120)
-        collectionView.collectionViewLayout = layout
+        view.addSubview(collectionView)
+        collectionView.frame = CGRect(x: 0, y: 385, width: 398, height: 500)
+        collectionView.backgroundColor = UIColor(named: "White")
+
         
         
         //Set up the delgate for the collectio view
@@ -240,15 +244,9 @@ extension ProfileController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        
-        
         print("Image Collection Tapped")
         collectionViewSelectedCell = indexPath.row
         self.performSegue(withIdentifier: "detail", sender: self)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 15, bottom: 0, right: 15)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -278,7 +276,19 @@ extension ProfileController:UICollectionViewDataSource{
 //Can specify the padding and width
 extension ProfileController:UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 120, height: 120)
+        return CGSize(width: (view.frame.size.width/3)-3, height: (view.frame.size.width/3)-3)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 2)
     }
 }
 
