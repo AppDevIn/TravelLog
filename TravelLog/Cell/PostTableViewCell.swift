@@ -51,12 +51,12 @@ class PostTableViewCell: UITableViewCell {
         postImageView.isUserInteractionEnabled = true
         feed = model
         
-        if let url = model.profileImg {
-            self.profileImageView.loadURL(url: url)
+        if let url = model.user?.profileLink {
+            self.profileImageView.loadURL(url: URL(string: url)!)
         }
         self.titleLable.text = model.title
-        self.usernameLable.text = model.username
-        self.postImageView.sd_setImage(with: URL(string: model.postImages[0]), placeholderImage: UIImage(named: "FooterLogin"))
+        self.usernameLable.text = model.user?.name
+        self.postImageView.sd_setImage(with: URL(string: model.images[0]), placeholderImage: UIImage(named: "FooterLogin"))
         
         //image tab gesture recongizer
         profileImageView.isUserInteractionEnabled = true
@@ -81,7 +81,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     @objc func imageTapped(sender: AnyObject) {
-        let data = feed?.UID
+        let data = feed?.user?.UID
         self.delegate.callSegueFromCell(myData: data!)
         print("image tapped")
     }
@@ -90,7 +90,7 @@ class PostTableViewCell: UITableViewCell {
         
         print("Swipped")
 
-        if (feed?.postImages.count)! <= 0 {
+        if (feed?.images.count)! <= 0 {
             print("No images")
             return
         }
@@ -104,7 +104,7 @@ class PostTableViewCell: UITableViewCell {
             case UISwipeGestureRecognizer.Direction.left:
 
                 // Add the current Image interger to go front
-                if currentImage == (feed?.postImages.count)! - 1 { currentImage = 0 }
+                if currentImage == (feed?.images.count)! - 1 { currentImage = 0 }
                 else { currentImage += 1 }
 
                 displayImages(i: currentImage)
@@ -113,7 +113,7 @@ class PostTableViewCell: UITableViewCell {
             case UISwipeGestureRecognizer.Direction.right:
 
                 // Minus the current Image interger to go back
-                if currentImage == 0 { currentImage = (feed?.postImages.count)! - 1 }
+                if currentImage == 0 { currentImage = (feed?.images.count)! - 1 }
                 else { currentImage -= 1 }
 
                 displayImages(i: currentImage)
@@ -127,7 +127,7 @@ class PostTableViewCell: UITableViewCell {
     func displayImages(i index:Int){
         
         //Cover string to URL
-        let url:URL = NSURL(string: feed?.postImages[index] as! String )! as URL
+        let url:URL = NSURL(string: feed?.images[index] as! String )! as URL
         self.postImageView.sd_setImage(with: url)
         
     }

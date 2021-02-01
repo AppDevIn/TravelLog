@@ -178,10 +178,44 @@ class DatabaseManager{
         
     }
     
+//    func getPosts(users:[String], success: @escaping ([HomeFeed]) -> Void )  {
+//        var posts:[HomeFeed] = []
+//        
+//        let docRef = db.collection("posts").whereField("uid", in: users).order(by: "date", descending: true)
+//        
+//        
+//        
+//        
+//        docRef.getDocuments { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in querySnapshot!.documents {
+//                    
+//                    let data = document.data()
+//                    
+//                    if let img = data["images"] {
+//                        let post = HomeFeed(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: img as! [String])
+//                            posts.append(post)
+//                    }
+//                    
+//                    
+//                }
+//                
+//                
+//                
+//                
+//            }
+//        }
+//        
+//    }
+//    
+    
     func getPosts(users:[String], success: @escaping (HomeFeed) -> Void )  {
         var posts:[HomeFeed] = []
         
         let docRef = db.collection("posts").whereField("uid", in: users).order(by: "date", descending: true)
+        
         
         
         
@@ -197,30 +231,48 @@ class DatabaseManager{
                         if let document = document, document.exists {
                             guard let userData = document.data() else {return}
                             
-                            var post = HomeFeed(
-                                UID: data["uid"] as! String,
-                                postImages: data["images"]! as! [String],
-                                username: userData["name"]! as! String,
-                                title: data["title"]! as! String,
-                                description: data["description"]! as! String,
-                                locations: data["locations"]! as! String
-                            )
                             
-                            if let url = userData["profileLink"]  {
-                                post.profileImg = NSURL(string: url as! String )! as URL
-                            }
-                            
-                            //Check if the lat and lng exist
-                            if let coor = data["coordinate"] {
+                            if let img = data["images"] {
+                                let post = HomeFeed(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: img as! [String])
+                                posts.append(post)
                                 
-                                let d = coor as! [Double]
-
-                                post.setLocation(lat: d[0] as! Double, lng: d[1] as! Double)
+                                
+                                guard let name = userData["name"] else {
+                                    return
+                                }
+                                
+                                let user:User = User(id: data["uid"] as! String, userName: name as! String)
+                                
+                                
+                                if let profileLink = userData["profileLink"] {
+                                    //Cover string to URL
+                                    user.profileLink = (profileLink as! String)
+                                    
+                                }
+                                
+                                //If got following
+                                if let following = userData["following"] {
+                                    user.following = following as! [String]
+                                }
+                                
+                                //If got followers
+                                if let follower = userData["follower"] {
+                                    user.follower = follower as! [String]
+                                }
+                                
+                                
+                                //Check if the lat and lng exist
+                                if let coor = userData["coordinate"] {
+                                    
+                                    let d = coor as! [Double]
+                                    
+                                    post.setLocation(lat: d[0] , lng: d[1] )
+                                }
+                                
+                                
+                                
+                                success(post)
                             }
-                            
-                            
-                            success(post)
-                            
                             
                         }
                     }

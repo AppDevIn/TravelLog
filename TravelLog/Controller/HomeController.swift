@@ -132,7 +132,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if segue.identifier == "postAuthor"{
             let destvc = segue.destination as! ProfileController
             destvc.UID = sender as? String
-            print(feed[9].UID)
+            print(feed[9].user?.UID)
             print("segue activited")
         }
     }
