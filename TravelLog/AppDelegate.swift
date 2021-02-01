@@ -22,7 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let locationManager = CLLocationManager()
     
     
+    
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        
         
         FirebaseApp.configure()
         
@@ -35,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         locationManager.delegate = self
         
         checkLocationAuthorization()
+        
+        
         
         return true
     }
@@ -145,6 +152,21 @@ extension AppDelegate: CLLocationManagerDelegate {
             if let place = placemarks?.first {
                 let description = "\(place)"
                 self.newVisitReceived(visit, description: description)
+                
+                //Save into the Plist
+                let userDefault = UserDefaults.init(suiteName: "group.sg.mad2.TravelLog")
+                userDefault!.setValue(description, forKey: "location")
+                
+                
+                let plcae = CDPlace(context: self.persistentContainer.viewContext)
+                plcae.name = description
+                plcae.departure = visit.departureDate
+                
+                do {
+                    try self.persistentContainer.viewContext.save()
+                } catch let error as NSError {
+                    print("Could not save. \(error), \(error.userInfo)")
+                }
             }
         }
         
@@ -197,15 +219,7 @@ extension AppDelegate: CLLocationManagerDelegate {
         let location = Location(visit: visit, descriptionString: description)
         
         
-        let plcae = CDPlace(context: self.persistentContainer.viewContext)
-        plcae.name = location.description
-        plcae.departure = visit.departureDate
-        
-        do {
-            try self.persistentContainer.viewContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
+  
         
         
         // 1
