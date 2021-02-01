@@ -27,11 +27,11 @@ class PostDetailController: UIViewController {
         super.viewDidLoad()
         
         if (feed != nil) {
-            let url:URL = NSURL(string: feed?.postImages[0] as! String )! as URL
+            let url:URL = NSURL(string: feed?.images[0] as! String )! as URL
             self.postImg.sd_setImage(with: url)
             self.postTitle.text = feed?.title
             self.postLocation.text = feed?.locations
-            self.postBody.text = feed?.description
+            self.postBody.text = feed?.decription
         }
         else{
             let url:URL = NSURL(string: post.images[0] as! String )! as URL
@@ -72,7 +72,7 @@ class PostDetailController: UIViewController {
         
         print("Swipped")
 
-        if (feed?.postImages.count)! <= 0 {
+        if (feed?.images.count)! <= 0 {
             print("No images")
             return
         }
@@ -86,7 +86,7 @@ class PostDetailController: UIViewController {
             case UISwipeGestureRecognizer.Direction.left:
 
                 // Add the current Image interger to go front
-                if currentImage == (feed?.postImages.count)! - 1 { currentImage = 0 }
+                if currentImage == (feed?.images.count)! - 1 { currentImage = 0 }
                 else { currentImage += 1 }
 
                 displayImages(i: currentImage)
@@ -95,7 +95,7 @@ class PostDetailController: UIViewController {
             case UISwipeGestureRecognizer.Direction.right:
 
                 // Minus the current Image interger to go back
-                if currentImage == 0 { currentImage = (feed?.postImages.count)! - 1 }
+                if currentImage == 0 { currentImage = (feed?.images.count)! - 1 }
                 else { currentImage -= 1 }
 
                 displayImages(i: currentImage)
@@ -130,7 +130,7 @@ class PostDetailController: UIViewController {
     func displayImages(i index:Int){
         
         //Cover string to URL
-        let url:URL = NSURL(string: feed?.postImages[index] as! String )! as URL
+        let url:URL = NSURL(string: feed?.images[index] as! String )! as URL
         self.postImg.sd_setImage(with: url)
         
     }

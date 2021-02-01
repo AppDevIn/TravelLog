@@ -241,7 +241,8 @@ extension ProfileController:UICollectionViewDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! PostDetailController
         let post: Post = posts[collectionViewSelectedCell]
-        destVC.feed = HomeFeed(UID: user.UID, postImages: post.images , username: user.name, title: post.title, description: post.decription, locations: post.locations)
+        destVC.feed = HomeFeed(title: post.title, decription: post.decription, locations: post.locations, images: post.images)
+        destVC.feed?.user = user
     }
 }
 

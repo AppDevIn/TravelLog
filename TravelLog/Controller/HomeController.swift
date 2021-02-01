@@ -63,11 +63,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func loadData(){
         guard let following = Constants.currentUser?.following, following != [] else {return}
         
-        DatabaseManager.shared.getPosts(users: following) { (post) in
-            
-            self.feed.append(post)
-            
-            print(self.feed)
+        DatabaseManager.shared.getPosts(users: following) { (posts) in
+            self.feed = posts
             self.tableview.reloadData()
         }
         
@@ -79,11 +76,9 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.feed = []
         guard let following = Constants.currentUser?.following, following != [] else {return}
         
-        DatabaseManager.shared.getPosts(users: following) { (post) in
-            
-            self.feed.append(post)
-            
-            print(self.feed)
+        
+        DatabaseManager.shared.getPosts(users: following) { (posts) in
+            self.feed = posts
             self.tableview.reloadData()
             self.refreshControl.endRefreshing()
         }
@@ -132,7 +127,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if segue.identifier == "postAuthor"{
             let destvc = segue.destination as! ProfileController
             destvc.UID = sender as? String
-            print(feed[9].UID)
+            print(feed[9].user?.UID)
             print("segue activited")
         }
     }
