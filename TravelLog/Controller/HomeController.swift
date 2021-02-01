@@ -74,6 +74,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @objc func refresh(_ sender: AnyObject ){
         
+        self.feed = []
         guard let following = Constants.currentUser?.following, following != [] else {return}
         
         DatabaseManager.shared.getPosts(users: following) { (post) in
