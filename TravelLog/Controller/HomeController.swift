@@ -64,8 +64,10 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let following = Constants.currentUser?.following, following != [] else {return}
         
         DatabaseManager.shared.getPosts(users: following) { (posts) in
-            self.feed = posts
-            self.tableview.reloadData()
+            DispatchQueue.main.async {
+                self.feed = posts
+                self.tableview.reloadData()
+            }
         }
         
 
@@ -78,9 +80,11 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         
         DatabaseManager.shared.getPosts(users: following) { (posts) in
-            self.feed = posts
-            self.tableview.reloadData()
-            self.refreshControl.endRefreshing()
+            DispatchQueue.main.async {
+                self.feed = posts
+                self.tableview.reloadData()
+                self.refreshControl.endRefreshing()
+            }
         }
     }
     
