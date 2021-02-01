@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-struct HomeFeed {
+class HomeFeed {
     
     var postImages: [String]
     var profileImg: URL?
@@ -18,7 +18,8 @@ struct HomeFeed {
     var title:  String
     var description: String
     var locations: String
-    
+    var lat: Double?
+    var lng: Double?
     
     init() {
         postImages = []
@@ -40,6 +41,11 @@ struct HomeFeed {
         self.locations = location
     }
    
+    
+    func setLocation(lat:Double, lng:Double) {
+        self.lat = lat
+        self.lng = lng
+    }
     
 }
 

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SDWebImage
+import MapKit
 
 class PostDetailController: UIViewController {
     
@@ -15,6 +16,7 @@ class PostDetailController: UIViewController {
     @IBOutlet weak var postTitle: UILabel!
     @IBOutlet weak var postLocation: UILabel!
     @IBOutlet weak var postBody: UITextView!
+    @IBOutlet weak var btn_map: UIButton!
     var feed:HomeFeed?
     var post: Post!
     
@@ -39,7 +41,11 @@ class PostDetailController: UIViewController {
             self.postBody.text = post.decription
         }
         
-        self.postImg.isUserInteractionEnabled = true
+        //Hide the button when is empty
+        btn_map.isHidden = (feed?.lat == nil)
+        
+        //Set the label and img clickable
+        self.postImg.isUserInteractionEnabled = true //img
         
         //Setting up the gestue for right
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
@@ -50,6 +56,16 @@ class PostDetailController: UIViewController {
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeLeft.direction = .left
         self.postImg.addGestureRecognizer(swipeLeft)
+
+        
+        
+    }
+    
+    @IBAction func showMap(_ sender: Any) {
+        if let post = feed {
+            self.openMapForPlace(lat: post.lat!, lng: post.lng!, name: self.feed!.locations)
+        }
+        
     }
     
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer?) -> Void {
@@ -88,6 +104,27 @@ class PostDetailController: UIViewController {
             }
         }
     }
+    
+    func openMapForPlace(lat:Double, lng:Double, name:String) {
+
+        
+        let latitude:CLLocationDegrees =  lat
+        let longitude:CLLocationDegrees =  lng
+
+        let regionDistance:CLLocationDistance = 10000
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: 10000, longitudinalMeters: 10000)
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+        ]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = name
+        mapItem.openInMaps(launchOptions: options)
+
+    }
+    
     
     
     func displayImages(i index:Int){
