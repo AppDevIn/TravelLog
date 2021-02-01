@@ -158,6 +158,9 @@ extension AppDelegate: CLLocationManagerDelegate {
                 let plcae = CDPlace(context: self.persistentContainer.viewContext)
                 plcae.name = description
                 plcae.departure = visit.departureDate
+                plcae.lat = visit.coordinate.latitude
+                plcae.lng = visit.coordinate.longitude
+                 
                 
                 do {
                     try self.persistentContainer.viewContext.save()
@@ -189,9 +192,6 @@ extension AppDelegate: CLLocationManagerDelegate {
                 } else {
                     description = "Fake visit: \(place.description)"
                 }
-                
-                
-                
                 
                 
                 //4

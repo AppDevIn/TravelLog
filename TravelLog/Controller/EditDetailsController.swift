@@ -161,7 +161,6 @@ class EditDetailsController : UIViewController {
         
         guard let id = user?.uid else {return}
         
-        
         self.db.collection("users").document(id).collection("posts").document(postId).setData([
             "title": p.title,
             "locations": p.locations,
