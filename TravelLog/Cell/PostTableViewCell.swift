@@ -8,6 +8,10 @@
 import UIKit
 import SDWebImage
 
+protocol MyCustomCellDelegator {
+    func callSegueFromCell(myData dataobject: Any)
+}
+
 class PostTableViewCell: UITableViewCell {
 
     @IBOutlet var profileImageView: UIImageView!
@@ -16,6 +20,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet var titleLable: UILabel!
     
     var feed: HomeFeed?
+    var delegate:MyCustomCellDelegator!
     
     // set cell identifier
     static let identifier = "PostTableViewCell"
@@ -53,6 +58,13 @@ class PostTableViewCell: UITableViewCell {
         self.usernameLable.text = model.username
         self.postImageView.sd_setImage(with: URL(string: model.postImages[0]), placeholderImage: UIImage(named: "FooterLogin"))
         
+        //image tab gesture recongizer
+        profileImageView.isUserInteractionEnabled = true
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        //Add the recognizer to view.
+        profileImageView.addGestureRecognizer(tapRecognizer)
+
+        
         //Setting up the gestue for right
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeRight.direction = .right
@@ -65,8 +77,15 @@ class PostTableViewCell: UITableViewCell {
         
         
         
+        
     }
     
+    @objc func imageTapped(sender: AnyObject) {
+        let data = feed?.UID
+        self.delegate.callSegueFromCell(myData: data!)
+        print("image tapped")
+    }
+
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer?) -> Void {
         
         print("Swipped")

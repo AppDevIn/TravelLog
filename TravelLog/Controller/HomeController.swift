@@ -13,7 +13,8 @@ import FirebaseAuth
 
 
 
-class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSource, MyCustomCellDelegator{
+    
     
     
     @IBOutlet var tableview: UITableView!
@@ -23,6 +24,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let db = Firestore.firestore()
     let userID = Constants.currentUser?.UID
     
+        
     var user: User?
     var following: User?
     var posts:[Post] = []
@@ -87,6 +89,11 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    func callSegueFromCell(myData dataobject: Any) {
+        self.performSegue(withIdentifier: "postAuthor", sender: dataobject)
+        print("self called")
+    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -100,6 +107,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableview.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
         cell.configure(with: feed[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
@@ -111,13 +119,25 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //perform segue when cell is selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "detail", sender: self)
+        
     }
+    
     
     //pass current selected HomeFeed object to next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destVC = segue.destination as! PostDetailController
-        destVC.feed = feed[tableview.indexPathForSelectedRow!.row]
+        if segue.identifier == "detail"{
+            let destVC = segue.destination as! PostDetailController
+            destVC.feed = feed[tableview.indexPathForSelectedRow!.row]
+        }
+        if segue.identifier == "postAuthor"{
+            let destvc = segue.destination as! ProfileController
+            destvc.UID = sender as? String
+            print(feed[9].UID)
+            print("segue activited")
+        }
     }
+    
+
     
 }
 
