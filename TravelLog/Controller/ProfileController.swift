@@ -55,7 +55,7 @@ class ProfileController:UIViewController {
             
         }
         
-
+        
         
         
         
@@ -89,13 +89,16 @@ class ProfileController:UIViewController {
         
         
         //Get the posts
-        DatabaseManager.shared.getPosts(userID: UID!) { (posts) in
-            self.posts = posts
-            self.collectionView.reloadData()
+        DatabaseManager.shared.getPosts(userID: UID!) { (post) in
+            DispatchQueue.main.async {
+                self.posts.append(post)
+                self.collectionView.reloadData()
+            }
+
         }
 
-
-
+        
+        
         
         
         if isCurrentUser {
@@ -113,7 +116,7 @@ class ProfileController:UIViewController {
             }
             
             
-
+            
         }
         
     }
@@ -123,6 +126,10 @@ class ProfileController:UIViewController {
         //Set the name
         self.txt_name.text = user.name
         
+        //Set the follower and following
+        self.txt_follower.text = "Follower: \(user.follower.count)"
+        self.txt_following.text = "Following: \(user.following.count)"
+        
         //Set the profile
         if let url = user.profileLink {
             //Cover string to URL
@@ -131,9 +138,7 @@ class ProfileController:UIViewController {
         }
         
         
-        //Set the follower and following
-        self.txt_follower.text = "Follower: \(user.follower.count)"
-        self.txt_following.text = "Following: \(user.following.count)"
+        
     }
     
     
@@ -155,18 +160,23 @@ class ProfileController:UIViewController {
     
     //function to set the url into the image
     func setUrlToImage(url:URL, imageView:UIImageView){
-        if let data = try? Data(contentsOf: url) {
-            if let image = UIImage(data: data) {
-                imageView.image = image
-            }
-        }
+        imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "profile"))
     }
     
     @objc func refresh(_ sender: AnyObject) {
         
         //Get the posts
-        DatabaseManager.shared.getPosts(userID: UID!) { (posts) in
-            self.posts = posts
+        DatabaseManager.shared.getPosts(userID: UID!) { (post) in
+            self.posts = []
+            self.posts.append(post)
+            self.collectionView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
+        
+        
+        //Get the posts
+        DatabaseManager.shared.getPosts(userID: UID!) { (post) in
+            self.posts.append(post)
             self.collectionView.reloadData()
             self.refreshControl.endRefreshing()
         }
@@ -195,7 +205,7 @@ class ProfileController:UIViewController {
             DatabaseManager.shared.removeFollow(UID: id!, followerID: UID!)
         }
         
-
+        
         
     }
     
@@ -251,7 +261,7 @@ extension ProfileController:UICollectionViewDelegate{
         return UIEdgeInsets(top: 10, left: 15, bottom: 0, right: 15)
     }
     
-
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! PostDetailController

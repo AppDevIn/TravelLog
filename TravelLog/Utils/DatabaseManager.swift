@@ -148,8 +148,8 @@ class DatabaseManager{
     }
     
     
-    func getPosts(userID UID:String, success: @escaping ([Post]) -> Void )  {
-        var posts:[Post] = []
+    func getPosts(userID UID:String, success: @escaping (Post) -> Void )  {
+        
         
         let docRef = db.collection("users").document(UID).collection("posts").order(by: "date", descending: true)
         
@@ -164,10 +164,10 @@ class DatabaseManager{
                     let data = document.data()
                     
                     let post = Post(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: data["images"]! as! [String])
-                    posts.append(post)
+                    success(post)
                 }
                 
-                success(posts)
+                
                 
                 
             }
