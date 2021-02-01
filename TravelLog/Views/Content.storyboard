@@ -96,6 +96,7 @@
                     <connections>
                         <outlet property="tableview" destination="ZbF-U9-QO1" id="mGH-Xe-Urh"/>
                         <segue destination="fJF-MS-BMO" kind="presentation" identifier="detail" id="HzI-gE-mhb"/>
+                        <segue destination="uOx-Mj-DKm" kind="show" identifier="postAuthor" id="rtE-b4-L37"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zYo-wp-35d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -590,8 +591,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="FxK-XS-OWe"/>
-        <segue reference="olr-KP-1dk"/>
+        <segue reference="rtE-b4-L37"/>
+        <segue reference="HzI-gE-mhb"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="FooterLogin" width="374" height="374"/>

@@ -34,7 +34,14 @@ class ProfileController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let _ = UID  {} else {
+        if let _ = UID  {
+            self.btn_follow.title = (Constants.currentUser?.following.contains(self.UID!))! ? "Unfollow" : "Follow"
+            
+            DatabaseManager.shared.getUser(userID: UID!) { (user) in
+                self.user = user
+                self.viewDidAppear(true)
+            }
+        } else {
             UID = Auth.auth().currentUser?.uid
             isCurrentUser = true
             
@@ -266,7 +273,7 @@ extension ProfileController:UICollectionViewDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! PostDetailController
         let post: Post = posts[collectionViewSelectedCell]
-        destVC.feed = HomeFeed(postImages: post.images , username: user.name, title: post.title, description: post.decription, locations: post.locations)
+        destVC.feed = HomeFeed(UID: user.UID, postImages: post.images , username: user.name, title: post.title, description: post.decription, locations: post.locations)
     }
 }
 

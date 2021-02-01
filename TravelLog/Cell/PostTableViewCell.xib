@@ -19,7 +19,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8IN-SL-HWy" userLabel="header" customClass="PostTableViewCell" customModule="TravelLog" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="369" height="50"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nXG-Gc-kfU">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nXG-Gc-kfU">
                                 <rect key="frame" x="17" y="11.5" width="30" height="27.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="6NB-Ur-Ggn"/>
