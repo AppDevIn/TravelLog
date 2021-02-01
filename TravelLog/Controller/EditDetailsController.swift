@@ -18,8 +18,6 @@ class EditDetailsController : UIViewController {
     var appDelegate:AppDelegate = (UIApplication.shared.delegate) as! AppDelegate
     
     
-    
-    
     var ItemProviders: [UIImage] = []
     
     

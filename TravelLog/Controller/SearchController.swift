@@ -37,6 +37,20 @@ class SearchController : UIViewController {
         }
     }
     
+    @IBAction func Cenel_Clicked(_ sender: Any) {
+        
+        //Empty the text field
+        txt_field.text = ""
+        
+        //Empty the array of data
+        users = []
+        tabelView.reloadData()
+        
+        //Remove the keyboard
+        txt_field.resignFirstResponder()
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "userDatails", let indexPath = tabelView.indexPathForSelectedRow{
             let destination = segue.destination as! ProfileController
