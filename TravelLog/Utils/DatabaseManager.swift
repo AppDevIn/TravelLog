@@ -164,6 +164,10 @@ class DatabaseManager{
                     let data = document.data()
                     
                     let post = Post(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: data["images"]! as! [String])
+                    
+                    
+                    
+                    
                     success(post)
                 }
                 
@@ -204,6 +208,15 @@ class DatabaseManager{
                             if let url = userData["profileLink"]  {
                                 post.profileImg = NSURL(string: url as! String )! as URL
                             }
+                            
+                            //Check if the lat and lng exist
+                            if let coor = data["coordinate"] {
+                                
+                                let d = coor as! [Double]
+
+                                post.setLocation(lat: d[0] as! Double, lng: d[1] as! Double)
+                            }
+                            
                             
                             success(post)
                             
@@ -263,6 +276,7 @@ class DatabaseManager{
                         users.append(user)
                     }
                     
+            
                     
                 }
                 if users.count > 0 {completionBlock(users)}

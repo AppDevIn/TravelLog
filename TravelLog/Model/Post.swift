@@ -14,12 +14,16 @@ class Post{
     var title:  String
     var decription: String
     var locations:String
+    var lat: Double?
+    var lng: Double?
     
     init() {
         images = []
         title = ""
         decription = ""
         locations = ""
+        lat = 0
+        lng = 0
     }
     
     init(title t:String, decription des:String, locations loc:String, images imgs:[String]) {
@@ -27,6 +31,11 @@ class Post{
         self.decription = des
         self.locations = loc
         self.images = imgs
+    }
+    
+    func setLocation(lat:Double, lng:Double) {
+        self.lat = lat
+        self.lng = lng
     }
     
     
