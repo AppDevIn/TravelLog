@@ -6,7 +6,12 @@
         <attribute name="lng" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="CDUser" representedClassName="CDUser" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="password" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="CDPlace" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="CDUser" positionX="-63" positionY="9" width="128" height="59"/>
     </elements>
 </model>

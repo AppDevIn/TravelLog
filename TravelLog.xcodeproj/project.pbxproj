@@ -46,6 +46,10 @@
 		9BB8914B25C3222300222158 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8914A25C3222300222158 /* User.swift */; };
 		9BB8915025C3BFDA00222158 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8914F25C3BFDA00222158 /* Constants.swift */; };
 		9BC2BD9925BDF6270097B582 /* EditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC2BD9825BDF6270097B582 /* EditController.swift */; };
+		9BCF16DA25C83E3A00363E1F /* CDUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCF16D825C83E3A00363E1F /* CDUser+CoreDataClass.swift */; };
+		9BCF16DB25C83E3A00363E1F /* CDUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCF16D925C83E3A00363E1F /* CDUser+CoreDataProperties.swift */; };
+		9BF66FCD25C8405800EFF972 /* PlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF66FCC25C8405800EFF972 /* PlaceController.swift */; };
+		9BF66FE125C841A500EFF972 /* UserDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF66FE025C841A500EFF972 /* UserDataController.swift */; };
 		BF67894125C3F9E500764854 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67894025C3F9E500764854 /* HomeController.swift */; };
 		BF67896025C40C6B00764854 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67895E25C40C6B00764854 /* PostTableViewCell.swift */; };
 		BF67896125C40C6B00764854 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF67895F25C40C6B00764854 /* PostTableViewCell.xib */; };
@@ -102,8 +106,8 @@
 		802FF8E9037EC6AFAED7DFC4 /* Pods_TravelLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AA70F4DDE3AC80C02A139A4 /* Pods-TravelLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelLog.debug.xcconfig"; path = "Target Support Files/Pods-TravelLog/Pods-TravelLog.debug.xcconfig"; sourceTree = "<group>"; };
 		9553392FFA87464992ADE143 /* Pods_TravelLogTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelLogTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B0BB2BE25C69AE0009BE9ED /* CDPlace+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDPlace+CoreDataClass.swift"; path = "TravelLog/CDPlace+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		9B0BB2BF25C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDPlace+CoreDataProperties.swift"; path = "TravelLog/CDPlace+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		9B0BB2BE25C69AE0009BE9ED /* CDPlace+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDPlace+CoreDataClass.swift"; path = "TravelLog/DataModel/CDPlace+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		9B0BB2BF25C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDPlace+CoreDataProperties.swift"; path = "TravelLog/DataModel/CDPlace+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		9B0BB2F525C6B482009BE9ED /* SplashScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenController.swift; sourceTree = "<group>"; };
 		9B0BB34F25C7389E009BE9ED /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		9B0BB35125C7389E009BE9ED /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -147,6 +151,10 @@
 		9BB8914A25C3222300222158 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9BB8914F25C3BFDA00222158 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9BC2BD9825BDF6270097B582 /* EditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditController.swift; sourceTree = "<group>"; };
+		9BCF16D825C83E3A00363E1F /* CDUser+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDUser+CoreDataClass.swift"; path = "TravelLog/DataModel/CDUser+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		9BCF16D925C83E3A00363E1F /* CDUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDUser+CoreDataProperties.swift"; path = "TravelLog/DataModel/CDUser+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		9BF66FCC25C8405800EFF972 /* PlaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceController.swift; sourceTree = "<group>"; };
+		9BF66FE025C841A500EFF972 /* UserDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataController.swift; sourceTree = "<group>"; };
 		BF67894025C3F9E500764854 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		BF67895E25C40C6B00764854 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		BF67895F25C40C6B00764854 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
@@ -257,9 +265,7 @@
 		9B7DC97525B336E4009E97D3 /* TravelLog */ = {
 			isa = PBXGroup;
 			children = (
-				9B0BB38325C796EB009BE9ED /* TravelLog.entitlements */,
-				9B0BB2BE25C69AE0009BE9ED /* CDPlace+CoreDataClass.swift */,
-				9B0BB2BF25C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift */,
+				9BCF16CC25C83D5F00363E1F /* DataModel */,
 				9BB8913125C2977300222158 /* Utils */,
 				9B80D1E725C24F330052570F /* Cell */,
 				9BA55E3B25B808860044B69B /* Views */,
@@ -271,6 +277,7 @@
 				9B7DC98425B336E5009E97D3 /* LaunchScreen.storyboard */,
 				9B7DC98725B336E5009E97D3 /* Info.plist */,
 				9B7DC97F25B336E4009E97D3 /* TravelLog.xcdatamodeld */,
+				9B0BB38325C796EB009BE9ED /* TravelLog.entitlements */,
 				9B80D20A25C26FAA0052570F /* GoogleService-Info.plist */,
 			);
 			path = TravelLog;
@@ -320,6 +327,8 @@
 				BF67896D25C5123A00764854 /* PostDetailController.swift */,
 				9B266BB325C4348600EE6843 /* MapController.swift */,
 				9B0BB2F525C6B482009BE9ED /* SplashScreenController.swift */,
+				9BF66FCC25C8405800EFF972 /* PlaceController.swift */,
+				9BF66FE025C841A500EFF972 /* UserDataController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -353,6 +362,17 @@
 				9BB8914F25C3BFDA00222158 /* Constants.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		9BCF16CC25C83D5F00363E1F /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				9BCF16D825C83E3A00363E1F /* CDUser+CoreDataClass.swift */,
+				9BCF16D925C83E3A00363E1F /* CDUser+CoreDataProperties.swift */,
+				9B0BB2BE25C69AE0009BE9ED /* CDPlace+CoreDataClass.swift */,
+				9B0BB2BF25C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift */,
+			);
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -646,19 +666,23 @@
 				9B0BB2C025C69AE0009BE9ED /* CDPlace+CoreDataClass.swift in Sources */,
 				BF67897E25C5579300764854 /* editbackup.swift in Sources */,
 				9BA55E6925B81FB40044B69B /* RegisterController.swift in Sources */,
+				9BCF16DB25C83E3A00363E1F /* CDUser+CoreDataProperties.swift in Sources */,
 				9BB8915025C3BFDA00222158 /* Constants.swift in Sources */,
 				BF67896E25C5123A00764854 /* PostDetailController.swift in Sources */,
 				BF67894125C3F9E500764854 /* HomeController.swift in Sources */,
 				9B0BB2F625C6B482009BE9ED /* SplashScreenController.swift in Sources */,
 				9B80D1DC25C24CB40052570F /* ProfileController.swift in Sources */,
 				9BB8914B25C3222300222158 /* User.swift in Sources */,
+				9BF66FE125C841A500EFF972 /* UserDataController.swift in Sources */,
 				9B7DC98125B336E4009E97D3 /* TravelLog.xcdatamodeld in Sources */,
+				9BCF16DA25C83E3A00363E1F /* CDUser+CoreDataClass.swift in Sources */,
 				9B0BB2C125C69AE0009BE9ED /* CDPlace+CoreDataProperties.swift in Sources */,
 				9B266BB425C4348600EE6843 /* MapController.swift in Sources */,
 				9BB8913325C2AE1300222158 /* DatabaseManager.swift in Sources */,
 				9B7DC97925B336E4009E97D3 /* SceneDelegate.swift in Sources */,
 				9B0BB3AC25C7A15B009BE9ED /* My_Widget.intentdefinition in Sources */,
 				9B266BEA25C586F800EE6843 /* Location.swift in Sources */,
+				9BF66FCD25C8405800EFF972 /* PlaceController.swift in Sources */,
 				9B71979825C0F88200F9B51C /* EditDetailsController.swift in Sources */,
 				9BA55E4025B809950044B69B /* LoginController.swift in Sources */,
 				9BB8913B25C2BF2900222158 /* StorageManager.swift in Sources */,
