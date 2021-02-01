@@ -41,6 +41,7 @@ class ProfileController:UIViewController {
             if let user = Constants.currentUser {
                 self.user = user
                 btn_follow.title = "Logout"
+                
             }
             else {
                 //If don't have user stored
@@ -49,6 +50,7 @@ class ProfileController:UIViewController {
                 
                 DatabaseManager.shared.getUser(userID: UID!) { (user) in
                     self.user = user
+                    
                     self.viewDidAppear(true)
                 }
             }
@@ -122,6 +124,10 @@ class ProfileController:UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        
+        //Set the title of the page to the name of the user
+        self.title = user.name
         
         //Set the name
         self.txt_name.text = user.name

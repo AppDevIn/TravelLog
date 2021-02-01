@@ -76,7 +76,7 @@
             </objects>
             <point key="canvasLocation" x="1609" y="1811"/>
         </scene>
-        <!--Home Controller-->
+        <!--Travel Logs-->
         <scene sceneID="OjF-tH-F7f">
             <objects>
                 <viewController id="wJz-ZD-x4f" customClass="HomeController" customModule="TravelLog" customModuleProvider="target" sceneMemberID="viewController">
@@ -98,7 +98,7 @@
                             <constraint firstItem="ZbF-U9-QO1" firstAttribute="top" secondItem="Fbo-Kp-NU3" secondAttribute="top" id="cag-Az-IQb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="JKX-Pa-15I"/>
+                    <navigationItem key="navigationItem" title="Travel Logs" id="JKX-Pa-15I"/>
                     <connections>
                         <outlet property="tableview" destination="ZbF-U9-QO1" id="mGH-Xe-Urh"/>
                         <segue destination="fJF-MS-BMO" kind="presentation" identifier="detail" id="HzI-gE-mhb"/>
@@ -346,7 +346,7 @@
             </objects>
             <point key="canvasLocation" x="2670" y="1067"/>
         </scene>
-        <!--Map-->
+        <!--Attractions-->
         <scene sceneID="LdJ-eS-aRu">
             <objects>
                 <viewController id="8ag-qa-fPs" customClass="MapController" customModule="TravelLog" customModuleProvider="target" sceneMemberID="viewController">
@@ -367,7 +367,7 @@
                             <constraint firstItem="3tf-8I-PXg" firstAttribute="bottom" secondItem="lG3-90-HDx" secondAttribute="bottom" id="mze-Fn-TcW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Map" id="5le-tg-Lxv"/>
+                    <navigationItem key="navigationItem" title="Attractions" id="5le-tg-Lxv"/>
                     <connections>
                         <outlet property="mapView" destination="lG3-90-HDx" id="5JZ-WG-Qen"/>
                     </connections>
@@ -466,7 +466,7 @@
             </objects>
             <point key="canvasLocation" x="579.71014492753625" y="1810.7142857142856"/>
         </scene>
-        <!--Edit Details Controller-->
+        <!--New Entry-->
         <scene sceneID="1SV-qN-EzT">
             <objects>
                 <viewController id="beL-5u-hqe" customClass="EditDetailsController" customModule="TravelLog" customModuleProvider="target" sceneMemberID="viewController">
@@ -543,7 +543,7 @@
                             <constraint firstItem="drj-G1-zAt" firstAttribute="top" secondItem="KRn-bs-cOG" secondAttribute="top" constant="10" id="t77-Kf-wXY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Tds-cM-b87"/>
+                    <navigationItem key="navigationItem" title="New Entry" id="Tds-cM-b87"/>
                     <connections>
                         <outlet property="dropDown" destination="Vfc-iq-lzy" id="hp6-mq-25n"/>
                         <outlet property="loading" destination="wnb-bG-gjy" id="VYP-Aa-TWb"/>
