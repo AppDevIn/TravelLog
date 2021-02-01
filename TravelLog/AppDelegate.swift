@@ -152,10 +152,7 @@ extension AppDelegate: CLLocationManagerDelegate {
             if let place = placemarks?.first {
                 let description = "\(place)"
                 self.newVisitReceived(visit, description: description)
-                
-                //Save into the Plist
-                let userDefault = UserDefaults.init(suiteName: "group.sg.mad2.TravelLog")
-                userDefault!.setValue(description, forKey: "location")
+    
                 
                 
                 let plcae = CDPlace(context: self.persistentContainer.viewContext)
@@ -219,7 +216,10 @@ extension AppDelegate: CLLocationManagerDelegate {
         let location = Location(visit: visit, descriptionString: description)
         
         
-  
+        
+        //Save into the Plist
+        let userDefault = UserDefaults.init(suiteName: "group.sg.mad2.TravelLog")
+        userDefault!.setValue(description, forKey: "location")
         
         
         // 1

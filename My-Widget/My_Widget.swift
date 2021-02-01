@@ -32,8 +32,15 @@ struct Provider: TimelineProvider {
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<LocationEntry>) -> Void) {
         
-        let entry = LocationEntry(Location: location)
-        let timeline = Timeline(entries: [entry], policy: .atEnd)
+        let date = Date()
+        let entry = LocationEntry(date: date,Location: location)
+        
+        
+        let nextUpdateDate = Calendar.current.date(byAdding: .second, value: 15, to: date)!
+        
+        let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+        
+        
         
         completion(timeline)
     }
