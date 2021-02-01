@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 protocol MyCustomCellDelegator {
-    func callSegueFromCell(myData dataobject: Any)
+    func callSegueFromCell(myData dataobject: HomeFeed)
 }
 
 class PostTableViewCell: UITableViewCell {
@@ -81,8 +81,8 @@ class PostTableViewCell: UITableViewCell {
     }
     
     @objc func imageTapped(sender: AnyObject) {
-        let data = feed?.user?.UID
-        self.delegate.callSegueFromCell(myData: data!)
+        
+        self.delegate.callSegueFromCell(myData: feed!)
         print("image tapped")
     }
 

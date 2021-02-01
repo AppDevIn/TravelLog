@@ -84,7 +84,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    func callSegueFromCell(myData dataobject: Any) {
+    func callSegueFromCell(myData dataobject: HomeFeed) {
         self.performSegue(withIdentifier: "postAuthor", sender: dataobject)
         print("self called")
     }
@@ -126,8 +126,12 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         if segue.identifier == "postAuthor"{
             let destvc = segue.destination as! ProfileController
-            destvc.UID = sender as? String
-            print(feed[9].user?.UID)
+            
+            let post = sender as? HomeFeed
+            
+            destvc.UID = post?.user?.UID
+            destvc.user = (post?.user)!
+            
             print("segue activited")
         }
     }

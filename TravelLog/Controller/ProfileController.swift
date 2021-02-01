@@ -35,12 +35,6 @@ class ProfileController:UIViewController {
         super.viewDidLoad()
         
         if let _ = UID  {
-            self.btn_follow.title = (Constants.currentUser?.following.contains(self.UID!))! ? "Unfollow" : "Follow"
-            
-            DatabaseManager.shared.getUser(userID: UID!) { (user) in
-                self.user = user
-                self.viewDidAppear(true)
-            }
         } else {
             UID = Auth.auth().currentUser?.uid
             isCurrentUser = true
