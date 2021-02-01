@@ -62,8 +62,10 @@ class PostDetailController: UIViewController {
     }
     
     @IBAction func showMap(_ sender: Any) {
+        if let post = feed {
+            self.openMapForPlace(lat: post.lat!, lng: post.lng!, name: self.feed!.locations)
+        }
         
-        self.openMapForPlace(lat: self.feed?.lat! as! Double, lng: self.feed?.lng! as! Double, name: self.feed!.locations)
     }
     
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer?) -> Void {
