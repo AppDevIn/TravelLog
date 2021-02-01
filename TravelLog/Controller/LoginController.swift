@@ -19,8 +19,21 @@ class LoginController : UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         txt_password.isSecureTextEntry = true
         
-        txt_email.text = "jeyavishnu@gmail.com"
-        txt_password.text = "Test123"
+        let userDefault =  UserDefaults.init(suiteName: "group.sg.mad2.TravelLog")!
+
+        
+        
+        let e:String? = userDefault.string(forKey: "email")
+        let p:String? = userDefault.string(forKey: "password")
+        
+        if let email = e, let password = p {
+            txt_email.text = email
+            txt_password.text = password
+            self.loginClicked(txt_email)
+        } else {
+            txt_email.text = "jeyavishnu@gmail.com"
+            txt_password.text = "Test123"
+        }
         
     }
     

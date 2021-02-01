@@ -46,6 +46,12 @@ class SplashScreenController : UIViewController {
                     //Stop the indicator when the data is recevied
                     self.activityIndicator.stopAnimating()
                     
+                    let userDefault =  UserDefaults.init(suiteName: "group.sg.mad2.TravelLog")!
+                    
+                    //Save the data in the plist
+                    userDefault.set(user.email, forKey: "email")
+                    userDefault.set(user.password, forKey: "password")
+                    
                     //Move to the next storyboard
                     let storyboard = UIStoryboard(name: "Content", bundle: nil) // File name of the story board
                     let vc = storyboard.instantiateViewController(identifier: "Content") as UIViewController // name must set as the identifer in stroyboard

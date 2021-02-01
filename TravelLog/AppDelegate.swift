@@ -220,6 +220,7 @@ extension AppDelegate: CLLocationManagerDelegate {
         //Save into the Plist
         let userDefault = UserDefaults.init(suiteName: "group.sg.mad2.TravelLog")
         userDefault!.setValue(description, forKey: "location")
+
         
         
         // 1
