@@ -75,6 +75,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>please allow access to upload images</string>
+	<string>please allow access to all images</string>
 </dict>
 </plist>
