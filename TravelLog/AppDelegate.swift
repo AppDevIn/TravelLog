@@ -152,8 +152,6 @@ extension AppDelegate: CLLocationManagerDelegate {
             if let place = placemarks?.first {
                 let description = "\(place)"
                 self.newVisitReceived(visit, description: description)
-    
-                
                 
                 let plcae = CDPlace(context: self.persistentContainer.viewContext)
                 plcae.name = description
@@ -161,12 +159,6 @@ extension AppDelegate: CLLocationManagerDelegate {
                 plcae.lat = visit.coordinate.latitude
                 plcae.lng = visit.coordinate.longitude
                  
-                
-                do {
-                    try self.persistentContainer.viewContext.save()
-                } catch let error as NSError {
-                    print("Could not save. \(error), \(error.userInfo)")
-                }
             }
         }
         
@@ -215,7 +207,13 @@ extension AppDelegate: CLLocationManagerDelegate {
     func newVisitReceived(_ visit: CLVisit, description: String) {
         let location = Location(visit: visit, descriptionString: description)
         
+    
         
+        do {
+            try self.persistentContainer.viewContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
         
         //Save into the Plist
         let userDefault = UserDefaults.init(suiteName: "group.sg.mad2.TravelLog")

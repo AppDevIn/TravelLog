@@ -42,7 +42,9 @@ class EditDetailsController : UIViewController {
     
     var items:[CDPlace] = []
     
-    var location:String = ""
+    var location:CDPlace?
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +66,37 @@ class EditDetailsController : UIViewController {
         //Init the length of image
         lengthOfImage = ItemProviders.count
         
-        
+        do {
+            let result = try context.fetch(CDPlace.fetchRequest())
+            var list:[CDPlace] = []
+            
+            let now = Date()
+            
+            
+            
+            for data in result as! [CDPlace]{
+                
+                let elapsedTime = now.timeIntervalSince(data.departure!)
+                
+                // convert from seconds to hours, rounding down to the nearest hour
+                let hours = floor(elapsedTime / 60 / 60)
+                
+            
+                
+                if(hours > 24){
+                    context.delete(data)
+                    try context.save()
+                } else {list.append(data)}
+                
+            }
+            items = list
+            
+            
+        } catch {
+            print(error)
+            
+            
+        }
         
         
         do {
@@ -81,6 +113,7 @@ class EditDetailsController : UIViewController {
                 
                 // convert from seconds to hours, rounding down to the nearest hour
                 let hours = floor(elapsedTime / 60 / 60)
+                
                 
                 if(hours > 24){
                     context.delete(data)
@@ -100,7 +133,7 @@ class EditDetailsController : UIViewController {
         if items != [] {
             dropDown.dataSource = self
             dropDown.delegate = self
-            location = items[0].name! // Default vale
+            location = items[0] // Default vale
         } else {
             txtx_location.isHidden = false
             dropDown.isHidden = true
@@ -138,13 +171,13 @@ class EditDetailsController : UIViewController {
         }
         
         //Create the post object
-        post = Post(title: title, decription: description, locations: location, images: [])
+        post = Post(title: title, decription: description, locations: location?.name ?? txtx_location.text!, images: [])
         
         //Start animating
         loading.startAnimating()
         
         //Upload the the info but not the imzage
-        uploadPostInfo(post: post)
+        uploadPostInfo(post: post, place: location)
         
         //Upload the images
         uploadPostImages(images: ItemProviders)
@@ -157,7 +190,7 @@ class EditDetailsController : UIViewController {
      Use firestore to upload the information into
      users/{id}/posts/{postID}
      */
-    func uploadPostInfo(post p:Post){
+    func uploadPostInfo(post p:Post, place: CDPlace?){
         
         guard let id = user?.uid else {return}
         
@@ -165,13 +198,14 @@ class EditDetailsController : UIViewController {
             "title": p.title,
             "locations": p.locations,
             "description": p.decription,
-            "date": Date()
+            "date": Date(),
+            "coordinate": place != nil ? [place?.lat, place?.lng] : []
             
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added with ID: \(id)")
+                print("Document added with ID: \(self.postId)")
             }
         }
         
@@ -181,13 +215,14 @@ class EditDetailsController : UIViewController {
             "description": p.decription,
             "date": Date(),
             "uid":id,
+            "coordinate": place != nil ? [place?.lat, place?.lng] : [],
             "userRef": db.document("users/\(id)")
             
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added with ID: \(id)")
+                print("Document added with ID: \(self.postId)")
             }
         }
     }
@@ -355,7 +390,7 @@ extension EditDetailsController : UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        self.location = items[row].name!
+        self.location = items[row]
         
     }
     
