@@ -35,9 +35,9 @@ class EditDetailsController : UIViewController {
     var lengthOfImage:Int = 0 //The number of images in the array
     
     @IBOutlet weak var txt_title: UITextField!
-    @IBOutlet weak var txt_description: UITextField!
     @IBOutlet weak var loading: UIActivityIndicatorView!
     @IBOutlet weak var txtx_location: UITextField!
+    @IBOutlet weak var txt_description: UITextView!
     @IBOutlet weak var dropDown: UIPickerView!
     
     var items:[CDPlace] = []
@@ -57,8 +57,21 @@ class EditDetailsController : UIViewController {
         
         //Set up text field delgate
         txt_title.delegate = self
-        txt_description.delegate = self
         txtx_location.delegate = self
+        
+        //Adding border to textview
+        var borderColor : UIColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
+        txt_description.layer.borderWidth = 0.5
+        txt_description.layer.borderColor = borderColor.cgColor
+        txt_description.layer.cornerRadius = 5.0
+        
+        //Text view delgate
+        txt_description.text = "Description"
+        txt_description.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        txt_description.delegate = self
+        
+        
+        
         
         //Hide the loading bar when stopped
         loading.hidesWhenStopped = true
@@ -408,4 +421,31 @@ extension EditDetailsController : UIPickerViewDataSource {
     
 }
 
+extension EditDetailsController : UITextViewDelegate {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        if textView.text == "Description" {
+            txt_description.text = ""
+            txt_description.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        }
+        return true
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text.count == 0 {
+            textView.text = "Description"
+            textView.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            textView.resignFirstResponder()
+        }
+    }
+    
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        if textView.text.count == 0 {
+            textView.text = "Description"
+            textView.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            textView.resignFirstResponder()
+        }
+        
+        return true
+    }
+}
 

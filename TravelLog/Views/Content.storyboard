@@ -525,14 +525,17 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="k6t-nV-5Il">
                                         <rect key="frame" x="0.0" y="173" width="404" height="260"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wL5-8s-UYJ">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="R54-7y-35g">
                                                 <rect key="frame" x="0.0" y="0.0" width="404" height="200"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="MeT-Es-2D7"/>
+                                                    <constraint firstAttribute="height" constant="200" id="THr-HY-qT0"/>
                                                 </constraints>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VXN-jy-vUz">
                                                 <rect key="frame" x="0.0" y="220" width="404" height="40"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -571,7 +574,7 @@
                     <connections>
                         <outlet property="dropDown" destination="Vfc-iq-lzy" id="hp6-mq-25n"/>
                         <outlet property="loading" destination="wnb-bG-gjy" id="VYP-Aa-TWb"/>
-                        <outlet property="txt_description" destination="wL5-8s-UYJ" id="mcd-jh-hCZ"/>
+                        <outlet property="txt_description" destination="R54-7y-35g" id="cyC-55-miP"/>
                         <outlet property="txt_title" destination="xOd-5u-aR8" id="fts-Fi-ELh"/>
                         <outlet property="txtx_location" destination="or2-d0-kCS" id="GQE-yX-cJb"/>
                     </connections>
