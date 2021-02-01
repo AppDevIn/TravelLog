@@ -194,6 +194,11 @@ class ProfileController:UIViewController {
             let id = Auth.auth().currentUser?.uid
             DatabaseManager.shared.insertFollow(UID: id!, followerID: UID!)
         } else if btn_follow.title == "Logout" {
+            
+            //Delete the user
+            let userController = UserDataController()
+            userController.deleteUser()
+            
             self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         }
         else {

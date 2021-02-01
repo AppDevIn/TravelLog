@@ -13,6 +13,7 @@ class SplashScreenController : UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var isLogin:Bool = true
+    var databaseLogin:Bool = true
     var usr:Login!
     
     
@@ -46,10 +47,11 @@ class SplashScreenController : UIViewController {
                     //Stop the indicator when the data is recevied
                     self.activityIndicator.stopAnimating()
                     
-                    
-                    //Save data of the user
-                    let userData = UserDataController()
-                    userData.saveUser(email: self.usr.email, password: self.usr.password)
+                    if !self.databaseLogin {
+                        //Save data of the user
+                        let userData = UserDataController()
+                        userData.saveUser(email: self.usr.email, password: self.usr.password)
+                    }
                     
                     //Move to the next storyboard
                     let storyboard = UIStoryboard(name: "Content", bundle: nil) // File name of the story board
