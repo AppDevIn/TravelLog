@@ -59,7 +59,13 @@
                             <constraint firstItem="pDg-We-hbj" firstAttribute="leading" secondItem="Dqp-UR-1EU" secondAttribute="leading" id="kDp-jj-ENo"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Search" id="2x7-tD-PXR"/>
+                    <navigationItem key="navigationItem" title="Search" id="2x7-tD-PXR">
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="jvk-AV-uVJ">
+                            <connections>
+                                <action selector="Cenel_Clicked:" destination="15K-v6-bjF" id="Naq-oJ-S0H"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tabelView" destination="FVC-3D-KHr" id="Qt8-2T-SJ3"/>
                         <outlet property="txt_field" destination="x20-d0-wSV" id="8cF-aH-87G"/>
@@ -389,7 +395,7 @@
             </objects>
             <point key="canvasLocation" x="580" y="1067"/>
         </scene>
-        <!--Editbackup-->
+        <!--New Entry-->
         <scene sceneID="wod-2U-x8N">
             <objects>
                 <viewController id="Qf5-1X-vKy" customClass="Editbackup" customModule="TravelLog" customModuleProvider="target" sceneMemberID="viewController">
@@ -444,7 +450,7 @@
                             <constraint firstItem="PA4-ZD-2Z8" firstAttribute="leading" secondItem="dqV-vy-pbT" secondAttribute="leading" id="qqq-Ty-OBg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="dGQ-uZ-3sg">
+                    <navigationItem key="navigationItem" title="New Entry" id="dGQ-uZ-3sg">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="OTP-Lk-79A">
                             <connections>
                                 <action selector="presentPicker:" destination="Qf5-1X-vKy" id="wbH-38-2Wx"/>
