@@ -158,14 +158,10 @@ class ProfileController:UIViewController {
     //Action that will be taken when the image is tapped
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-        
-        //Sett  up the PHPicker
-        var configuration = PHPickerConfiguration()
-        configuration.filter = .images
-        
-        //Open the PHPicker
-        let picker = PHPickerViewController(configuration: configuration)
+            let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
         picker.delegate = self
+        picker.allowsEditing = true
         present(picker, animated: true)
         
     }
@@ -230,37 +226,6 @@ class ProfileController:UIViewController {
 }
 
 
-//The PHPicker delgate
-extension ProfileController : PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        dismiss(animated: true)
-        
-        let ItemProviders = results.map(\.itemProvider)
-        
-        //If Zero exit
-        guard ItemProviders.count > 0 else {return}
-        
-        if ItemProviders[0].canLoadObject(ofClass: UIImage.self){
-            ItemProviders[0].loadObject(ofClass: UIImage.self) { (image, error) in
-                DispatchQueue.main.async {
-                    guard let image = image as? UIImage else {return}
-                    self.imageView.image = image
-                    
-                    StorageManager.shared.setProfilePic(image: image, UID: self.UID!) { (success) in
-                        print(success ? "Image Uploaded" : "Image Fail to upload")
-                    }
-                }
-                
-            }
-            
-        }
-        
-        
-    }
-    
-}
-
-
 
 extension ProfileController:UICollectionViewDelegate{
     
@@ -313,5 +278,25 @@ extension ProfileController:UICollectionViewDelegateFlowLayout{
     }
 }
 
+
+extension ProfileController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage{
+            imageView.image = image
+            DispatchQueue.main.async {
+                guard let image = image as? UIImage else {return}
+                self.imageView.image = image
+                
+                StorageManager.shared.setProfilePic(image: image, UID: self.UID!) { (success) in
+                    print(success ? "Image Uploaded" : "Image Fail to upload")
+                }
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
 
 
