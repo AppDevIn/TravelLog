@@ -182,7 +182,7 @@ class DatabaseManager{
     func getPosts(users:[String], success: @escaping (HomeFeed) -> Void )  {
         var posts:[HomeFeed] = []
         
-        let docRef = db.collection("posts").order(by: "date", descending: true).whereField("uid", in: users)
+        let docRef = db.collection("posts").whereField("uid", in: users).order(by: "date", descending: true)
         
         
         
