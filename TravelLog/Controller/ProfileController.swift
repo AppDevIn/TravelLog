@@ -174,15 +174,7 @@ class ProfileController:UIViewController {
     
     @objc func refresh(_ sender: AnyObject) {
         
-        //Get the posts
-        DatabaseManager.shared.getPosts(userID: UID!) { (post) in
-            self.posts = []
-            self.posts.append(post)
-            self.collectionView.reloadData()
-            self.refreshControl.endRefreshing()
-        }
-        
-        
+        self.posts = []
         //Get the posts
         DatabaseManager.shared.getPosts(userID: UID!) { (post) in
             self.posts.append(post)
