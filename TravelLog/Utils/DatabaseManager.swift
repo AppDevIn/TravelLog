@@ -163,12 +163,11 @@ class DatabaseManager{
                     
                     let data = document.data()
                     
-                    let post = Post(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: data["images"]! as! [String])
                     
-                    
-                    
-                    
-                    success(post)
+                    if let img = data["images"] {
+                        let post = Post(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: img as! [String])
+                        success(post)
+                    }
                 }
                 
                 
