@@ -44,8 +44,8 @@ class UserDataController {
         do {
             let result = try context.fetch(CDUser.fetchRequest())
             
-            if let data = result[0] as? CDUser {
-                return data
+            if result.count > 0 {
+                return result[0] as? CDUser
             } else {return nil}
             
             
