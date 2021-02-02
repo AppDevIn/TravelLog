@@ -22,6 +22,8 @@ class RegisterController : UIViewController {
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
         
+       
+        
         
         //Hide the password
         txt_password.isSecureTextEntry = true
