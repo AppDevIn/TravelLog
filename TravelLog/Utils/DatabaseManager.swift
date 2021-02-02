@@ -174,6 +174,18 @@ class DatabaseManager{
                     
                     if let img = data["images"] {
                         let post = Post(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: img as! [String], postID: document.documentID)
+                        
+                        
+                        //Check if the lat and lng exist
+                        if let coor = data["coordinate"] {
+                            
+                            let d = coor as! [Double]
+                            post.setLocation(lat: d[0] , lng: d[1] )
+
+                            
+                        }
+                        
+                        
                         success(post)
                     }
                 }                
@@ -199,6 +211,7 @@ class DatabaseManager{
                     let data = document.data()
                     
                     if let img = data["images"] {
+                        
                         let post = HomeFeed(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: img as! [String], postID: document.documentID)
                         
                         post.user = User()
