@@ -242,15 +242,6 @@ extension ProfileController:UICollectionViewDelegate{
         self.performSegue(withIdentifier: "detail", sender: self)
     }
     
-<<<<<<< HEAD
-=======
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 15, bottom: 0, right: 15)
-    }
-    
-    
-    
->>>>>>> master
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! PostDetailController
         let post: Post = posts[collectionViewSelectedCell]
