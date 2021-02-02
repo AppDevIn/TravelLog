@@ -36,6 +36,10 @@ class Post{
         self.postID = postID
     }
     
+    
+
+    
+    
     func setLocation(lat:Double, lng:Double) {
         self.lat = lat
         self.lng = lng
