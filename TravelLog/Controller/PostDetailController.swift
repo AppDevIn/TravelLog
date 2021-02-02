@@ -66,7 +66,11 @@ class PostDetailController: UIViewController {
     
     @IBAction func deletePost(_ sender: Any) {
         
+        //Delete the post
         DatabaseManager.shared.deletePost(userID: Constants.currentUser!.UID, postid: feed!.postID )
+        
+        //Dismiss the view
+        dismiss(animated: true, completion: nil)
         
     }
     

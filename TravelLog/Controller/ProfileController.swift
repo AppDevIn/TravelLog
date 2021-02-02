@@ -11,6 +11,7 @@ import FirebaseAuth
 import PhotosUI
 import SDWebImage
 
+
 class ProfileController:UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -126,9 +127,8 @@ class ProfileController:UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
-        
         //Set the title of the page to the name of the user
-        self.title = user.name
+        self.title = isCurrentUser ? "Profile" : user.name
         
         //Set the name
         self.txt_name.text = user.name
@@ -168,6 +168,12 @@ class ProfileController:UIViewController {
     
     @objc func refresh(_ sender: AnyObject) {
         
+        reloadData()
+        
+    }
+    
+    func reloadData() {
+        
         self.posts = []
         self.collectionView.reloadData()
         //Get the posts
@@ -176,7 +182,6 @@ class ProfileController:UIViewController {
             self.collectionView.reloadData()
             self.refreshControl.endRefreshing()
         }
-        
         
     }
     
@@ -220,8 +225,6 @@ extension ProfileController:UICollectionViewDelegate{
     //When a cell is selected
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        
-        
         
         print("Image Collection Tapped")
         collectionViewSelectedCell = indexPath.row
