@@ -95,8 +95,9 @@ class ProfileController:UIViewController {
         
         
         //Get the posts
-        DatabaseManager.shared.getPosts(userID: UID!) { (post) in
+        DatabaseManager.shared.getPosts(userID: UID!, Indictor: nil) { (post) in
             DispatchQueue.main.async {
+                
                 self.posts.append(post)
                 self.collectionView.reloadData()
             }
@@ -179,7 +180,9 @@ class ProfileController:UIViewController {
         self.posts = []
         self.collectionView.reloadData()
         //Get the posts
-        DatabaseManager.shared.getPosts(userID: UID!) { (post) in
+        DatabaseManager.shared.getPosts(userID: UID!, Indictor: self.refreshControl) { (post) in
+            
+            
             self.posts.append(post)
             self.collectionView.reloadData()
             self.refreshControl.endRefreshing()
@@ -202,6 +205,8 @@ class ProfileController:UIViewController {
             //Delete the user
             let userController = UserDataController()
             userController.deleteUser()
+            
+            Constants.currentUser = nil
             
             self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         }
