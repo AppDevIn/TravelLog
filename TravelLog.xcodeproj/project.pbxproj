@@ -50,6 +50,13 @@
 		9BCF16DB25C83E3A00363E1F /* CDUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCF16D925C83E3A00363E1F /* CDUser+CoreDataProperties.swift */; };
 		9BF66FCD25C8405800EFF972 /* PlaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF66FCC25C8405800EFF972 /* PlaceController.swift */; };
 		9BF66FE125C841A500EFF972 /* UserDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF66FE025C841A500EFF972 /* UserDataController.swift */; };
+		9BFEB98025C990BD00A2EE42 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0BB34F25C7389E009BE9ED /* WidgetKit.framework */; };
+		9BFEB98125C990BD00A2EE42 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0BB35125C7389E009BE9ED /* SwiftUI.framework */; };
+		9BFEB98425C990BD00A2EE42 /* TravLogWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFEB98325C990BD00A2EE42 /* TravLogWidget.swift */; };
+		9BFEB98725C990BE00A2EE42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BFEB98625C990BE00A2EE42 /* Assets.xcassets */; };
+		9BFEB98925C990BE00A2EE42 /* TravLogWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9BFEB98525C990BD00A2EE42 /* TravLogWidget.intentdefinition */; };
+		9BFEB98A25C990BE00A2EE42 /* TravLogWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 9BFEB98525C990BD00A2EE42 /* TravLogWidget.intentdefinition */; };
+		9BFEB98D25C990BE00A2EE42 /* TravLogWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9BFEB97F25C990BD00A2EE42 /* TravLogWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BF67894125C3F9E500764854 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67894025C3F9E500764854 /* HomeController.swift */; };
 		BF67896025C40C6B00764854 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67895E25C40C6B00764854 /* PostTableViewCell.swift */; };
 		BF67896125C40C6B00764854 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF67895F25C40C6B00764854 /* PostTableViewCell.xib */; };
@@ -81,6 +88,13 @@
 			remoteGlobalIDString = 9B7DC97225B336E4009E97D3;
 			remoteInfo = TravelLog;
 		};
+		9BFEB98B25C990BE00A2EE42 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B7DC96B25B336E4009E97D3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9BFEB97E25C990BD00A2EE42;
+			remoteInfo = TravLogWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -90,6 +104,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				9BFEB98D25C990BE00A2EE42 /* TravLogWidgetExtension.appex in Embed App Extensions */,
 				9B0BB3AF25C7A15B009BE9ED /* My-WidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -155,6 +170,11 @@
 		9BCF16D925C83E3A00363E1F /* CDUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDUser+CoreDataProperties.swift"; path = "TravelLog/DataModel/CDUser+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		9BF66FCC25C8405800EFF972 /* PlaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceController.swift; sourceTree = "<group>"; };
 		9BF66FE025C841A500EFF972 /* UserDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataController.swift; sourceTree = "<group>"; };
+		9BFEB97F25C990BD00A2EE42 /* TravLogWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TravLogWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BFEB98325C990BD00A2EE42 /* TravLogWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravLogWidget.swift; sourceTree = "<group>"; };
+		9BFEB98525C990BD00A2EE42 /* TravLogWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = TravLogWidget.intentdefinition; sourceTree = "<group>"; };
+		9BFEB98625C990BE00A2EE42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9BFEB98825C990BE00A2EE42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF67894025C3F9E500764854 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		BF67895E25C40C6B00764854 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		BF67895F25C40C6B00764854 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
@@ -195,6 +215,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBD8F3E4F95671F504A7D211 /* Pods_TravelLog_TravelLogUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BFEB97C25C990BD00A2EE42 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BFEB98125C990BD00A2EE42 /* SwiftUI.framework in Frameworks */,
+				9BFEB98025C990BD00A2EE42 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +274,7 @@
 				9B7DC98F25B336E6009E97D3 /* TravelLogTests */,
 				9B7DC99A25B336E6009E97D3 /* TravelLogUITests */,
 				9B0BB3A425C7A159009BE9ED /* My-Widget */,
+				9BFEB98225C990BD00A2EE42 /* TravLogWidget */,
 				9B7DC97425B336E4009E97D3 /* Products */,
 				85895E86CB0211ED632427C9 /* Pods */,
 				49D3327E5C4EF52901AD9033 /* Frameworks */,
@@ -258,6 +288,7 @@
 				9B7DC98C25B336E6009E97D3 /* TravelLogTests.xctest */,
 				9B7DC99725B336E6009E97D3 /* TravelLogUITests.xctest */,
 				9B0BB3A125C7A159009BE9ED /* My-WidgetExtension.appex */,
+				9BFEB97F25C990BD00A2EE42 /* TravLogWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -375,6 +406,17 @@
 			path = DataModel;
 			sourceTree = "<group>";
 		};
+		9BFEB98225C990BD00A2EE42 /* TravLogWidget */ = {
+			isa = PBXGroup;
+			children = (
+				9BFEB98325C990BD00A2EE42 /* TravLogWidget.swift */,
+				9BFEB98525C990BD00A2EE42 /* TravLogWidget.intentdefinition */,
+				9BFEB98625C990BE00A2EE42 /* Assets.xcassets */,
+				9BFEB98825C990BE00A2EE42 /* Info.plist */,
+			);
+			path = TravLogWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -410,6 +452,7 @@
 			);
 			dependencies = (
 				9B0BB3AE25C7A15B009BE9ED /* PBXTargetDependency */,
+				9BFEB98C25C990BE00A2EE42 /* PBXTargetDependency */,
 			);
 			name = TravelLog;
 			productName = TravelLog;
@@ -455,6 +498,23 @@
 			productReference = 9B7DC99725B336E6009E97D3 /* TravelLogUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		9BFEB97E25C990BD00A2EE42 /* TravLogWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9BFEB99025C990BF00A2EE42 /* Build configuration list for PBXNativeTarget "TravLogWidgetExtension" */;
+			buildPhases = (
+				9BFEB97B25C990BD00A2EE42 /* Sources */,
+				9BFEB97C25C990BD00A2EE42 /* Frameworks */,
+				9BFEB97D25C990BD00A2EE42 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TravLogWidgetExtension;
+			productName = TravLogWidgetExtension;
+			productReference = 9BFEB97F25C990BD00A2EE42 /* TravLogWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -478,6 +538,9 @@
 						CreatedOnToolsVersion = 12.3;
 						TestTargetID = 9B7DC97225B336E4009E97D3;
 					};
+					9BFEB97E25C990BD00A2EE42 = {
+						CreatedOnToolsVersion = 12.4;
+					};
 				};
 			};
 			buildConfigurationList = 9B7DC96E25B336E4009E97D3 /* Build configuration list for PBXProject "TravelLog" */;
@@ -497,6 +560,7 @@
 				9B7DC98B25B336E6009E97D3 /* TravelLogTests */,
 				9B7DC99625B336E6009E97D3 /* TravelLogUITests */,
 				9B0BB3A025C7A159009BE9ED /* My-WidgetExtension */,
+				9BFEB97E25C990BD00A2EE42 /* TravLogWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -535,6 +599,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BFEB97D25C990BD00A2EE42 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BFEB98725C990BE00A2EE42 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +739,7 @@
 				BF67897E25C5579300764854 /* Editbackup.swift in Sources */,
 				9BA55E6925B81FB40044B69B /* RegisterController.swift in Sources */,
 				9BCF16DB25C83E3A00363E1F /* CDUser+CoreDataProperties.swift in Sources */,
+				9BFEB98A25C990BE00A2EE42 /* TravLogWidget.intentdefinition in Sources */,
 				9BB8915025C3BFDA00222158 /* Constants.swift in Sources */,
 				BF67896E25C5123A00764854 /* PostDetailController.swift in Sources */,
 				BF67894125C3F9E500764854 /* HomeController.swift in Sources */,
@@ -708,6 +781,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9BFEB97B25C990BD00A2EE42 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9BFEB98925C990BE00A2EE42 /* TravLogWidget.intentdefinition in Sources */,
+				9BFEB98425C990BD00A2EE42 /* TravLogWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -725,6 +807,11 @@
 			isa = PBXTargetDependency;
 			target = 9B7DC97225B336E4009E97D3 /* TravelLog */;
 			targetProxy = 9B7DC99825B336E6009E97D3 /* PBXContainerItemProxy */;
+		};
+		9BFEB98C25C990BE00A2EE42 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9BFEB97E25C990BD00A2EE42 /* TravLogWidgetExtension */;
+			targetProxy = 9BFEB98B25C990BE00A2EE42 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1042,6 +1129,50 @@
 			};
 			name = Release;
 		};
+		9BFEB98E25C990BF00A2EE42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 55X6A2Q9Q6;
+				INFOPLIST_FILE = TravLogWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.TravelLog.TravLogWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9BFEB98F25C990BF00A2EE42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 55X6A2Q9Q6;
+				INFOPLIST_FILE = TravLogWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sg.mad2.TravelLog.TravLogWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1086,6 +1217,15 @@
 			buildConfigurations = (
 				9B7DC9A725B336E6009E97D3 /* Debug */,
 				9B7DC9A825B336E6009E97D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9BFEB99025C990BF00A2EE42 /* Build configuration list for PBXNativeTarget "TravLogWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9BFEB98E25C990BF00A2EE42 /* Debug */,
+				9BFEB98F25C990BF00A2EE42 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
