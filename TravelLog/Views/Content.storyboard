@@ -475,11 +475,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Entry" id="dGQ-uZ-3sg">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="OTP-Lk-79A">
-                            <connections>
-                                <action selector="presentPicker:" destination="Qf5-1X-vKy" id="wbH-38-2Wx"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="plus" catalog="system" id="OTP-Lk-79A">
+                                <connections>
+                                    <action selector="presentPicker:" destination="Qf5-1X-vKy" id="wbH-38-2Wx"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="camera" catalog="system" id="acj-Wr-Cfp">
+                                <connections>
+                                    <action selector="camera:" destination="Qf5-1X-vKy" id="2IK-mj-USS"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="btn_next" destination="PA4-ZD-2Z8" id="1bQ-Gs-Vut"/>
@@ -628,6 +635,7 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="FooterLogin" width="374" height="374"/>
+        <image name="camera" catalog="system" width="128" height="94"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="map" catalog="system" width="128" height="110"/>

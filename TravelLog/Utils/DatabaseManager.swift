@@ -168,11 +168,7 @@ class DatabaseManager{
                         let post = Post(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: img as! [String])
                         success(post)
                     }
-                }
-                
-                
-                
-                
+                }                
             }
         }
         
