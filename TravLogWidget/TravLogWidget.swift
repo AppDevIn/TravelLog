@@ -9,61 +9,87 @@ import WidgetKit
 import SwiftUI
 import Intents
 
-struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
-    }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+
+struct LocationEntry:TimelineEntry {
+    var date: Date = Date()
+    let Location: String
+}
+
+struct Provider: TimelineProvider {
+    
+    
+    @AppStorage("location", store: UserDefaults(suiteName: "group.sg.mad2.TravelLog"))
+    var location: String = ""
+
+    func placeholder(in context: Context) -> LocationEntry {
+        LocationEntry(date: Date(), Location: "Location")
+    }
+    
+    func getSnapshot(in context: Context, completion: @escaping (LocationEntry) -> Void) {
+        let entry = LocationEntry(Location: location)
         completion(entry)
     }
-
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
-        }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+    
+    func getTimeline(in context: Context, completion: @escaping (Timeline<LocationEntry>) -> Void) {
+        
+        
+        let date = Date()
+        let entry = LocationEntry(date: date,Location: location)
+        
+        
+        let nextUpdateDate = Calendar.current.date(byAdding: .second, value: 15, to: date)!
+        
+        let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
+        
+        
+        
         completion(timeline)
     }
+    
+
+
+
 }
 
-struct SimpleEntry: TimelineEntry {
-    let date: Date
-    let configuration: ConfigurationIntent
-}
 
-struct TravLogWidgetEntryView : View {
+struct TraveLogWidgetEntryView : View {
     var entry: Provider.Entry
-
+    
+    
+    
     var body: some View {
-        Text(entry.date, style: .time)
+        VStack(alignment: .center, spacing: 20, content: {
+            HStack(alignment: .center, spacing: 20, content: {
+                
+                Text(entry.Location)
+                    .frame(maxWidth: .infinity, alignment: .leading) // << full width
+                    .padding()
+                    .multilineTextAlignment(.center)
+                    
+            })
+           
+        })
     }
 }
 
 @main
-struct TravLogWidget: Widget {
-    let kind: String = "TravLogWidget"
+struct TraveLogWidget: Widget {
+    let kind: String = "TraveLogWidget"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            TravLogWidgetEntryView(entry: entry)
+        StaticConfiguration(kind: kind,
+                            provider: Provider()) { entry in
+            TraveLogWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
     }
 }
 
-struct TravLogWidget_Previews: PreviewProvider {
+struct TraveLogWidget_Previews: PreviewProvider {
     static var previews: some View {
-        TravLogWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        
+        TraveLogWidgetEntryView(entry:LocationEntry(Location: "dsjflksdjfjskdjkjjsfdkjjkjhfgjhsfjkhgjfsdh")).previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
