@@ -14,12 +14,14 @@ import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
 
-class Editbackup : UIViewController {
+class Editbackup : UIViewController{
     
     
     var selectedAssets = [PHAsset]()
     var images = [UIImage]()
     @IBOutlet weak var btn_next: UIButton!
+    
+    
     
     
     
@@ -39,7 +41,13 @@ class Editbackup : UIViewController {
         btn_next.isEnabled = false
     }
     
-    
+    @IBAction func camera(_ sender: Any) {
+        let vc = UIImagePickerController()
+        vc.sourceType = .camera
+        vc.allowsEditing = true
+        vc.delegate = self
+        present(vc, animated: true)
+    }
     
     //The is add the naviagtion button function
     @IBAction func presentPicker(_ sender: Any) {
@@ -160,15 +168,16 @@ extension Editbackup: UICollectionViewDelegateFlowLayout{
     }
 }
 
+extension Editbackup: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {return}
+        images.append(image)
+        collectionView.reloadData()
+        picker.dismiss(animated: true, completion: nil)
 
-
-
-//extension Editbackup : PHPickerViewControllerDelegate {
-//    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-//        dismiss(animated: true)
-//
-//        ItemProviders = results.map(\.itemProvider)
-//
-//        displayImages(i: 0)
-//    }
-//}
+    }
+}
