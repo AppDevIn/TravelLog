@@ -95,7 +95,6 @@ class Editbackup : UIViewController{
         
         if selectedAssets.count != 0{
             
-            images = []
             for i in 0..<selectedAssets.count{
                 
                 // reciving request to convert assets to images
@@ -118,6 +117,8 @@ class Editbackup : UIViewController{
                 }
             }
             
+            selectedAssets = []
+            
             //The button is enabled if there is images
             btn_next.isEnabled = (images.count >= 0)
             
@@ -139,7 +140,7 @@ extension Editbackup: UICollectionViewDelegate{
         collectionView.deselectItem(at: indexPath, animated: true)
         print("delete tapped image")
         images.remove(at: indexPath.row)
-        selectedAssets.remove(at: indexPath.row)
+        
         print(images)
         print(selectedAssets)
         self.collectionView.reloadData()
