@@ -22,8 +22,45 @@ class PlaceController {
     }
     
     
-    func AddPlace()  {
+    func AddPlace(_ visit: CLVisit, description: String)  {
         
+        var samelocation:Bool = false
+        
+        do {
+            let result = try context.fetch(CDPlace.fetchRequest())
+   
+            for data in result as! [CDPlace]{
+                
+                if description == data.name! {
+                    samelocation = true
+                    
+                }
+             
+            }
+            
+            
+        } catch {
+            print(error)
+            
+            
+        }
+        
+        guard !samelocation else {
+            samelocation = false
+            return
+        }
+        
+        let plcae = CDPlace(context: context)
+        plcae.name = description
+        plcae.departure = visit.departureDate
+        plcae.lat = visit.coordinate.latitude
+        plcae.lng = visit.coordinate.longitude
+        
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
         
     }
     

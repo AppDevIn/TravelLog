@@ -204,52 +204,11 @@ extension AppDelegate: CLLocationManagerDelegate {
     func newVisitReceived(_ visit: CLVisit, description: String) {
         let location = Location(visit: visit, descriptionString: description)
         
-     
         
+        let placeController = PlaceController()
+        placeController.AddPlace(visit, description:description)
         
-        var samelocation:Bool = false
-        
-        do {
-            let result = try self.persistentContainer.viewContext.fetch(CDPlace.fetchRequest())
-            var list:[CDPlace] = []
-            
-            let now = Date()
-            
-            
-            
-            for data in result as! [CDPlace]{
-                
-                if description == data.name! {
-                    samelocation = true
-                    
-                }
-             
-            }
-            
-            
-            
-        } catch {
-            print(error)
-            
-            
-        }
-        
-        guard !samelocation else {
-            samelocation = false
-            return
-        }
-        
-        let plcae = CDPlace(context: self.persistentContainer.viewContext)
-        plcae.name = description
-        plcae.departure = visit.departureDate
-        plcae.lat = visit.coordinate.latitude
-        plcae.lng = visit.coordinate.longitude
-        
-        do {
-            try self.persistentContainer.viewContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
+      
         
         //Save into the Plist
         let userDefault = UserDefaults.init(suiteName: "group.sg.mad2.TravelLog")
