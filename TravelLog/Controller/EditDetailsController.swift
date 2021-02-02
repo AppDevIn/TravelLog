@@ -184,7 +184,7 @@ class EditDetailsController : UIViewController {
         }
         
         //Create the post object
-        post = Post(title: title, decription: description, locations: location?.name ?? txtx_location.text!, images: [])
+        post = Post(title: title, decription: description, locations: location?.name ?? txtx_location.text!, images: [], postID: postId)
         
         //Start animating
         loading.startAnimating()

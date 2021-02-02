@@ -189,6 +189,9 @@
                                                 <state key="normal" title="Delete Post">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="deletePost:" destination="fJF-MS-BMO" eventType="touchUpInside" id="EXC-Sk-NEy"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" name="Button-Red"/>
@@ -207,6 +210,7 @@
                     </view>
                     <connections>
                         <outlet property="btn_map" destination="m1Y-R3-iwi" id="cWE-KW-Qwl"/>
+                        <outlet property="buttonStack" destination="uVD-8A-806" id="rFR-pd-rLB"/>
                         <outlet property="postBody" destination="a2G-HL-A9q" id="PYr-PT-UQe"/>
                         <outlet property="postImg" destination="K83-Nu-nM1" id="BRZ-Ux-O12"/>
                         <outlet property="postLocation" destination="6k7-s4-T9M" id="Vw1-tN-ENu"/>

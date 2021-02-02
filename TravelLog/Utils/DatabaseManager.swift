@@ -165,7 +165,7 @@ class DatabaseManager{
                     
                     
                     if let img = data["images"] {
-                        let post = Post(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: img as! [String])
+                        let post = Post(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: img as! [String], postID: document.documentID)
                         success(post)
                     }
                 }                
@@ -191,7 +191,7 @@ class DatabaseManager{
                     let data = document.data()
                     
                     if let img = data["images"] {
-                        let post = HomeFeed(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: img as! [String])
+                        let post = HomeFeed(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: img as! [String], postID: document.documentID)
                         
                         post.user = User()
                         post.user?.UID = data["uid"] as! String
@@ -279,83 +279,6 @@ class DatabaseManager{
         
     }
     
-//
-//    func getPosts(users:[String], success: @escaping (HomeFeed) -> Void )  {
-//        var posts:[HomeFeed] = []
-//
-//        let docRef = db.collection("posts").whereField("uid", in: users).order(by: "date", descending: true)
-//
-//
-//
-//
-//        docRef.getDocuments { (querySnapshot, err) in
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//            } else {
-//                for document in querySnapshot!.documents {
-//
-//                    let data = document.data()
-//
-//                    (data["userRef"] as! DocumentReference).getDocument { (document, error) in
-//                        if let document = document, document.exists {
-//                            guard let userData = document.data() else {return}
-//
-//
-//                            if let img = data["images"] {
-//                                let post = HomeFeed(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: img as! [String])
-//                                posts.append(post)
-//
-//
-//                                guard let name = userData["name"] else {
-//                                    return
-//                                }
-//
-//                                let user:User = User(id: data["uid"] as! String, userName: name as! String)
-//
-//
-//                                if let profileLink = userData["profileLink"] {
-//                                    //Cover string to URL
-//                                    user.profileLink = (profileLink as! String)
-//
-//                                }
-//
-//                                //If got following
-//                                if let following = userData["following"] {
-//                                    user.following = following as! [String]
-//                                }
-//
-//                                //If got followers
-//                                if let follower = userData["follower"] {
-//                                    user.follower = follower as! [String]
-//                                }
-//
-//
-//                                //Check if the lat and lng exist
-//                                if let coor = userData["coordinate"] {
-//
-//                                    let d = coor as! [Double]
-//
-//                                    post.setLocation(lat: d[0] , lng: d[1] )
-//                                }
-//
-//
-//
-//                                success(post)
-//                            }
-//
-//                        }
-//                    }
-//
-//                }
-//
-//
-//
-//
-//            }
-//        }
-//
-//    }
-//
     
     func searchUser(name prefix:String, completionBlock: @escaping ([User]) -> Void) {
         let docRef = db.collection("users")
@@ -435,6 +358,27 @@ class DatabaseManager{
         followingRef.setData([
             "follower": FieldValue.arrayRemove([uid])
         ], merge: true)
+    }
+    
+    func deletePost(userID:String, postid:String){
+        db.collection("posts").document(postid).delete { (err) in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+        
+        self.db.collection("users").document(userID).collection("posts").document(postid).delete { (err) in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+        
+        
+        
     }
     
 }
