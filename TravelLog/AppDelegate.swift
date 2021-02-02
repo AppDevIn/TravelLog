@@ -153,11 +153,7 @@ extension AppDelegate: CLLocationManagerDelegate {
                 let description = "\(place)"
                 self.newVisitReceived(visit, description: description)
                 
-                let plcae = CDPlace(context: self.persistentContainer.viewContext)
-                plcae.name = description
-                plcae.departure = visit.departureDate
-                plcae.lat = visit.coordinate.latitude
-                plcae.lng = visit.coordinate.longitude
+      
                  
             }
         }
@@ -207,7 +203,45 @@ extension AppDelegate: CLLocationManagerDelegate {
     func newVisitReceived(_ visit: CLVisit, description: String) {
         let location = Location(visit: visit, descriptionString: description)
         
-    
+        let plcae = CDPlace(context: self.persistentContainer.viewContext)
+        plcae.name = description
+        plcae.departure = visit.departureDate
+        plcae.lat = visit.coordinate.latitude
+        plcae.lng = visit.coordinate.longitude
+        
+        
+        var samelocation:Bool = false
+        
+        do {
+            let result = try self.persistentContainer.viewContext.fetch(CDPlace.fetchRequest())
+            var list:[CDPlace] = []
+            
+            let now = Date()
+            
+            
+            
+            for data in result as! [CDPlace]{
+                
+                if plcae.name == data.name! {
+                    samelocation = true
+                    
+                }
+             
+            }
+            
+            
+            
+        } catch {
+            print(error)
+            
+            
+        }
+        
+        guard !samelocation else {
+            return
+        }
+        
+        
         
         do {
             try self.persistentContainer.viewContext.save()
