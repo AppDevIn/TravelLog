@@ -43,8 +43,8 @@ Use the dependency manager [CocoaPods](https://cocoapods.org/) to install depend
 ## ScreenShots
 
 <p align="row">
-  <img src= "ScreenShot/SplashScreen" width="400" height="800">
-<img src= "/Users/jeyavishnu/Downloads/IMG_0F11B78F8DC7-1.jpeg" width="400" height="800">
+  <img src= "ScreenShots/SplashScreen.jpeg" width="400" height="800">
+<img src= "ScreenShots/Profile.jpeg" width="400" height="800">
 </p>
 
 
