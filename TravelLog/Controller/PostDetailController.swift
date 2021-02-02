@@ -27,14 +27,14 @@ class PostDetailController: UIViewController {
         super.viewDidLoad()
         
         if (feed != nil) {
-            let url:URL = NSURL(string: feed?.images[0] as! String )! as URL
+            let url:URL = NSURL(string: (feed?.images[0] as! String) )! as URL
             self.postImg.sd_setImage(with: url)
             self.postTitle.text = feed?.title
             self.postLocation.text = feed?.locations
             self.postBody.text = feed?.decription
         }
         else{
-            let url:URL = NSURL(string: post.images[0] as! String )! as URL
+            let url:URL = NSURL(string: (post.images[0] as! String) )! as URL
             self.postImg.sd_setImage(with: url)
             self.postTitle.text = post.title
             self.postLocation.text = post.locations
