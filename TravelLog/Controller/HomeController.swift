@@ -76,6 +76,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @objc func refresh(_ sender: AnyObject ){
         
         self.feed = []
+        self.tableview.reloadData()
         guard let following = Constants.currentUser?.following, following != [] else {return}
         
         
