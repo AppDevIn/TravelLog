@@ -52,7 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //When the app is open
         case .authorizedWhenInUse:
-            
+            locationManager.distanceFilter = 500 // 0
+            locationManager.startUpdatingLocation()  // 2
             break
         //The app is not allowed one time pop up
         case .denied:
@@ -67,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Even when the app is closed
         case .authorizedAlways:
             
-            //     Uncomment following code to enable fake visits
+            //Running fake location
             locationManager.distanceFilter = 500 // 0
             locationManager.allowsBackgroundLocationUpdates = true // 1
             locationManager.startUpdatingLocation()  // 2
@@ -151,7 +152,7 @@ extension AppDelegate: CLLocationManagerDelegate {
         // Get location description
         AppDelegate.geoCoder.reverseGeocodeLocation(clLocation) { placemarks, _ in
             if let place = placemarks?.first {
-                let description = "\(place.name)"
+                let description = "\(place.name!)"
                 self.newVisitReceived(visit, description: description)
                 
       
