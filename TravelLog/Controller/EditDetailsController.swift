@@ -274,8 +274,7 @@ class EditDetailsController : UIViewController {
         if self.count >= self.lengthOfImage {
             self.loading.stopAnimating()
             let editController = self.navigationController?.viewControllers.first as! Editbackup
-            
-            editController.images = []
+//            editController.images = []
             self.navigationController?.popViewController(animated: true)
             
             

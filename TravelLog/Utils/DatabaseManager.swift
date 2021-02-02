@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
+import UIKit
 
 
 class DatabaseManager{
@@ -148,7 +149,7 @@ class DatabaseManager{
     }
     
     
-    func getPosts(userID UID:String, success: @escaping (Post) -> Void )  {
+    func getPosts(userID UID:String,Indictor:UIRefreshControl?, success: @escaping (Post) -> Void )  {
         
         
         let docRef = db.collection("users").document(UID).collection("posts").order(by: "date", descending: true)
@@ -160,6 +161,12 @@ class DatabaseManager{
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
+                
+                if let indicator = Indictor {
+                    indicator.endRefreshing()
+                }
+                
+                
                 for document in querySnapshot!.documents {
                     
                     let data = document.data()
