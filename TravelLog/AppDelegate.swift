@@ -22,7 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let locationManager = CLLocationManager()
     
     
+    
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        
         
         FirebaseApp.configure()
         
@@ -35,6 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         locationManager.delegate = self
         
         checkLocationAuthorization()
+
+        
+        
         
         return true
     }
@@ -44,7 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //When the app is open
         case .authorizedWhenInUse:
-            
+            locationManager.distanceFilter = 500 // 0
+            locationManager.startUpdatingLocation()  // 2
             break
         //The app is not allowed one time pop up
         case .denied:
@@ -59,8 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Even when the app is closed
         case .authorizedAlways:
             
-            //     Uncomment following code to enable fake visits
-            locationManager.distanceFilter = 35 // 0
+            //Running fake location
+            locationManager.distanceFilter = 500 // 0
             locationManager.allowsBackgroundLocationUpdates = true // 1
             locationManager.startUpdatingLocation()  // 2
             break
@@ -143,8 +152,11 @@ extension AppDelegate: CLLocationManagerDelegate {
         // Get location description
         AppDelegate.geoCoder.reverseGeocodeLocation(clLocation) { placemarks, _ in
             if let place = placemarks?.first {
-                let description = "\(place)"
+                let description = "\(place.name!)"
                 self.newVisitReceived(visit, description: description)
+                
+      
+                 
             }
         }
         
@@ -166,13 +178,10 @@ extension AppDelegate: CLLocationManagerDelegate {
                 // 3
                 var description:String
                 if let name = place.name {
-                    description = "Fake visit: \(name)"
+                    description = "\(name)"
                 } else {
-                    description = "Fake visit: \(place.description)"
+                    description = "\(place.description)"
                 }
-                
-                
-                
                 
                 
                 //4
@@ -197,15 +206,17 @@ extension AppDelegate: CLLocationManagerDelegate {
         let location = Location(visit: visit, descriptionString: description)
         
         
-        let plcae = CDPlace(context: self.persistentContainer.viewContext)
-        plcae.name = location.description
-        plcae.departure = visit.departureDate
-        
-        do {
-            try self.persistentContainer.viewContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+        let placeController = PlaceController()
+        guard placeController.AddPlace(visit, description:description) else {
+            return
         }
+        
+      
+        
+        //Save into the Plist
+        let userDefault = UserDefaults.init(suiteName: "group.sg.mad2.TravelLog")
+        userDefault!.setValue(description, forKey: "location")
+
         
         
         // 1

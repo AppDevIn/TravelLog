@@ -11,6 +11,7 @@ import FirebaseAuth
 import PhotosUI
 import SDWebImage
 
+
 class ProfileController:UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
@@ -34,27 +35,34 @@ class ProfileController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let _ = UID  {} else {
+        if let _ = UID  {
+        } else {
             UID = Auth.auth().currentUser?.uid
             isCurrentUser = true
             
             if let user = Constants.currentUser {
                 self.user = user
+                
             }
             else {
-                //If don't have user stored
+                
                 DatabaseManager.shared.getUser(userID: UID!) { (user) in
                     self.user = user
+                    
                     self.viewDidAppear(true)
                 }
             }
             
         }
         
-
-        
+        //If don't have user stored
         //Set the title
-        self.btn_follow.title = user.follower.contains(self.UID!) ? "Unfollow" : "Follow"
+        self.btn_follow.title = isCurrentUser ? "Logout" : ((Constants.currentUser?.following.contains(self.UID!))! ? "Unfollow" : "Follow")
+        
+        
+        
+        
+        
         
         
         //Set up the refresh for the collection view
@@ -91,13 +99,17 @@ class ProfileController:UIViewController {
         
         
         //Get the posts
-        DatabaseManager.shared.getPosts(userID: UID!) { (posts) in
-            self.posts = posts
-            self.collectionView.reloadData()
+        DatabaseManager.shared.getPosts(userID: UID!, Indictor: nil) { (post) in
+            DispatchQueue.main.async {
+                
+                self.posts.append(post)
+                self.collectionView.reloadData()
+            }
+
         }
 
-
-
+        
+        
         
         
         if isCurrentUser {
@@ -111,17 +123,10 @@ class ProfileController:UIViewController {
             
             //Check if the image is nil
             if let url = Constants.currentUser?.profileLink {
-                self.imageView.sd_setImage(with: URL(string: url.absoluteString), placeholderImage: UIImage(named: "FooterLogin"))
+                self.imageView.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "FooterLogin"))
             }
             
             
-            //Hide the button
-            if btn_follow.tintColor != UIColor.clear {
-                var tintColorsOfBarButtons = [UIBarButtonItem: UIColor]()
-                tintColorsOfBarButtons[btn_follow] = btn_follow.tintColor
-                btn_follow.tintColor = UIColor.clear
-                btn_follow.isEnabled = false
-            }
             
         }
         
@@ -129,32 +134,35 @@ class ProfileController:UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
+        //Set the title of the page to the name of the user
+        self.title = isCurrentUser ? "Profile" : user.name
+        
         //Set the name
         self.txt_name.text = user.name
-        
-        //Set the profile
-        if let url = user.profileLink {
-            self.setUrlToImage(url: url, imageView: self.imageView)
-        }
-        
         
         //Set the follower and following
         self.txt_follower.text = "Follower: \(user.follower.count)"
         self.txt_following.text = "Following: \(user.following.count)"
+        
+        //Set the profile
+        if let url = user.profileLink {
+            //Cover string to URL
+            let url:URL = NSURL(string: url)! as URL
+            self.setUrlToImage(url: url, imageView: self.imageView)
+        }
+        
+        
+        
     }
     
     
     //Action that will be taken when the image is tapped
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-        
-        //Sett  up the PHPicker
-        var configuration = PHPickerConfiguration()
-        configuration.filter = .images
-        
-        //Open the PHPicker
-        let picker = PHPickerViewController(configuration: configuration)
+            let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
         picker.delegate = self
+        picker.allowsEditing = true
         present(picker, animated: true)
         
     }
@@ -162,18 +170,24 @@ class ProfileController:UIViewController {
     
     //function to set the url into the image
     func setUrlToImage(url:URL, imageView:UIImageView){
-        if let data = try? Data(contentsOf: url) {
-            if let image = UIImage(data: data) {
-                imageView.image = image
-            }
-        }
+        imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "profile"))
     }
     
     @objc func refresh(_ sender: AnyObject) {
         
+        reloadData()
+        
+    }
+    
+    func reloadData() {
+        
+        self.posts = []
+        self.collectionView.reloadData()
         //Get the posts
-        DatabaseManager.shared.getPosts(userID: UID!) { (posts) in
-            self.posts = posts
+        DatabaseManager.shared.getPosts(userID: UID!, Indictor: self.refreshControl) { (post) in
+            
+            
+            self.posts.append(post)
             self.collectionView.reloadData()
             self.refreshControl.endRefreshing()
         }
@@ -190,7 +204,17 @@ class ProfileController:UIViewController {
             //Insert the UID into database
             let id = Auth.auth().currentUser?.uid
             DatabaseManager.shared.insertFollow(UID: id!, followerID: UID!)
-        } else {
+        } else if btn_follow.title == "Logout" {
+            
+            //Delete the user
+            let userController = UserDataController()
+            userController.deleteUser()
+            
+            Constants.currentUser = nil
+            
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        }
+        else {
             //Change button to text to follow
             btn_follow.title = "Follow"
             
@@ -199,37 +223,6 @@ class ProfileController:UIViewController {
             DatabaseManager.shared.removeFollow(UID: id!, followerID: UID!)
         }
         
-
-        
-    }
-    
-}
-
-
-//The PHPicker delgate
-extension ProfileController : PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        dismiss(animated: true)
-        
-        let ItemProviders = results.map(\.itemProvider)
-        
-        //If Zero exit
-        guard ItemProviders.count > 0 else {return}
-        
-        if ItemProviders[0].canLoadObject(ofClass: UIImage.self){
-            ItemProviders[0].loadObject(ofClass: UIImage.self) { (image, error) in
-                DispatchQueue.main.async {
-                    guard let image = image as? UIImage else {return}
-                    self.imageView.image = image
-                    
-                    StorageManager.shared.setProfilePic(image: image, UID: self.UID!) { (success) in
-                        print(success ? "Image Uploaded" : "Image Fail to upload")
-                    }
-                }
-                
-            }
-            
-        }
         
         
     }
@@ -249,9 +242,20 @@ extension ProfileController:UICollectionViewDelegate{
         self.performSegue(withIdentifier: "detail", sender: self)
     }
     
+<<<<<<< HEAD
+=======
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 15, bottom: 0, right: 15)
+    }
+    
+    
+    
+>>>>>>> master
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! PostDetailController
-        destVC.post = posts[collectionViewSelectedCell]
+        let post: Post = posts[collectionViewSelectedCell]
+        destVC.feed = HomeFeed(post: post, user: user)
+        
     }
 }
 
@@ -292,5 +296,25 @@ extension ProfileController:UICollectionViewDelegateFlowLayout{
     }
 }
 
+
+extension ProfileController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage{
+            imageView.image = image
+            DispatchQueue.main.async {
+                guard let image = image as? UIImage else {return}
+                self.imageView.image = image
+                
+                StorageManager.shared.setProfilePic(image: image, UID: self.UID!) { (success) in
+                    print(success ? "Image Uploaded" : "Image Fail to upload")
+                }
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
 
 

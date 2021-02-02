@@ -13,7 +13,8 @@ import FirebaseAuth
 
 
 
-class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSource, MyCustomCellDelegator{
+    
     
     
     @IBOutlet var tableview: UITableView!
@@ -23,6 +24,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let db = Firestore.firestore()
     let userID = Constants.currentUser?.UID
     
+        
     var user: User?
     var following: User?
     var posts:[Post] = []
@@ -59,63 +61,37 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func loadData(){
-        DatabaseManager.shared.getUser(userID: userID!) { (user) in
-            //get the ID of the accounts the user is following
-            Constants.currentUser = user
-            self.user = user
-            print(self.user?.following ?? "")
-            
-            //get all the account post that the user is following
-            for x in self.user!.following{
-                DatabaseManager.shared.getUser(userID: x) { (User) in
-                    self.following = User
-                    print(self.following?.post ?? "")
-                    
-                    // get the posts
-                    DatabaseManager.shared.getPosts(userID: self.following!.UID) { (Post) in
-                        self.posts = Post
-                        
-                        //adding HomeFeed object base on the amount of post the user have
-                        for i in self.posts{
-                            self.feed.append(HomeFeed(postImages: i.images[0], porfileImg: (self.following?.profileLink)!, username: self.following!.name, title: i.title, description: i.decription, locations: i.locations))
-                        }
-                        print(self.feed)
-                        self.tableview.reloadData()
-                    }
-                }
+        guard let following = Constants.currentUser?.following, following != [] else {return}
+        
+        DatabaseManager.shared.getPosts(users: following) { (posts) in
+            DispatchQueue.main.async {
+                self.feed = posts
+                self.tableview.reloadData()
             }
         }
+        
+
     }
     
     @objc func refresh(_ sender: AnyObject ){
         
-        DatabaseManager.shared.getUser(userID: userID!) { (user) in
-            //get the ID of the accounts the user is following
-            Constants.currentUser = user
-            self.user = user
-            print(self.user?.following ?? "")
-            
-            //get all the account post that the user is following
-            for x in self.user!.following{
-                DatabaseManager.shared.getUser(userID: x) { (User) in
-                    self.following = User
-                    print(self.following?.post ?? "")
-                    
-                    // get the posts
-                    DatabaseManager.shared.getPosts(userID: self.following!.UID) { (Post) in
-                        self.posts = Post
-                        self.feed = []
-                        //adding HomeFeed object base on the amount of post the user have
-                        for i in self.posts{
-                            self.feed.append(HomeFeed(postImages: i.images[0], porfileImg: (self.following?.profileLink)!, username: self.following!.name, title: i.title, description: i.decription, locations: i.locations))
-                        }
-                        print(self.feed)
-                        self.tableview.reloadData()
-                        self.refreshControl.endRefreshing()
-                    }
-                }
+        self.feed = []
+        self.tableview.reloadData()
+        guard let following = Constants.currentUser?.following, following != [] else {return}
+        
+        
+        DatabaseManager.shared.getPosts(users: following) { (posts) in
+            DispatchQueue.main.async {
+                self.feed = posts
+                self.tableview.reloadData()
+                self.refreshControl.endRefreshing()
             }
         }
+    }
+    
+    func callSegueFromCell(myData dataobject: HomeFeed) {
+        self.performSegue(withIdentifier: "postAuthor", sender: dataobject)
+        print("self called")
     }
     
     
@@ -131,6 +107,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableview.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
         cell.configure(with: feed[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
@@ -142,13 +119,29 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //perform segue when cell is selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "detail", sender: self)
+        
     }
+    
     
     //pass current selected HomeFeed object to next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destVC = segue.destination as! PostDetailController
-        destVC.feed = feed[tableview.indexPathForSelectedRow!.row]
+        if segue.identifier == "detail"{
+            let destVC = segue.destination as! PostDetailController
+            destVC.feed = feed[tableview.indexPathForSelectedRow!.row]
+        }
+        if segue.identifier == "postAuthor"{
+            let destvc = segue.destination as! ProfileController
+            
+            let post = sender as? HomeFeed
+            
+            destvc.UID = post?.user?.UID
+            destvc.user = (post?.user)!
+            
+            print("segue activited")
+        }
     }
+    
+
     
 }
 

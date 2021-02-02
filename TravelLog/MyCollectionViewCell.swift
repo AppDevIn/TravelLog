@@ -22,7 +22,7 @@ class MyCollectionViewCell: UICollectionViewCell {
     }
     
     public func configure(url:URL){
-        self.imageView.sd_setImage(with: URL(string: url.absoluteString), placeholderImage: UIImage(named: "FooterLogin"))
+        self.imageView.sd_setImage(with: URL(string: url.absoluteString))
     }
     
     public func configure(with image:UIImage){

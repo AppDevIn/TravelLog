@@ -9,35 +9,34 @@ import Foundation
 import UIKit
 
 
-struct HomeFeed {
-    
-    var postImages: String
-    var profileImg: URL
-    var username: String
-    var title:  String
-    var description: String
-    var locations: String
+class HomeFeed: Post {
     
     
-    init() {
-        postImages = ""
-        username = ""
-        profileImg = NSURL(string: "")! as URL
-        title = ""
-        description = ""
-        locations = ""
+    var user:User?
+    
+    
+    override init(title t: String, decription des: String, locations loc: String, images imgs: [String], postID: String) {
+        super.init(title: t, decription: des, locations: loc, images: imgs, postID: postID)
+    }
+    
+    init(post:Post) {
+        super.init(title: post.title, decription: post.decription, locations: post.locations, images: post.images, postID: post.postID)
         
+        if let lat = post.lat, let lng = post.lng {
+            setLocation(lat: lat, lng: lng)
+        }
     }
     
-    init(postImages post:String, porfileImg profile: URL, username name:String, title t: String, description desc: String, locations location: String) {
-        self.postImages = post
-        self.profileImg = profile
-        self.username = name
-        self.title = t
-        self.description = desc
-        self.locations = location
+
+    init(post:Post, user:User) {
+        super.init(title: post.title, decription: post.decription, locations: post.locations, images: post.images, postID: post.postID)
+        
+        self.user = user
+        
+        if let lat = post.lat, let lng = post.lng {
+            setLocation(lat: lat, lng: lng)
+        }
     }
-   
     
 }
 

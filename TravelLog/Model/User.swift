@@ -10,7 +10,7 @@ import Foundation
 class User{
     
     var name:String
-    var profileLink:URL?
+    var profileLink:String?
     var UID:String
     var following:[String] = []
     var follower:[String] = []
@@ -29,7 +29,7 @@ class User{
         self.UID = "jdskjnjkdhjk"
     }
     
-    init(id uid:String, userName name:String, dp profileLink:URL) {
+    init(id uid:String, userName name:String, dp profileLink:String) {
         self.name = name
         self.profileLink = profileLink
         self.UID = uid

@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
+import UIKit
 
 
 class DatabaseManager{
@@ -44,7 +45,7 @@ class DatabaseManager{
         var arr:[String] = []
         
         for n in name{
-            temp += String(n)
+            temp += String(n).lowercased()
             arr.append(temp)
         }
         
@@ -62,14 +63,14 @@ class DatabaseManager{
                     return
                 }
                 
-                guard let profileLink = data["profileLink"] else {
-                    return
+                let user:User = User(id: UID, userName: name as! String)
+                
+                
+                if let profileLink = data["profileLink"] {
+                    //Cover string to URL
+                    user.profileLink = profileLink as! String
+                    
                 }
-                
-                
-                //Cover string to URL
-                let url:URL = NSURL(string: profileLink as! String )! as URL
-                let user:User = User(id: UID, userName: name as! String, dp: url)
                 
                 //If got following
                 if let following = data["following"] {
@@ -112,16 +113,14 @@ class DatabaseManager{
                 return
             }
             
-            guard let profileLink = data["profileLink"] else {
-                return
+            let user:User = User(id: UID, userName: name as! String)
+            
+            
+            if let profileLink = data["profileLink"] {
+                //Cover string to URL
+                user.profileLink = profileLink as! String
+                
             }
-            
-            
-            //Cover string to URL
-            let url:URL = NSURL(string: profileLink as! String )! as URL
-            let user:User = User(id: UID, userName: name as! String, dp: url)
-            
-            
             //If got following
             if let following = data["following"] {
                 user.following = following as! [String]
@@ -131,6 +130,7 @@ class DatabaseManager{
             if let follower = data["follower"] {
                 user.follower = follower as! [String]
             }
+            
             
             completionBlock(user)
             
@@ -149,29 +149,154 @@ class DatabaseManager{
     }
     
     
-    func getPosts(userID UID:String, success: @escaping ([Post]) -> Void )  {
-        var posts:[Post] = []
+    func getPosts(userID UID:String,Indictor:UIRefreshControl?, success: @escaping (Post) -> Void )  {
         
-        let docRef = db.collection("users").document(UID).collection("posts")
+        
+        let docRef = db.collection("users").document(UID).collection("posts").order(by: "date", descending: true)
+        
+        
+        
+        
+        docRef.getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                
+                if let indicator = Indictor {
+                    indicator.endRefreshing()
+                }
+                
+                
+                for document in querySnapshot!.documents {
+                    
+                    let data = document.data()
+                    
+                    
+                    if let img = data["images"] {
+                        let post = Post(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: img as! [String], postID: document.documentID)
+                        
+                        
+                        //Check if the lat and lng exist
+                        if let coor = data["coordinate"] {
+                            
+                            let d = coor as! [Double]
+                            post.setLocation(lat: d[0] , lng: d[1] )
+
+                            
+                        }
+                        
+                        
+                        success(post)
+                    }
+                }                
+            }
+        }
+        
+    }
+    
+    func getPosts(users:[String], success: @escaping ([HomeFeed]) -> Void )  {
+        var posts:[HomeFeed] = []
+        
+        let docRef = db.collection("posts").whereField("uid", in: users).order(by: "date", descending: true)
+        
+        
+        var userDict = [String:DocumentReference]()
         
         docRef.getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
+                    
                     let data = document.data()
                     
-                    let post = Post(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: data["images"]! as! [String])
-                    posts.append(post)
+                    if let img = data["images"] {
+                        
+                        let post = HomeFeed(title: data["title"]! as! String, decription: data["description"]! as! String, locations: data["locations"]! as! String, images: img as! [String], postID: document.documentID)
+                        
+                        post.user = User()
+                        post.user?.UID = data["uid"] as! String
+                        
+                        
+                        //Check if the lat and lng exist
+                        if let coor = data["coordinate"] {
+                            
+                            let d = coor as! [Double]
+                            post.setLocation(lat: d[0] , lng: d[1] )
+
+                            
+                        }
+                        
+                        posts.append(post)
+                        
+                        
+                        
+                        userDict[data["uid"] as! String] = data["userRef"] as! DocumentReference
+                    }
+                    
+                    
                 }
                 
-                success(posts)
+                for key in userDict.keys {
+                    userDict[key]?.getDocument(completion: { (document, error) in
+                        if let document = document, document.exists {
+                            guard let userData = document.data() else {return}
+                            
+                            
+                            guard let name = userData["name"] else {
+                                return
+                            }
+                            
+                            let user:User = User(id: key, userName: name as! String)
+                            
+                            
+                            if let profileLink = userData["profileLink"] {
+                                //Cover string to URL
+                                user.profileLink = (profileLink as! String)
+                                
+                            }
+                            
+                            //If got following
+                            if let following = userData["following"] {
+                                user.following = following as! [String]
+                            }
+                            
+                            //If got followers
+                            if let follower = userData["follower"] {
+                                user.follower = follower as! [String]
+                            }
+                            
+                            
+                         
+                            
+                            for post in posts {
+                                if post.user?.UID == key {
+                                    post.user = user
+                                }
+                            }
+                            
+                            success(posts)
+                            
+                            
+                            
+                            
+                        }
+                    })
+                }
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 
                 
             }
         }
-        
-        
         
     }
     
@@ -181,7 +306,7 @@ class DatabaseManager{
         
         var users:[User] = []
         
-        docRef.whereField("caseSearch", arrayContains: prefix).getDocuments { (querySnapshot, err) in
+        docRef.whereField("caseSearch", arrayContains: prefix.lowercased()).getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -195,7 +320,7 @@ class DatabaseManager{
                         //Cover string to URL
                         let url:URL = NSURL(string: profileLink as! String )! as URL
                         
-                        user = User(id: id, userName: name as! String, dp: url)
+                        user = User(id: id, userName: name as! String, dp: profileLink as! String)
                     } else if let name = data["name"]{
                         user = User(id: id, userName: name as! String)
                     } else{
@@ -216,6 +341,7 @@ class DatabaseManager{
                     if id != Constants.currentUser?.UID {
                         users.append(user)
                     }
+                    
                     
                     
                 }
@@ -255,4 +381,26 @@ class DatabaseManager{
         ], merge: true)
     }
     
+    func deletePost(userID:String, postid:String){
+        db.collection("posts").document(postid).delete { (err) in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+        
+        self.db.collection("users").document(userID).collection("posts").document(postid).delete { (err) in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+        
+        
+        
+    }
+    
 }
+

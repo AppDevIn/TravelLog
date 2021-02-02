@@ -18,8 +18,6 @@ class EditDetailsController : UIViewController {
     var appDelegate:AppDelegate = (UIApplication.shared.delegate) as! AppDelegate
     
     
-    
-
     var ItemProviders: [UIImage] = []
     
     
@@ -37,14 +35,16 @@ class EditDetailsController : UIViewController {
     var lengthOfImage:Int = 0 //The number of images in the array
     
     @IBOutlet weak var txt_title: UITextField!
-    @IBOutlet weak var txt_description: UITextField!
     @IBOutlet weak var loading: UIActivityIndicatorView!
     @IBOutlet weak var txtx_location: UITextField!
+    @IBOutlet weak var txt_description: UITextView!
     @IBOutlet weak var dropDown: UIPickerView!
     
     var items:[CDPlace] = []
     
-    var location:String = ""
+    var location:CDPlace?
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +57,21 @@ class EditDetailsController : UIViewController {
         
         //Set up text field delgate
         txt_title.delegate = self
-        txt_description.delegate = self
         txtx_location.delegate = self
+        
+        //Adding border to textview
+        var borderColor : UIColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
+        txt_description.layer.borderWidth = 0.5
+        txt_description.layer.borderColor = borderColor.cgColor
+        txt_description.layer.cornerRadius = 5.0
+        
+        //Text view delgate
+        txt_description.text = "Description"
+        txt_description.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        txt_description.delegate = self
+        
+        
+        
         
         //Hide the loading bar when stopped
         loading.hidesWhenStopped = true
@@ -66,7 +79,37 @@ class EditDetailsController : UIViewController {
         //Init the length of image
         lengthOfImage = ItemProviders.count
         
-        
+        do {
+            let result = try context.fetch(CDPlace.fetchRequest())
+            var list:[CDPlace] = []
+            
+            let now = Date()
+            
+            
+            
+            for data in result as! [CDPlace]{
+                
+                let elapsedTime = now.timeIntervalSince(data.departure!)
+                
+                // convert from seconds to hours, rounding down to the nearest hour
+                let hours = floor(elapsedTime / 60 / 60)
+                
+            
+                
+                if(hours > 24){
+                    context.delete(data)
+                    try context.save()
+                } else {list.append(data)}
+                
+            }
+            items = list
+            
+            
+        } catch {
+            print(error)
+            
+            
+        }
         
         
         do {
@@ -83,6 +126,7 @@ class EditDetailsController : UIViewController {
                 
                 // convert from seconds to hours, rounding down to the nearest hour
                 let hours = floor(elapsedTime / 60 / 60)
+                
                 
                 if(hours > 24){
                     context.delete(data)
@@ -102,6 +146,7 @@ class EditDetailsController : UIViewController {
         if items != [] {
             dropDown.dataSource = self
             dropDown.delegate = self
+            location = items[0] // Default vale
         } else {
             txtx_location.isHidden = false
             dropDown.isHidden = true
@@ -116,42 +161,36 @@ class EditDetailsController : UIViewController {
         
         
         //Change the text from String? to String
-        guard let title = txt_title.text else {
+        guard let title = txt_title.text, title != "" else {
             print("Empty title")
+            alert(title: "Empty Text", message: "The title text box is empty")
             return
         }
         
         
-        guard let description = txt_description.text else {
+        guard let description = txt_description.text, description != "" else {
             print("Empty description")
+            alert(title: "Empty Text", message: "The description text box is empty")
             return
         }
         
-        //Check if the text is empty
-        if (description == "" && title == "") {
-            print("Empty text filed")
-            return
-        }
         
-        //Check if the images is empty
-        if ItemProviders.count <= 0 {
-            print("No images")
-            return
-        }
-        
-        guard !txtx_location.isHidden, let loc = txtx_location.text, loc != "" else {
-            print("No location")
-            return
+        if !txtx_location.isHidden {
+            guard let loc = txtx_location.text, loc != "" else {
+                print("No location")
+                alert(title: "Empty Text", message: "The location text bos is empty")
+                return
+            }
         }
         
         //Create the post object
-        post = Post(title: title, decription: description, locations: location, images: [])
+        post = Post(title: title, decription: description, locations: location?.name ?? txtx_location.text!, images: [], postID: postId)
         
         //Start animating
         loading.startAnimating()
         
         //Upload the the info but not the imzage
-        uploadPostInfo(post: post)
+        uploadPostInfo(post: post, place: location)
         
         //Upload the images
         uploadPostImages(images: ItemProviders)
@@ -164,21 +203,39 @@ class EditDetailsController : UIViewController {
      Use firestore to upload the information into
      users/{id}/posts/{postID}
      */
-    func uploadPostInfo(post p:Post){
+    func uploadPostInfo(post p:Post, place: CDPlace?){
         
         guard let id = user?.uid else {return}
-        
         
         self.db.collection("users").document(id).collection("posts").document(postId).setData([
             "title": p.title,
             "locations": p.locations,
-            "description": p.decription
+            "description": p.decription,
+            "date": Date(),
+            "coordinate": place != nil ? [place?.lat, place?.lng] : []
             
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                print("Document added with ID: \(id)")
+                print("Document added with ID: \(self.postId)")
+            }
+        }
+        
+        self.db.collection("posts").document(postId).setData([
+            "title": p.title,
+            "locations": p.locations,
+            "description": p.decription,
+            "date": Date(),
+            "uid":id,
+            "coordinate": place != nil ? [place?.lat, place?.lng] : [],
+            "userRef": db.document("users/\(id)")
+            
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(self.postId)")
             }
         }
     }
@@ -217,8 +274,7 @@ class EditDetailsController : UIViewController {
         if self.count >= self.lengthOfImage {
             self.loading.stopAnimating()
             let editController = self.navigationController?.viewControllers.first as! Editbackup
-            editController.images = []
-            
+//            editController.images = []
             self.navigationController?.popViewController(animated: true)
             
             
@@ -274,7 +330,22 @@ class EditDetailsController : UIViewController {
                     "images":FieldValue.arrayUnion([downloadURL.absoluteString])
                     
                 ], merge: true) { err in
-                    self.completed()
+                    
+                    
+                    if let err = err {
+                        self.completed()
+                        print("Error adding document: \(err)")
+                        
+                    } else {
+                        print("Document added with ID: \(id)")
+                    }
+                }
+                
+                self.db.collection("posts").document(self.postId).setData([
+                    "images":FieldValue.arrayUnion([downloadURL.absoluteString])
+                    
+                ], merge: true) { err in
+                    
                     
                     if let err = err {
                         
@@ -282,6 +353,7 @@ class EditDetailsController : UIViewController {
                         
                     } else {
                         print("Document added with ID: \(id)")
+                        self.completed()
                     }
                 }
                 
@@ -291,6 +363,17 @@ class EditDetailsController : UIViewController {
             
         }
         
+        
+    }
+    
+    func alert(title:String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        
+        
+        self.present(alert, animated: true, completion: nil)
         
     }
     
@@ -319,7 +402,7 @@ extension EditDetailsController : UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        self.location = items[row].name!
+        self.location = items[row]
         
     }
     
@@ -337,4 +420,31 @@ extension EditDetailsController : UIPickerViewDataSource {
     
 }
 
+extension EditDetailsController : UITextViewDelegate {
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        if textView.text == "Description" {
+            txt_description.text = ""
+            txt_description.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        }
+        return true
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text.count == 0 {
+            textView.text = "Description"
+            textView.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            textView.resignFirstResponder()
+        }
+    }
+    
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        if textView.text.count == 0 {
+            textView.text = "Description"
+            textView.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            textView.resignFirstResponder()
+        }
+        
+        return true
+    }
+}
 

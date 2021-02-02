@@ -13,6 +13,7 @@ class SplashScreenController : UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var isLogin:Bool = true
+    var databaseLogin:Bool = true
     var usr:Login!
     
     
@@ -30,7 +31,9 @@ class SplashScreenController : UIViewController {
                 //Check if there is error
                 guard let user = authResult?.user, error == nil else {
                     print(error!.localizedDescription)
-                    self.dismiss(animated: true, completion: nil)
+                    self.alert(title: "Error", message: error!.localizedDescription)
+                    
+                    
                     return
                 }
                 
@@ -43,6 +46,12 @@ class SplashScreenController : UIViewController {
                     
                     //Stop the indicator when the data is recevied
                     self.activityIndicator.stopAnimating()
+                    
+                    if !self.databaseLogin {
+                        //Save data of the user
+                        let userData = UserDataController()
+                        userData.saveUser(email: self.usr.email, password: self.usr.password)
+                    }
                     
                     //Move to the next storyboard
                     let storyboard = UIStoryboard(name: "Content", bundle: nil) // File name of the story board
@@ -63,7 +72,7 @@ class SplashScreenController : UIViewController {
                 //Check if there is error
                 guard let user = authResult?.user, error == nil else {
                     print(error!.localizedDescription)
-                    self.dismiss(animated: true, completion: nil)
+                    self.alert(title: "Error", message: error!.localizedDescription)
                     return
                 }
                 
@@ -80,6 +89,10 @@ class SplashScreenController : UIViewController {
                         U.email = self.usr.password
                         
                         Constants.currentUser = U
+                        
+                        //Save data of the user
+                        let userData = UserDataController()
+                        userData.saveUser(email: self.usr.email, password: self.usr.password)
                         
                         //Move to the next storyboard
                         let storyboard = UIStoryboard(name: "Content", bundle: nil) // File name of the story board
@@ -101,7 +114,17 @@ class SplashScreenController : UIViewController {
     }
     
     
-    
+    func alert(title:String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+        NSLog("The \"OK\" alert occured.")
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        
+        self.present(alert, animated: true, completion: nil)
+
+    }
     
 }
 
