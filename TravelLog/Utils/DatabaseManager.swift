@@ -155,6 +155,7 @@ class DatabaseManager{
         
         
         
+        
         docRef.getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
