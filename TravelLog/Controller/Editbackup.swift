@@ -34,8 +34,6 @@ class Editbackup : UIViewController{
         collectionView.dataSource = self
         collectionView.collectionViewLayout = layout
         collectionView.register(MyCollectionViewCell.nib(), forCellWithReuseIdentifier: MyCollectionViewCell.identifier)
-        
-        btn_next.isEnabled = false
     }
     
     @IBAction func camera(_ sender: Any) {
@@ -62,6 +60,16 @@ class Editbackup : UIViewController{
             
         }
     }
+    
+    @IBAction func nextClicked(_ sender: Any) {
+        
+        if images.count > 0 {
+            performSegue(withIdentifier: "addDeatils", sender: nil)
+        } else {
+            alert(title: "Empty Images", message: "Please add images through the camera Icon or the photos")
+        }
+    }
+    
     
     func initimage(){
         
@@ -124,6 +132,20 @@ class Editbackup : UIViewController{
         
         print("complete photo array \(self.images)")
     }
+    
+    
+    
+    func alert(title:String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
 }
 
 

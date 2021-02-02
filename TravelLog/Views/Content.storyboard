@@ -470,7 +470,7 @@
                                     <color key="titleColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="beL-5u-hqe" kind="show" identifier="addDeatils" id="xSk-e8-UGh"/>
+                                    <action selector="nextClicked:" destination="Qf5-1X-vKy" eventType="touchUpInside" id="oV0-Ot-z1H"/>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="70w-oa-QZ7">
@@ -523,11 +523,12 @@
                     <connections>
                         <outlet property="btn_next" destination="PA4-ZD-2Z8" id="1bQ-Gs-Vut"/>
                         <outlet property="collectionView" destination="70w-oa-QZ7" id="fGz-5M-SZR"/>
+                        <segue destination="beL-5u-hqe" kind="show" identifier="addDeatils" id="sYd-C0-6zZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3PP-Tl-9EC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="579.71014492753625" y="1810.7142857142856"/>
+            <point key="canvasLocation" x="580" y="1811"/>
         </scene>
         <!--New Entry-->
         <scene sceneID="1SV-qN-EzT">
