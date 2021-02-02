@@ -42,13 +42,9 @@ class ProfileController:UIViewController {
             
             if let user = Constants.currentUser {
                 self.user = user
-                btn_follow.title = "Logout"
                 
             }
             else {
-                //If don't have user stored
-                //Set the title
-                self.btn_follow.title = (Constants.currentUser?.following.contains(self.UID!))! ? "Unfollow" : "Follow"
                 
                 DatabaseManager.shared.getUser(userID: UID!) { (user) in
                     self.user = user
@@ -58,6 +54,12 @@ class ProfileController:UIViewController {
             }
             
         }
+        
+        //If don't have user stored
+        //Set the title
+        self.btn_follow.title = isCurrentUser ? "Logout" : ((Constants.currentUser?.following.contains(self.UID!))! ? "Unfollow" : "Follow")
+        
+        
         
         
         
