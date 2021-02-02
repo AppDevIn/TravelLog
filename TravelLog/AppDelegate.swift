@@ -68,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case .authorizedAlways:
             
             //     Uncomment following code to enable fake visits
-            locationManager.distanceFilter = 35 // 0
+            locationManager.distanceFilter = 500 // 0
             locationManager.allowsBackgroundLocationUpdates = true // 1
             locationManager.startUpdatingLocation()  // 2
             break
