@@ -27,8 +27,8 @@ class LoginController : UIViewController {
         if let userData = userData {
             login(true, email: userData.email!, password: userData.password!)
         } else {
-            txt_email.text = "jeyavishnu@gmail.com"
-            txt_password.text = "Test123"
+//            txt_email.text = "jeyavishnu@gmail.com"
+//            txt_password.text = "Test123"
         }
         
     }
