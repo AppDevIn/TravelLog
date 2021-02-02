@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         locationManager.delegate = self
         
         checkLocationAuthorization()
+
         
         
         
@@ -150,7 +151,7 @@ extension AppDelegate: CLLocationManagerDelegate {
         // Get location description
         AppDelegate.geoCoder.reverseGeocodeLocation(clLocation) { placemarks, _ in
             if let place = placemarks?.first {
-                let description = "\(place)"
+                let description = "\(place.name)"
                 self.newVisitReceived(visit, description: description)
                 
       
@@ -176,9 +177,9 @@ extension AppDelegate: CLLocationManagerDelegate {
                 // 3
                 var description:String
                 if let name = place.name {
-                    description = "Fake visit: \(name)"
+                    description = "\(name)"
                 } else {
-                    description = "Fake visit: \(place.description)"
+                    description = "\(place.description)"
                 }
                 
                 
@@ -203,11 +204,7 @@ extension AppDelegate: CLLocationManagerDelegate {
     func newVisitReceived(_ visit: CLVisit, description: String) {
         let location = Location(visit: visit, descriptionString: description)
         
-        let plcae = CDPlace(context: self.persistentContainer.viewContext)
-        plcae.name = description
-        plcae.departure = visit.departureDate
-        plcae.lat = visit.coordinate.latitude
-        plcae.lng = visit.coordinate.longitude
+     
         
         
         var samelocation:Bool = false
@@ -222,7 +219,7 @@ extension AppDelegate: CLLocationManagerDelegate {
             
             for data in result as! [CDPlace]{
                 
-                if plcae.name == data.name! {
+                if description == data.name! {
                     samelocation = true
                     
                 }
@@ -238,10 +235,15 @@ extension AppDelegate: CLLocationManagerDelegate {
         }
         
         guard !samelocation else {
+            samelocation = false
             return
         }
         
-        
+        let plcae = CDPlace(context: self.persistentContainer.viewContext)
+        plcae.name = description
+        plcae.departure = visit.departureDate
+        plcae.lat = visit.coordinate.latitude
+        plcae.lng = visit.coordinate.longitude
         
         do {
             try self.persistentContainer.viewContext.save()
