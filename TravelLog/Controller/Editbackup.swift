@@ -22,9 +22,6 @@ class Editbackup : UIViewController{
     @IBOutlet weak var btn_next: UIButton!
     
     
-    
-    
-    
     @IBOutlet var collectionView: UICollectionView!
     
     

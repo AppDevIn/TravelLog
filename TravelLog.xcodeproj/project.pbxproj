@@ -55,7 +55,7 @@
 		BF67896125C40C6B00764854 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF67895F25C40C6B00764854 /* PostTableViewCell.xib */; };
 		BF67896625C40E3C00764854 /* HomeFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67896525C40E3C00764854 /* HomeFeed.swift */; };
 		BF67896E25C5123A00764854 /* PostDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67896D25C5123A00764854 /* PostDetailController.swift */; };
-		BF67897E25C5579300764854 /* editbackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67897D25C5579300764854 /* editbackup.swift */; };
+		BF67897E25C5579300764854 /* Editbackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF67897D25C5579300764854 /* Editbackup.swift */; };
 		DBD8F3E4F95671F504A7D211 /* Pods_TravelLog_TravelLogUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B509B6B9BF0125265519D3 /* Pods_TravelLog_TravelLogUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -160,7 +160,7 @@
 		BF67895F25C40C6B00764854 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		BF67896525C40E3C00764854 /* HomeFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeed.swift; sourceTree = "<group>"; };
 		BF67896D25C5123A00764854 /* PostDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailController.swift; sourceTree = "<group>"; };
-		BF67897D25C5579300764854 /* editbackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editbackup.swift; sourceTree = "<group>"; };
+		BF67897D25C5579300764854 /* Editbackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editbackup.swift; sourceTree = "<group>"; };
 		E168E8993381FED63DB1F912 /* Pods-TravelLog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelLog.release.xcconfig"; path = "Target Support Files/Pods-TravelLog/Pods-TravelLog.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -319,7 +319,7 @@
 				9BA55E3F25B809950044B69B /* LoginController.swift */,
 				9BA55E6825B81FB40044B69B /* RegisterController.swift */,
 				9BC2BD9825BDF6270097B582 /* EditController.swift */,
-				BF67897D25C5579300764854 /* editbackup.swift */,
+				BF67897D25C5579300764854 /* Editbackup.swift */,
 				9B71979725C0F88200F9B51C /* EditDetailsController.swift */,
 				9B80D1DB25C24CB40052570F /* ProfileController.swift */,
 				9BB8914525C31B1A00222158 /* SearchController.swift */,
@@ -664,7 +664,7 @@
 				9BB8914625C31B1A00222158 /* SearchController.swift in Sources */,
 				9B71979325BFDA2B00F9B51C /* Post.swift in Sources */,
 				9B0BB2C025C69AE0009BE9ED /* CDPlace+CoreDataClass.swift in Sources */,
-				BF67897E25C5579300764854 /* editbackup.swift in Sources */,
+				BF67897E25C5579300764854 /* Editbackup.swift in Sources */,
 				9BA55E6925B81FB40044B69B /* RegisterController.swift in Sources */,
 				9BCF16DB25C83E3A00363E1F /* CDUser+CoreDataProperties.swift in Sources */,
 				9BB8915025C3BFDA00222158 /* Constants.swift in Sources */,

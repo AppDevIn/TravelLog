@@ -11,6 +11,7 @@ import FirebaseAuth
 import PhotosUI
 import SDWebImage
 
+
 class ProfileController:UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -126,9 +127,8 @@ class ProfileController:UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
-        
         //Set the title of the page to the name of the user
-        self.title = user.name
+        self.title = isCurrentUser ? "Profile" : user.name
         
         //Set the name
         self.txt_name.text = user.name
@@ -168,7 +168,14 @@ class ProfileController:UIViewController {
     
     @objc func refresh(_ sender: AnyObject) {
         
+        reloadData()
+        
+    }
+    
+    func reloadData() {
+        
         self.posts = []
+        self.collectionView.reloadData()
         //Get the posts
         DatabaseManager.shared.getPosts(userID: UID!) { (post) in
             self.posts.append(post)
@@ -219,8 +226,6 @@ extension ProfileController:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        
-        
         print("Image Collection Tapped")
         collectionViewSelectedCell = indexPath.row
         self.performSegue(withIdentifier: "detail", sender: self)
@@ -235,7 +240,7 @@ extension ProfileController:UICollectionViewDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! PostDetailController
         let post: Post = posts[collectionViewSelectedCell]
-        destVC.feed = HomeFeed(title: post.title, decription: post.decription, locations: post.locations, images: post.images)
+        destVC.feed = HomeFeed(title: post.title, decription: post.decription, locations: post.locations, images: post.images, postID: post.postID)
         destVC.feed?.user = user
     }
 }

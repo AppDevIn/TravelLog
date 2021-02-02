@@ -17,8 +17,10 @@ class PostDetailController: UIViewController {
     @IBOutlet weak var postLocation: UILabel!
     @IBOutlet weak var postBody: UITextView!
     @IBOutlet weak var btn_map: UIButton!
+    @IBOutlet weak var buttonStack: UIStackView!
     var feed:HomeFeed?
     var post: Post!
+    
     
     
     var currentImage:Int = 0
@@ -26,20 +28,14 @@ class PostDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (feed != nil) {
-            let url:URL = NSURL(string: feed?.images[0] as! String )! as URL
-            self.postImg.sd_setImage(with: url)
-            self.postTitle.text = feed?.title
-            self.postLocation.text = feed?.locations
-            self.postBody.text = feed?.decription
-        }
-        else{
-            let url:URL = NSURL(string: post.images[0] as! String )! as URL
-            self.postImg.sd_setImage(with: url)
-            self.postTitle.text = post.title
-            self.postLocation.text = post.locations
-            self.postBody.text = post.decription
-        }
+        
+        let url:URL = NSURL(string: (feed?.images[0] as! String) )! as URL
+        self.postImg.sd_setImage(with: url)
+        self.postTitle.text = feed?.title
+        self.postLocation.text = feed?.locations
+        self.postBody.text = feed?.decription
+        
+        buttonStack.isHidden = !(feed?.user?.UID == Constants.currentUser?.UID)
         
         //Hide the button when is empty
         btn_map.isHidden = (feed?.lat == nil)
@@ -67,6 +63,17 @@ class PostDetailController: UIViewController {
         }
         
     }
+    
+    @IBAction func deletePost(_ sender: Any) {
+        
+        //Delete the post
+        DatabaseManager.shared.deletePost(userID: Constants.currentUser!.UID, postid: feed!.postID )
+        
+        //Dismiss the view
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
     
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer?) -> Void {
         
