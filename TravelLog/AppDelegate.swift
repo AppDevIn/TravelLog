@@ -206,7 +206,9 @@ extension AppDelegate: CLLocationManagerDelegate {
         
         
         let placeController = PlaceController()
-        placeController.AddPlace(visit, description:description)
+        guard placeController.AddPlace(visit, description:description) else {
+            return
+        }
         
       
         

@@ -36,7 +36,7 @@ struct Provider: TimelineProvider {
         let entry = LocationEntry(date: date,Location: location)
         
         
-        let nextUpdateDate = Calendar.current.date(byAdding: .second, value: 15, to: date)!
+        let nextUpdateDate = Calendar.current.date(byAdding: .nanosecond, value: 15, to: date)!
         
         let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
         

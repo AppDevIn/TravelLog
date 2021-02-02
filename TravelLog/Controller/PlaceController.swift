@@ -22,7 +22,7 @@ class PlaceController {
     }
     
     
-    func AddPlace(_ visit: CLVisit, description: String)  {
+    func AddPlace(_ visit: CLVisit, description: String) -> Bool {
         
         var samelocation:Bool = false
         
@@ -47,7 +47,7 @@ class PlaceController {
         
         guard !samelocation else {
             samelocation = false
-            return
+            return false
         }
         
         let plcae = CDPlace(context: context)
@@ -62,6 +62,7 @@ class PlaceController {
             print("Could not save. \(error), \(error.userInfo)")
         }
         
+        return true
     }
     
 }
