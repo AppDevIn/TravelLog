@@ -44,31 +44,24 @@ class SplashScreenController : UIViewController {
                     //Save the user to constant
                     Constants.currentUser = user
                     
-
                     
-                    //Save the deatils of the post into a constant array
-                    DatabaseManager.shared.getPosts(users: [user.UID]) { (post) in
-                        Constants.posts = post
-                        
-                        
-                        //Stop the indicator when the data is recevied
-                        self.activityIndicator.stopAnimating()
-                        
-                        if !self.databaseLogin {
-                            //Save data of the user
-                            let userData = UserDataController()
-                            userData.saveUser(email: self.usr.email, password: self.usr.password)
-                        }
-                        
-                        //Move to the next storyboard
-                        let storyboard = UIStoryboard(name: "Content", bundle: nil) // File name of the story board
-                        let vc = storyboard.instantiateViewController(identifier: "Content") as UIViewController // name must set as the identifer in stroyboard
-                        vc.modalPresentationStyle = .fullScreen //
-                        self.present(vc, animated: true, completion: nil)
-                        
+                    
+                    
+                    //Stop the indicator when the data is recevied
+                    self.activityIndicator.stopAnimating()
+                    
+                    if !self.databaseLogin {
+                        //Save data of the user
+                        let userData = UserDataController()
+                        userData.saveUser(email: self.usr.email, password: self.usr.password)
                     }
                     
-
+                    //Move to the next storyboard
+                    let storyboard = UIStoryboard(name: "Content", bundle: nil) // File name of the story board
+                    let vc = storyboard.instantiateViewController(identifier: "Content") as UIViewController // name must set as the identifer in stroyboard
+                    vc.modalPresentationStyle = .fullScreen //
+                    self.present(vc, animated: true, completion: nil)
+                    
 
                 }
                 

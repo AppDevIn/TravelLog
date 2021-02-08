@@ -205,6 +205,7 @@ class DatabaseManager{
         docRef.getDocuments { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
+                success([])
             } else {
                 for document in querySnapshot!.documents {
                     
@@ -275,7 +276,9 @@ class DatabaseManager{
                                 }
                             }
                             
-                            success(posts)
+                            success(posts.filter({ (homeFeed) -> Bool in
+                                return (Constants.currentUser?.UID != homeFeed.user?.UID || (userDict.keys.count == 1 && userDict.keys.contains(Constants.currentUser!.UID)))
+                            }))
                             
                             
                             
