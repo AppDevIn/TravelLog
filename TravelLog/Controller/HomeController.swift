@@ -61,9 +61,11 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func loadData(){
-        guard let following = Constants.currentUser?.following, following != [] else {return}
+        guard let following = Constants.currentUser?.following else {return}
         
-        DatabaseManager.shared.getPosts(users: following) { (posts) in
+        //Show your own feed if the user is doesn'; have any follwers
+  
+        DatabaseManager.shared.getPosts(users: following.count == 0 ? [Constants.currentUser!.UID] : following) { (posts) in
             DispatchQueue.main.async {
                 self.feed = posts
                 self.tableview.reloadData()
@@ -77,16 +79,28 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.feed = []
         self.tableview.reloadData()
-        guard let following = Constants.currentUser?.following, following != [] else {return}
+        guard let following = Constants.currentUser?.following else {return}
         
         
-        DatabaseManager.shared.getPosts(users: following) { (posts) in
+        DatabaseManager.shared.getPosts(users: [Constants.currentUser!.UID]) { (post) in
+            self.feed = post
+            self.tableview.reloadData()
+            self.refreshControl.endRefreshing()
+        }
+
+        
+        //Save the deatils of the post into a constant array
+        DatabaseManager.shared.getPosts(users: following.count == 0 ? [Constants.currentUser!.UID] : following) { (posts) in
             DispatchQueue.main.async {
-                self.feed = posts
+                self.feed = posts.count == 0 ? Constants.posts : posts
+                
                 self.tableview.reloadData()
                 self.refreshControl.endRefreshing()
             }
         }
+    
+
+     
     }
     
     func callSegueFromCell(myData dataobject: HomeFeed) {
