@@ -207,6 +207,7 @@ class ProfileController:UIViewController {
             userController.deleteUser()
             
             Constants.currentUser = nil
+            Constants.posts = []
             
             self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         }
