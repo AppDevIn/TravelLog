@@ -53,7 +53,12 @@ Use the dependency manager [CocoaPods](https://cocoapods.org/) to install depend
 
 - Get feeds base on users following
 - Post with geolocation and images
-- Map with pins for attractions and current user location   
+- Map with pins for attractions and current user location 
+- Search for user
+- Follow and Unfollow user
+- Able to delete post
+- Display Feed in order of the time of post
+- Profile Page 
 
 ## Credits
 
