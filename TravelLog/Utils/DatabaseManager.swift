@@ -177,7 +177,7 @@ class DatabaseManager{
                         
                         
                         //Check if the lat and lng exist
-                        if let coor = data["coordinate"] {
+                        if let coor = data["coordinate"] , (coor as! [Double]) != [] {
                             
                             let d = coor as! [Double]
                             post.setLocation(lat: d[0] , lng: d[1] )
@@ -226,7 +226,7 @@ class DatabaseManager{
                         
                         
                         //Check if the lat and lng exist
-                        if let coor = data["coordinate"] {
+                        if let coor = data["coordinate"] , (coor as! [Double]) != [] {
                             
                             let d = coor as! [Double]
                             post.setLocation(lat: d[0] , lng: d[1] )
