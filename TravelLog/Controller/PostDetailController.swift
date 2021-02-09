@@ -66,8 +66,14 @@ class PostDetailController: UIViewController {
     
     @IBAction func deletePost(_ sender: Any) {
         
+        Constants.posts = Constants.posts.filter({ (post) -> Bool in
+            return post.postID != feed!.postID
+        })
+        
+        
         //Delete the post
         DatabaseManager.shared.deletePost(userID: Constants.currentUser!.UID, postid: feed!.postID )
+        
         
         //Dismiss the view
         dismiss(animated: true, completion: nil)

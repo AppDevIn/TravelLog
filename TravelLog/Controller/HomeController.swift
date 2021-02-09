@@ -61,11 +61,18 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func loadData(){
-        guard let following = Constants.currentUser?.following, following != [] else {return}
+        guard let following = Constants.currentUser?.following else {return}
+        
+        guard following.count != 0 else {
+            self.feed = Constants.posts
+            self.tableview.reloadData()
+            return
+            
+        }
         
         DatabaseManager.shared.getPosts(users: following) { (posts) in
             DispatchQueue.main.async {
-                self.feed = posts
+                self.feed = posts.count == 0 ? Constants.posts : posts
                 self.tableview.reloadData()
             }
         }
@@ -77,12 +84,20 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.feed = []
         self.tableview.reloadData()
-        guard let following = Constants.currentUser?.following, following != [] else {return}
+        guard let following = Constants.currentUser?.following else {return}
+        
+        guard following.count != 0 else {
+            self.feed = Constants.posts
+            self.tableview.reloadData()
+            self.refreshControl.endRefreshing()
+            return
+            
+        }
         
         
         DatabaseManager.shared.getPosts(users: following) { (posts) in
             DispatchQueue.main.async {
-                self.feed = posts
+                self.feed = posts.count == 0 ? Constants.posts : posts
                 self.tableview.reloadData()
                 self.refreshControl.endRefreshing()
             }

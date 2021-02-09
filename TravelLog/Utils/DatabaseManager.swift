@@ -200,13 +200,20 @@ class DatabaseManager{
         let docRef = db.collection("posts").whereField("uid", in: users).order(by: "date", descending: true)
         
         
+        
+        
         var userDict = [String:DocumentReference]()
         
         docRef.getDocuments { (querySnapshot, err) in
             if let err = err {
+                success([])
                 print("Error getting documents: \(err)")
             } else {
-                for document in querySnapshot!.documents {
+                guard let querysnapshot = querySnapshot, querysnapshot.documents.count != 0 else {
+                    success([])
+                    return
+                }
+                for document in querysnapshot.documents {
                     
                     let data = document.data()
                     
