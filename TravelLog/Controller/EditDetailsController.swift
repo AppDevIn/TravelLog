@@ -273,6 +273,7 @@ class EditDetailsController : UIViewController {
         
         if self.count >= self.lengthOfImage {
             self.loading.stopAnimating()
+            Constants.posts.append(HomeFeed(post: post, user: Constants.currentUser!))
             let editController = self.navigationController?.viewControllers.first as! Editbackup
 //            editController.images = []
             self.navigationController?.popViewController(animated: true)
